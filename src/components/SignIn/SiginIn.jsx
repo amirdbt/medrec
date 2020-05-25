@@ -90,7 +90,7 @@ const SiginIn = () => {
               <Typography component="h1" variant="h5">
                 Welcome Back To MedRec
               </Typography>
-              <Typography variant="caption">
+              <Typography variant="subtitle1">
                 Sign in to your account to continue
               </Typography>
 
