@@ -137,7 +137,7 @@ const SiginIn = () => {
                 <Link href="#" variant="body2">
                   Forgot password
                 </Link>
-                <Link href="/sign-up" variant="body2">
+                <Link href="/signup" variant="body2">
                   Sign up
                 </Link>
               </div>

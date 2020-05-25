@@ -8,15 +8,15 @@ import {Switch, Route, withRouter} from "react-router-dom"
 const Main = withRouter(({ location }) => {
   return (
     <>
-      {location.pathname !== "/sign-in" && location.pathname !== "/sign-up"  && (
+      {location.pathname !== "/signin" && location.pathname !== "/signup"  && (
         <>
           <SideBar />
         </>
       )}
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/sign-in" component={SignIn} />
-        <Route path="/sign-up" component={SignUp} />
+        <Route path="/signin" component={SignIn} />
+        <Route path="/signup" component={SignUp} />
       </Switch>
     </>
   );

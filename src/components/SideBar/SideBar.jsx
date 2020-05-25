@@ -124,7 +124,7 @@ const SideBar = () => {
               elevation={0}
             >
               <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <Link to="/sign-in" className={classes.link1}>
+              <Link to="/signin" className={classes.link1}>
                 <MenuItem onClick={handleClose}>Log out</MenuItem>
               </Link>
             </Menu>

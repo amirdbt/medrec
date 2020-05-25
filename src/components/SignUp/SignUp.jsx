@@ -68,10 +68,10 @@ const SignUp = () => {
         },500)
       }} 
       validationSchema={Yup.object().shape({
-        firstName:  Yup.string().required("Required"),
-        lastName:  Yup.string().required("Required"),
+        firstName:  Yup.string().required("Required").min(2,"The first name can not be less than 2"),
+        lastName:  Yup.string().required("Required").min(2,"The last name can not be less than 2"),
         email:  Yup.string().email("Invalid email").required("Required"),
-        userName:  Yup.string().required("Required"),
+        userName:  Yup.string().required("Required").min(4,"The username can not be less than 4"),
         gender:  Yup.string().required("Required"),
         password: Yup.string().required("No password provided").min(8),
         phoneNumber: Yup.string().required("Required")
@@ -196,7 +196,7 @@ const SignUp = () => {
               <div style={{ marginTop: "20px" }}></div>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
             
-                <Link href="/sign-in" variant="body2">
+                <Link href="/signin" variant="body2">
                   Sign in
                 </Link>
               </div>
