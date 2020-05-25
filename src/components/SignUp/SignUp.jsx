@@ -26,7 +26,10 @@ const useStyles = makeStyles((theme) => ({
   text: {
     width: "550px",
     '@media (max-width: 1080px)':{
-      width: "100%"
+      width: "500px"
+    },
+    '@media (max-width: 500px)':{
+      width: "300px"
     }
   },
   display: {
