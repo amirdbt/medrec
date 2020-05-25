@@ -52,7 +52,7 @@ const SignUp = () => {
   const classes = useStyles();
 
   return(
-    <Formik initialValues={{firstname: "", lastname: "",gender: "",email:"",username: "", password: "",phone:""}} onSubmit={(values, {setSubmitting}) => {
+    <Formik initialValues={{firstName: "", lastName: "",gender: "",email:"",userName: "", password: "",phoneNumber:""}} onSubmit={(values, {setSubmitting}) => {
         setTimeout(()=>{
           console.log("Signing up", values)
           axios.post(``, values)
@@ -68,13 +68,13 @@ const SignUp = () => {
         },500)
       }} 
       validationSchema={Yup.object().shape({
-        firstname:  Yup.string().required("Required"),
-        lastname:  Yup.string().required("Required"),
+        firstName:  Yup.string().required("Required"),
+        lastName:  Yup.string().required("Required"),
         email:  Yup.string().email("Invalid email").required("Required"),
-        username:  Yup.string().required("Required"),
+        userName:  Yup.string().required("Required"),
         gender:  Yup.string().required("Required"),
         password: Yup.string().required("No password provided").min(8),
-        phone: Yup.string().required("Required")
+        phoneNumber: Yup.string().required("Required")
       })}
       >
       {props => {const {values,touched,errors,isSubmitting,handleChange, handleBlur, handleSubmit} = props
@@ -95,32 +95,32 @@ const SignUp = () => {
   
             <div className={classes.textfields}>
             <TextField
-            name="firstname"
+            name="firstName"
                 label="Firstname *"
                 fullWidth
                 type="text"
                 error={err}
-                value={values.firstname}
-                className={errors.firstname && touched.firstname && "error"}
+                value={values.firstName}
+                className={errors.firstName && touched.firstName && "error"}
                 // className={classes.text}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-         {errors.firstname && touched.firstname && ( <div className={classes.error}> {errors.firstname} </div>)}
+         {errors.firstName && touched.firstName && ( <div className={classes.error}> {errors.firstName} </div>)}
               <div style={{ marginTop: "10px" }}></div>
             <TextField
-            name="lastname"
+            name="lastName"
                 label="Lastname *"
                 fullWidth
                 type="text"
                 error={err}
-                value={values.lastname}
-                className={errors.lastname && touched.lastname && "error"}
+                value={values.lastName}
+                className={errors.lastName && touched.lastName && "error"}
                 // className={classes.text}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-         {errors.lastname && touched.lastname && ( <div className={classes.error}> {errors.lastname} </div>)}
+         {errors.lastName && touched.lastName && ( <div className={classes.error}> {errors.lastName} </div>)}
               <div style={{ marginTop: "10px" }}></div>
             <TextField
             name="email"
@@ -137,32 +137,32 @@ const SignUp = () => {
          {errors.email && touched.email && ( <div className={classes.error}> {errors.email} </div>)}
               <div style={{ marginTop: "10px" }}></div>
             <TextField
-            name="username"
+            name="userName"
                 label="Username *"
                 fullWidth
                 type="text"
                 error={err}
-                value={values.username}
-                className={errors.username && touched.username && "error"}
+                value={values.userName}
+                className={errors.userName && touched.userName && "error"}
                 // className={classes.text}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-         {errors.username && touched.username && ( <div className={classes.error}> {errors.username} </div>)}
+         {errors.userName && touched.userName && ( <div className={classes.error}> {errors.userName} </div>)}
               <div style={{ marginTop: "10px" }}></div>
             <TextField
-            name="phone"
+            name="phoneNumber"
                 label="Phone Number *"
                 fullWidth
                 type="text"
                 error={err}
-                value={values.phone}
-                className={errors.phone && touched.phone && "error"}
+                value={values.phoneNumber}
+                className={errors.phoneNumber && touched.phoneNumber && "error"}
                 // className={classes.text}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-         {errors.phone && touched.phone && ( <div className={classes.error}> {errors.phone} </div>)}
+         {errors.phoneNumber && touched.phoneNumber && ( <div className={classes.error}> {errors.phoneNumber} </div>)}
               <div style={{ marginTop: "10px" }}></div>
               <TextField
               name="password"
