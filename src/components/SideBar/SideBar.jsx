@@ -16,7 +16,7 @@ import {
   MenuItem,
   Hidden,
 } from "@material-ui/core";
-import { Dashboard, AccountCircle, Search,Settings } from "@material-ui/icons";
+import { Dashboard, AccountCircle, Search, Settings } from "@material-ui/icons";
 import MenuIcon from "@material-ui/icons/Menu";
 
 const drawerWidth = 250;
@@ -76,9 +76,6 @@ const useStyles = makeStyles((theme) => ({
   link: {
     color: "#fff",
     textDecoration: "none",
-  },
-  men: {
-    top: "47px",
   },
   link1: {
     textDecoration: "none",
@@ -184,7 +181,6 @@ const SideBar = (props) => {
               open={open}
               onClose={handleClose}
               anchorEl={anchorEl}
-              className={classes.men}
               anchorOrigin={{ vertical: "top", horizontal: "right" }}
               keepMounted
               transformOrigin={{ vertical: "top", horizontal: "right" }}
