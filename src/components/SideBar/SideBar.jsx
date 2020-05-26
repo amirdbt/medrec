@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import {
   Divider,
   Drawer,
@@ -12,16 +12,13 @@ import {
   Toolbar,
   IconButton,
   InputBase,
-  Badge,
   Menu,
   MenuItem,
 } from "@material-ui/core";
 import {
-  Mail,
   Dashboard,
   AccountCircle,
   Search,
-  Notifications,
 } from "@material-ui/icons";
 
 const drawerWidth = 250;
@@ -83,6 +80,11 @@ const useStyles = makeStyles((theme) => ({
 
 const SideBar = () => {
   const [open, setopen] = useState(false);
+  let history = useHistory()
+  const logout =() =>{
+    localStorage.removeItem("token")
+    history.push("/signin")
+  }
 
   const handleMenu = () => {
     setopen(true);
@@ -125,7 +127,7 @@ const SideBar = () => {
             >
               <MenuItem onClick={handleClose}>Profile</MenuItem>
               <Link to="/signin" className={classes.link1}>
-                <MenuItem onClick={handleClose}>Log out</MenuItem>
+                <MenuItem onClick={logout}>Log out</MenuItem>
               </Link>
             </Menu>
           </div>

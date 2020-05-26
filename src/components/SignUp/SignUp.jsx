@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import {
-  Card,
-  CardContent,
   Button,
   Typography,
   TextField,
@@ -13,6 +11,7 @@ import {
   Container,
   Grid,
 } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 import { LockOutlined } from "@material-ui/icons";
 import { Alert } from "@material-ui/lab";
 import { Formik } from "formik";
@@ -46,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 const SignUp = () => {
   const [err, setErr] = useState(false);
   const [message, setMessage] = useState("");
-
+  let history = useHistory();
   const classes = useStyles();
 
   return (
@@ -58,14 +57,18 @@ const SignUp = () => {
         email: "",
         userName: "",
         password: "",
-        phoneNumber: "",
+        phoneNumber: ""
       }}
-      onSubmit={(values, { setSubmitting }) => {
+       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           console.log("Signing up", values);
+          history.push("/")
           axios
             .post(``, values)
-            .then((res) => {})
+            .then((res) => {
+              console.log(res)
+              history.push("/")
+            })
             .catch((err) => {
               console.log(err);
               setErr(true);
@@ -73,7 +76,7 @@ const SignUp = () => {
             });
           setSubmitting(false);
         }, 500);
-      }}
+       }}
       validationSchema={Yup.object().shape({
         firstName: Yup.string()
           .required("Required")
@@ -167,7 +170,6 @@ const SignUp = () => {
                       error={err}
                       value={values.email}
                       className={errors.email && touched.email && "error"}
-                      // className={classes.text}
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
@@ -186,7 +188,6 @@ const SignUp = () => {
                       error={err}
                       value={values.userName}
                       className={errors.userName && touched.userName && "error"}
-                      // className={classes.text}
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
@@ -206,14 +207,13 @@ const SignUp = () => {
                       className={
                         errors.phoneNumber && touched.phoneNumber && "error"
                       }
-                      // className={classes.text}
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
                     {errors.phoneNumber && touched.phoneNumber && (
                       <div className={classes.error}>
-                        {" "}
-                        {errors.phoneNumber}{" "}
+                
+                        {errors.phoneNumber}
                       </div>
                     )}
                   </Grid>
@@ -226,7 +226,6 @@ const SignUp = () => {
                       variant="outlined"
                       error={err}
                       className={errors.password && touched.password && "error"}
-                      // className={classes.text}
                       value={values.password}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -237,7 +236,6 @@ const SignUp = () => {
                   </Grid>
                 </Grid>
                 <Button
-                  type="submit"
                   fullWidth
                   variant="contained"
                   color="primary"

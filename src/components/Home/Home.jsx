@@ -1,11 +1,31 @@
-import React from 'react'
+import React from "react";
+import { Snackbar, Slide,Typography} from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
+
 
 const Home = () => {
-    return (
-        <div className="content">
-            <h1>Home</h1>
-        </div>
-    )
-}
+    const firstName = localStorage.getItem("firstName")
+    const lastName = localStorage.getItem("lastName")
+    const [open, setOpen] = React.useState(true);
 
-export default Home
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+      };
+  return (
+    <div className="content">
+        <Typography variant="h5">Welcome {firstName} {lastName}</Typography>
+    
+      <Snackbar open={open} autoHideDuration={3000}  TransitionComponent={Slide} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          Welcome {firstName} {lastName}
+        </Alert>
+      </Snackbar>
+    </div>
+  );
+};
+
+export default Home;

@@ -11,6 +11,7 @@ import {
   Grid,
   Container,
 } from "@material-ui/core";
+import {useHistory} from "react-router-dom"
 import { Alert } from "@material-ui/lab";
 import { LockOutlined } from "@material-ui/icons";
 import { Formik } from "formik";
@@ -43,28 +44,35 @@ const useStyles = makeStyles((theme) => ({
 const SiginIn = () => {
   const [err, setErr] = useState(false);
   const [message, setMessage] = useState("");
-
+  let history = useHistory()
   const classes = useStyles();
 
   return (
     <Formik
-      initialValues={{ username: "", password: "" }}
+      initialValues={{ userNameOrEmail: "", password: "" }}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           console.log("Logging in", values);
           axios
-            .post(``, values)
-            .then((res) => {})
+            .post(`https://polar-dusk-61658.herokuapp.com/users/login`, values)
+            .then((res) => {
+              console.log(res.data)
+              localStorage.setItem("token", res.data.token)
+              localStorage.setItem("firstName", res.data.user.firstName)
+              localStorage.setItem("lastName", res.data.user.lastName)
+              localStorage.setItem("_id", res.data.user._id)
+              history.push("/", {user: res.data.user})
+            })
             .catch((err) => {
-              console.log(err);
+              console.log(err.response.data.error);
+              setMessage(err.response.data.error);
               setErr(true);
-              setMessage(err);
             });
           setSubmitting(false);
-        }, 500);
+        }, 2000);
       }}
       validationSchema={Yup.object().shape({
-        username: Yup.string().required("Required"),
+        userNameOrEmail: Yup.string().required("Required"),
         password: Yup.string().required("No password provided").min(8),
       })}
     >
@@ -81,7 +89,7 @@ const SiginIn = () => {
         return (
           <Container component="main" maxWidth="xs">
             <CssBaseline />
-            {err ? <Alert severity="error">{message}</Alert> : <div></div>}
+            {err ?( <Alert style={{marginTop: "20px"}} severity="error">{message}</Alert>) :( <div></div>)}
             <div className={classes.paper}>
               <Avatar className={classes.avatar}>
                 <LockOutlined />
@@ -97,20 +105,20 @@ const SiginIn = () => {
               <form className={classes.form} onSubmit={handleSubmit}>
                 <div className={classes.textfields}>
                   <TextField
-                    name="username"
-                    label="Username *"
+                    name="userNameOrEmail"
+                    label="Username or Email*"
                     variant="outlined"
                     fullWidth
                     margin="normal"
                     type="text"
                     error={err}
-                    value={values.username}
-                    className={errors.username && touched.username && "error"}
+                    value={values.userNameOrEmail}
+                    className={errors.userNameOrEmail && touched.userNameOrEmail && "error"}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                  {errors.username && touched.username && (
-                    <div className={classes.error}> {errors.username} </div>
+                  {errors.userNameOrEmail && touched.userNameOrEmail && (
+                    <div className={classes.error}> {errors.userNameOrEmail} </div>
                   )}
                   <div style={{ marginTop: "20px" }}></div>
                   <TextField
@@ -158,7 +166,7 @@ const SiginIn = () => {
                     </Grid>
                     <Grid item>
                       <Link href="/signup" variant="body2">
-                        {"Don't have an account? Sign Up"}
+                        Don't have an account? Sign Up
                       </Link>
                     </Grid>
                   </Grid>
