@@ -79,7 +79,7 @@ const SignUp = () => {
               localStorage.setItem("userName", res.data.user.userName);
               localStorage.setItem("_id", res.data.user._id);
               setLoading(false);
-              history.push("/");
+              history.push("/settings");
             })
             .catch((err) => {
               console.log(err.response.data.error);
