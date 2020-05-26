@@ -11,7 +11,7 @@ import {
   Grid,
   Container,
 } from "@material-ui/core";
-import {useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom";
 import { Alert } from "@material-ui/lab";
 import { LockOutlined } from "@material-ui/icons";
 import { Formik } from "formik";
@@ -44,8 +44,8 @@ const useStyles = makeStyles((theme) => ({
 const SiginIn = () => {
   const [err, setErr] = useState(false);
   const [message, setMessage] = useState("");
-  const [loading,setLoading] = useState(false)
-  let history = useHistory()
+  const [loading, setLoading] = useState(false);
+  let history = useHistory();
   const classes = useStyles();
 
   return (
@@ -54,24 +54,23 @@ const SiginIn = () => {
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           console.log("Logging in", values);
-          setLoading(true)
+          setLoading(true);
           axios
             .post(`https://polar-dusk-61658.herokuapp.com/users/login`, values)
             .then((res) => {
-              console.log(res.data)
-              localStorage.setItem("token", res.data.token)
-              localStorage.setItem("firstName", res.data.user.firstName)
-              localStorage.setItem("lastName", res.data.user.lastName)
-              localStorage.setItem("_id", res.data.user._id)
-              setLoading(false)
-              history.push("/", {user: res.data.user})
+              console.log(res.data);
+              localStorage.setItem("token", res.data.token);
+              localStorage.setItem("firstName", res.data.user.firstName);
+              localStorage.setItem("lastName", res.data.user.lastName);
+              localStorage.setItem("_id", res.data.user._id);
+              setLoading(false);
+              history.push("/", { user: res.data.user });
             })
             .catch((err) => {
               console.log(err.response.data.error);
               setMessage(err.response.data.error);
-              setLoading(false)
+              setLoading(false);
               setErr(true);
-              
             });
           setSubmitting(false);
         }, 200);
@@ -86,7 +85,6 @@ const SiginIn = () => {
           values,
           touched,
           errors,
-          isSubmitting,
           handleChange,
           handleBlur,
           handleSubmit,
@@ -94,7 +92,13 @@ const SiginIn = () => {
         return (
           <Container component="main" maxWidth="xs">
             <CssBaseline />
-            {err ?( <Alert style={{marginTop: "20px"}} severity="error">{message}</Alert>) :( <div></div>)}
+            {err ? (
+              <Alert style={{ marginTop: "20px" }} severity="error">
+                {message}
+              </Alert>
+            ) : (
+              <div></div>
+            )}
             <div className={classes.paper}>
               <Avatar className={classes.avatar}>
                 <LockOutlined />
@@ -118,12 +122,19 @@ const SiginIn = () => {
                     type="text"
                     error={err}
                     value={values.userNameOrEmail}
-                    className={errors.userNameOrEmail && touched.userNameOrEmail && "error"}
+                    className={
+                      errors.userNameOrEmail &&
+                      touched.userNameOrEmail &&
+                      "error"
+                    }
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
                   {errors.userNameOrEmail && touched.userNameOrEmail && (
-                    <div className={classes.error}> {errors.userNameOrEmail} </div>
+                    <div className={classes.error}>
+                      {" "}
+                      {errors.userNameOrEmail}{" "}
+                    </div>
                   )}
                   <div style={{ marginTop: "20px" }}></div>
                   <TextField

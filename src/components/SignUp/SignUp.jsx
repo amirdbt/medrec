@@ -10,6 +10,10 @@ import {
   CssBaseline,
   Container,
   Grid,
+  InputLabel,
+  FormControl,
+  Select,
+  MenuItem,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { LockOutlined } from "@material-ui/icons";
@@ -45,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
 const SignUp = () => {
   const [err, setErr] = useState(false);
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   let history = useHistory();
   const classes = useStyles();
 
@@ -55,28 +60,34 @@ const SignUp = () => {
         lastName: "",
         gender: "",
         email: "",
-        userName: "",
         password: "",
-        phoneNumber: ""
+        userName: "",
+        phoneNumber: "",
       }}
-       onSubmit={(values, { setSubmitting }) => {
+      onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           console.log("Signing up", values);
-          history.push("/")
+          setLoading(true);
           axios
-            .post(``, values)
+            .post(`https://polar-dusk-61658.herokuapp.com/users/signup`, values)
             .then((res) => {
-              console.log(res)
-              history.push("/")
+              console.log(res);
+              localStorage.setItem("token", res.data.token)
+              localStorage.setItem("firstName", res.data.user.firstName);
+              localStorage.setItem("lastName", res.data.user.lastName);
+              localStorage.setItem("_id", res.data.user._id);
+              setLoading(false);
+              history.push("/");
             })
             .catch((err) => {
-              console.log(err);
+              console.log(err.response.data.error);
+              setMessage(err.response.data.error);
               setErr(true);
-              setMessage(err);
+              setLoading(false);
             });
           setSubmitting(false);
-        }, 500);
-       }}
+        }, 200);
+      }}
       validationSchema={Yup.object().shape({
         firstName: Yup.string()
           .required("Required")
@@ -98,7 +109,6 @@ const SignUp = () => {
           values,
           touched,
           errors,
-          isSubmitting,
           handleChange,
           handleBlur,
           handleSubmit,
@@ -196,6 +206,33 @@ const SignUp = () => {
                     )}
                   </Grid>
                   <Grid item xs={12}>
+                    <FormControl fullWidth variant="outlined">
+                      <InputLabel id="demo-simple-select-outlined-label">
+                        Gender
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-outlined-label"
+                        id="demo-simple-select-outlined"
+                        value={values.gender}
+                        onChange={handleChange}
+                        error={err}
+                        onBlur={handleBlur}
+                        className={errors.gender && touched.gender && "error"}
+                        label="Gender"
+                        name="gender"
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        <MenuItem value="male">Male</MenuItem>
+                        <MenuItem value="female">Female</MenuItem>
+                      </Select>
+                      {errors.gender && touched.gender && (
+                        <div className={classes.error}> {errors.gender} </div>
+                      )}
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12}>
                     <TextField
                       name="phoneNumber"
                       label="Phone Number *"
@@ -211,10 +248,7 @@ const SignUp = () => {
                       onBlur={handleBlur}
                     />
                     {errors.phoneNumber && touched.phoneNumber && (
-                      <div className={classes.error}>
-                
-                        {errors.phoneNumber}
-                      </div>
+                      <div className={classes.error}>{errors.phoneNumber}</div>
                     )}
                   </Grid>
                   <Grid item xs={12}>
@@ -239,13 +273,13 @@ const SignUp = () => {
                   fullWidth
                   variant="contained"
                   color="primary"
-                  disabled={isSubmitting}
+                  disabled={loading}
                   className={classes.submit}
                   onClick={handleSubmit}
                 >
                   Sign Up
                 </Button>
-                {isSubmitting && (
+                {loading && (
                   <LinearProgress
                     variant="query"
                     style={{ marginTop: "10px" }}
