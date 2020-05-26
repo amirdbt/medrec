@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link,useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
   Divider,
   Drawer,
@@ -14,12 +14,10 @@ import {
   InputBase,
   Menu,
   MenuItem,
+  Hidden,
 } from "@material-ui/core";
-import {
-  Dashboard,
-  AccountCircle,
-  Search,
-} from "@material-ui/icons";
+import { Dashboard, AccountCircle, Search } from "@material-ui/icons";
+import MenuIcon from "@material-ui/icons/Menu";
 
 const drawerWidth = 250;
 
@@ -28,8 +26,10 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
   drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
+    [theme.breakpoints.up("sm")]: {
+      width: drawerWidth,
+      flexShrink: 0,
+    },
   },
   drawerPaper: {
     width: drawerWidth,
@@ -51,9 +51,17 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "20px",
   },
   topBar: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    backgroundColor: "#ffffff",
+    [theme.breakpoints.up("sm")]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+      backgroundColor: "#ffffff",
+    },
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
+    },
   },
   search: {
     display: "flex",
@@ -78,16 +86,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SideBar = () => {
+const SideBar = (props) => {
+  const { window } = props;
   const [open, setopen] = useState(false);
-  let history = useHistory()
-  const logout =() =>{
-    localStorage.removeItem("token")
-    localStorage.removeItem("firstName")
-    localStorage.removeItem("lastName")
-    localStorage.removeItem("_id")
-    history.push("/signin")
-  }
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const classes = useStyles();
+  let history = useHistory();
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("firstName");
+    localStorage.removeItem("lastName");
+    localStorage.removeItem("_id");
+    history.push("/signin");
+  };
 
   const handleMenu = () => {
     setopen(true);
@@ -95,11 +106,42 @@ const SideBar = () => {
   const handleClose = () => {
     setopen(false);
   };
-  const classes = useStyles();
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const drawer = (
+    <>
+      <div className={classes.toolbar} />
+      <header className={classes.header}>MedRecords</header>
+      <Divider />
+      <List>
+        <Link className={classes.link} to="/">
+          <ListItem button className={classes.listItems}>
+            <ListItemIcon className={classes.iconColor}>
+              <Dashboard />
+            </ListItemIcon>
+            <Typography variant="h5">Dashboard</Typography>
+          </ListItem>
+        </Link>
+      </List>
+    </>
+  );
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
   return (
     <div className={classes.root}>
       <AppBar className={classes.topBar} color="default" elevation={0}>
         <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            className={classes.menuButton}
+          >
+            <MenuIcon />
+          </IconButton>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <Search />
@@ -108,7 +150,6 @@ const SideBar = () => {
           </div>
           <div />
           <div className={classes.appIcons}>
-           
             <IconButton
               edge="end"
               aria-label="account of current user"
@@ -137,28 +178,35 @@ const SideBar = () => {
         </Toolbar>
       </AppBar>
       <nav>
-        <Drawer
-          className={classes.drawer}
-          variant="permanent"
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-          anchor="left"
-        >
-          <div className={classes.toolbar} />
-          <header className={classes.header}>MedRecords</header>
-          <Divider />
-          <List>
-            <Link className={classes.link} to="/">
-              <ListItem button className={classes.listItems}>
-                <ListItemIcon className={classes.iconColor}>
-                  <Dashboard />
-                </ListItemIcon>
-                <Typography variant="h5">Dashboard</Typography>
-              </ListItem>
-            </Link>
-          </List>
-        </Drawer>
+        <Hidden smUp implementation="css">
+          <Drawer
+            className={classes.drawer}
+            container={container}
+            variant="temporary"
+            anchor="left"
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+        <Hidden xsDown implementation="css">
+          <Drawer
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            variant="permanent"
+            open
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
       </nav>
     </div>
   );
