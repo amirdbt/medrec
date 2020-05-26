@@ -186,7 +186,9 @@ const SideBar = (props) => {
               transformOrigin={{ vertical: "top", horizontal: "right" }}
               elevation={0}
             >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <Link to="/profile" className={classes.link1}>
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+              </Link>
               <Link to="/signin" className={classes.link1}>
                 <MenuItem onClick={logout}>Log out</MenuItem>
               </Link>
