@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import {
   Divider,
@@ -16,7 +16,7 @@ import {
   MenuItem,
   Hidden,
 } from "@material-ui/core";
-import { Dashboard, AccountCircle, Search } from "@material-ui/icons";
+import { Dashboard, AccountCircle, Search,Settings } from "@material-ui/icons";
 import MenuIcon from "@material-ui/icons/Menu";
 
 const drawerWidth = 250;
@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
   },
   men: {
-    top: 0,
+    top: "47px",
   },
   link1: {
     textDecoration: "none",
@@ -88,23 +88,27 @@ const useStyles = makeStyles((theme) => ({
 
 const SideBar = (props) => {
   const { window } = props;
-  const [open, setopen] = useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
   const classes = useStyles();
   let history = useHistory();
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("firstName");
     localStorage.removeItem("lastName");
+    localStorage.removeItem("email");
+    localStorage.removeItem("userName");
     localStorage.removeItem("_id");
     history.push("/signin");
   };
 
-  const handleMenu = () => {
-    setopen(true);
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
-    setopen(false);
+    setAnchorEl(null);
   };
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -122,6 +126,22 @@ const SideBar = (props) => {
               <Dashboard />
             </ListItemIcon>
             <Typography variant="h5">Dashboard</Typography>
+          </ListItem>
+        </Link>
+        <Link className={classes.link} to="/profile">
+          <ListItem button className={classes.listItems}>
+            <ListItemIcon className={classes.iconColor}>
+              <AccountCircle />
+            </ListItemIcon>
+            <Typography variant="h5">Profile</Typography>
+          </ListItem>
+        </Link>
+        <Link className={classes.link} to="/settings">
+          <ListItem button className={classes.listItems}>
+            <ListItemIcon className={classes.iconColor}>
+              <Settings />
+            </ListItemIcon>
+            <Typography variant="h5">User Settings</Typography>
           </ListItem>
         </Link>
       </List>
@@ -163,6 +183,7 @@ const SideBar = (props) => {
             <Menu
               open={open}
               onClose={handleClose}
+              anchorEl={anchorEl}
               className={classes.men}
               anchorOrigin={{ vertical: "top", horizontal: "right" }}
               keepMounted

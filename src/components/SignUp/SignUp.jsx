@@ -72,9 +72,11 @@ const SignUp = () => {
             .post(`https://polar-dusk-61658.herokuapp.com/users/signup`, values)
             .then((res) => {
               console.log(res);
-              localStorage.setItem("token", res.data.token)
+              localStorage.setItem("token", res.data.token);
               localStorage.setItem("firstName", res.data.user.firstName);
               localStorage.setItem("lastName", res.data.user.lastName);
+              localStorage.setItem("email", res.data.user.email);
+              localStorage.setItem("userName", res.data.user.userName);
               localStorage.setItem("_id", res.data.user._id);
               setLoading(false);
               history.push("/");
