@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 const SiginIn = () => {
   const [err, setErr] = useState(false);
   const [message, setMessage] = useState("");
+  const [loading,setLoading] = useState(false)
   let history = useHistory()
   const classes = useStyles();
 
@@ -53,6 +54,7 @@ const SiginIn = () => {
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           console.log("Logging in", values);
+          setLoading(true)
           axios
             .post(`https://polar-dusk-61658.herokuapp.com/users/login`, values)
             .then((res) => {
@@ -61,15 +63,18 @@ const SiginIn = () => {
               localStorage.setItem("firstName", res.data.user.firstName)
               localStorage.setItem("lastName", res.data.user.lastName)
               localStorage.setItem("_id", res.data.user._id)
+              setLoading(false)
               history.push("/", {user: res.data.user})
             })
             .catch((err) => {
               console.log(err.response.data.error);
               setMessage(err.response.data.error);
+              setLoading(false)
               setErr(true);
+              
             });
           setSubmitting(false);
-        }, 2000);
+        }, 200);
       }}
       validationSchema={Yup.object().shape({
         userNameOrEmail: Yup.string().required("Required"),
@@ -144,13 +149,13 @@ const SiginIn = () => {
                     color="primary"
                     fullWidth
                     className={classes.submit}
-                    disabled={isSubmitting}
+                    disabled={loading}
                     onClick={handleSubmit}
                   >
                     Sign in
                   </Button>
 
-                  {isSubmitting && (
+                  {loading && (
                     <LinearProgress
                       variant="query"
                       style={{ marginTop: "10px" }}

@@ -83,6 +83,9 @@ const SideBar = () => {
   let history = useHistory()
   const logout =() =>{
     localStorage.removeItem("token")
+    localStorage.removeItem("firstName")
+    localStorage.removeItem("lastName")
+    localStorage.removeItem("_id")
     history.push("/signin")
   }
 
