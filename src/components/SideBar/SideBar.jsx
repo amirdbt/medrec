@@ -16,7 +16,7 @@ import {
   MenuItem,
   Hidden,
 } from "@material-ui/core";
-import { Dashboard, AccountCircle, Search, Settings } from "@material-ui/icons";
+import { Dashboard, AccountCircle, Search, Settings,PowerSettingsNew } from "@material-ui/icons";
 import MenuIcon from "@material-ui/icons/Menu";
 
 const drawerWidth = 250;
@@ -175,7 +175,7 @@ const SideBar = (props) => {
               color="inherit"
               onClick={handleMenu}
             >
-              <AccountCircle />
+              <PowerSettingsNew />
             </IconButton>
             <Menu
               open={open}
