@@ -222,6 +222,7 @@ const SideBar = (props) => {
             }}
             variant="permanent"
             open
+           
           >
             {drawer}
           </Drawer>

@@ -6,12 +6,13 @@ import Home from "./components/Home/Home";
 import Profile from "./components/Profile/Profile";
 import Settings from "./components/Profile/Settings";
 import AuthGuard from "./components/SignIn/AuthGuard";
+import ForgotPassword from "./components/SignIn/ForgotPassword"
 import { Switch, Route, withRouter } from "react-router-dom";
 
 const Main = withRouter(({ location }) => {
   return (
     <>
-      {location.pathname !== "/signin" && location.pathname !== "/signup" && (
+      {location.pathname !== "/signin" && location.pathname !== "/signup" && location.pathname !== "/forgotpassword" && (
         <>
           <SideBar />
         </>
@@ -21,6 +22,7 @@ const Main = withRouter(({ location }) => {
         <AuthGuard path="/profile" component={Profile} />
         <AuthGuard path="/settings" component={Settings} />
         <Route path="/signin" component={SignIn} />
+        <Route path="/forgotpassword" component={ForgotPassword} />
         <Route path="/signup" component={SignUp} />
       </Switch>
     </>
