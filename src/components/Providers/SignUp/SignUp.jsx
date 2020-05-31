@@ -9,14 +9,10 @@ import {
   Avatar,
   CssBaseline,
   Container,
-  Grid,
-  InputLabel,
-  FormControl,
-  Select,
-  MenuItem,
+  Grid
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import { LockOutlined } from "@material-ui/icons";
+import { LocalHospital } from "@material-ui/icons";
 import { Alert } from "@material-ui/lab";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -46,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignUp = () => {
+const ProviderSignUp = () => {
   const [err, setErr] = useState(false);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -56,30 +52,24 @@ const SignUp = () => {
   return (
     <Formik
       initialValues={{
-        firstName: "",
-        lastName: "",
-        gender: "",
+        providerName: "",
+        address: "",
+        state: "",
         email: "",
         password: "",
-        userName: "",
-        phoneNumber: "",
+        phone_number_main: "",
       }}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           console.log("Signing up", values);
           setLoading(true);
           axios
-            .post(`https://polar-dusk-61658.herokuapp.com/users/signup`, values)
+            .post(``, values)
             .then((res) => {
               console.log(res);
-              localStorage.setItem("token", res.data.token);
-              localStorage.setItem("firstName", res.data.user.firstName);
-              localStorage.setItem("lastName", res.data.user.lastName);
-              localStorage.setItem("email", res.data.user.email);
-              localStorage.setItem("userName", res.data.user.userName);
-              localStorage.setItem("_id", res.data.user._id);
+
               setLoading(false);
-              history.push("/settings");
+              //   history.push("");
             })
             .catch((err) => {
               console.log(err.response.data.error);
@@ -91,19 +81,12 @@ const SignUp = () => {
         }, 200);
       }}
       validationSchema={Yup.object().shape({
-        firstName: Yup.string()
-          .required("Required")
-          .min(2, "The first name can not be less than 2"),
-        lastName: Yup.string()
-          .required("Required")
-          .min(2, "The last name can not be less than 2"),
+        providerName: Yup.string().required("Required"),
+        address: Yup.string().required("Required"),
+        state: Yup.string().required("Required"),
         email: Yup.string().email("Invalid email").required("Required"),
-        userName: Yup.string()
-          .required("Required")
-          .min(4, "The username can not be less than 4"),
-        gender: Yup.string().required("Required"),
+        phone_number_main: Yup.string().required("Required"),
         password: Yup.string().required("No password provided").min(8),
-        phoneNumber: Yup.string().required("Required"),
       })}
     >
       {(props) => {
@@ -121,7 +104,7 @@ const SignUp = () => {
             {err ? <Alert severity="error">{message}</Alert> : <div></div>}
             <div className={classes.paper}>
               <Avatar className={classes.avatar}>
-                <LockOutlined />
+                <LocalHospital />
               </Avatar>
 
               <div className={classes.display}>
@@ -135,40 +118,61 @@ const SignUp = () => {
 
               <form onSubmit={handleSubmit} className={classes.form}>
                 <Grid container spacing={2}>
-                  <Grid item xs={12} sm={6}>
+                  <Grid item xs={12} >
                     <TextField
-                      name="firstName"
-                      label="Firstname *"
+                      name="providerName"
+                      label="Provider Name *"
                       fullWidth
                       variant="outlined"
                       type="text"
                       error={err}
-                      value={values.firstName}
+                      value={values.providerName}
                       className={
-                        errors.firstName && touched.firstName && "error"
+                        errors.providerName && touched.providerName && "error"
                       }
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
-                    {errors.firstName && touched.firstName && (
-                      <div className={classes.error}> {errors.firstName} </div>
+                    {errors.providerName && touched.providerName && (
+                      <div className={classes.error}>
+                        {" "}
+                        {errors.providerName}{" "}
+                      </div>
                     )}
                   </Grid>
-                  <Grid item xs={12} sm={6}>
+                  <Grid item xs={12} >
                     <TextField
-                      name="lastName"
-                      label="Lastname *"
+                      name="address"
+                      label="Address *"
+                      fullWidth
+                      variant="outlined"
+                      type="text"
+                      multiline
+                      error={err}
+                      value={values.address}
+                      className={errors.address && touched.address && "error"}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    {errors.address && touched.address && (
+                      <div className={classes.error}> {errors.address} </div>
+                    )}
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="state"
+                      label="State *"
                       fullWidth
                       variant="outlined"
                       type="text"
                       error={err}
-                      value={values.lastName}
-                      className={errors.lastName && touched.lastName && "error"}
+                      value={values.state}
+                      className={errors.state && touched.state && "error"}
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
-                    {errors.lastName && touched.lastName && (
-                      <div className={classes.error}> {errors.lastName} </div>
+                    {errors.state && touched.state && (
+                      <div className={classes.error}> {errors.state} </div>
                     )}
                   </Grid>
 
@@ -189,68 +193,27 @@ const SignUp = () => {
                       <div className={classes.error}> {errors.email} </div>
                     )}
                   </Grid>
-
                   <Grid item xs={12}>
                     <TextField
-                      name="userName"
-                      label="Username *"
-                      fullWidth
-                      variant="outlined"
-                      type="text"
-                      error={err}
-                      value={values.userName}
-                      className={errors.userName && touched.userName && "error"}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                    {errors.userName && touched.userName && (
-                      <div className={classes.error}> {errors.userName} </div>
-                    )}
-                  </Grid>
-                  <Grid item xs={12}>
-                    <FormControl fullWidth variant="outlined">
-                      <InputLabel id="demo-simple-select-outlined-label">
-                        Gender
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-outlined-label"
-                        id="demo-simple-select-outlined"
-                        value={values.gender}
-                        onChange={handleChange}
-                        error={err}
-                        onBlur={handleBlur}
-                        className={errors.gender && touched.gender && "error"}
-                        label="Gender"
-                        name="gender"
-                      >
-                        <MenuItem value="">
-                          <em>None</em>
-                        </MenuItem>
-                        <MenuItem value="male">Male</MenuItem>
-                        <MenuItem value="female">Female</MenuItem>
-                      </Select>
-                      {errors.gender && touched.gender && (
-                        <div className={classes.error}> {errors.gender} </div>
-                      )}
-                    </FormControl>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      name="phoneNumber"
+                      name="phone_number_main"
                       label="Phone Number *"
                       fullWidth
                       type="text"
                       variant="outlined"
                       error={err}
-                      value={values.phoneNumber}
+                      value={values.phone_number_main}
                       className={
-                        errors.phoneNumber && touched.phoneNumber && "error"
+                        errors.phone_number_main &&
+                        touched.phone_number_main &&
+                        "error"
                       }
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
-                    {errors.phoneNumber && touched.phoneNumber && (
-                      <div className={classes.error}>{errors.phoneNumber}</div>
+                    {errors.phone_number_main && touched.phone_number_main && (
+                      <div className={classes.error}>
+                        {errors.phone_number_main}
+                      </div>
                     )}
                   </Grid>
                   <Grid item xs={12}>
@@ -270,6 +233,8 @@ const SignUp = () => {
                       <div className={classes.error}> {errors.password} </div>
                     )}
                   </Grid>
+
+                  
                 </Grid>
                 <Button
                   fullWidth
@@ -287,19 +252,19 @@ const SignUp = () => {
                     style={{ marginTop: "10px" }}
                   />
                 )}
-                 <Grid container>
+                <Grid container>
                     <Grid item xs>
-                      <Link href="/providers-signup" variant="body2">
-                        Provider? Sign up
+                      <Link href="/signup" variant="body2">
+                        User? Sign up
                       </Link>
                     </Grid>
                     <Grid item>
-                      <Link href="/signin" variant="body2">
+                      <Link href="/providers-signin" variant="body2">
                         Already have an account? Sign in
                       </Link>
                     </Grid>
                   </Grid>
-                  <div style={{marginBottom:"20px"}}></div>
+                <div style={{marginBottom: "20px"}}></div>
               </form>
             </div>
           </Container>
@@ -308,4 +273,4 @@ const SignUp = () => {
     </Formik>
   );
 };
-export default SignUp;
+export default ProviderSignUp;
