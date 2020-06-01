@@ -253,14 +253,9 @@ const ProviderSignUp = () => {
                   />
                 )}
                 <Grid container>
-                    <Grid item xs>
-                      <Link href="/signup" variant="body2">
-                        User? Sign up
-                      </Link>
-                    </Grid>
                     <Grid item>
-                      <Link href="/providers-signin" variant="body2">
-                        Already have an account? Sign in
+                      <Link href="/user-component" variant="body2">
+                        User? Sign up
                       </Link>
                     </Grid>
                   </Grid>

@@ -1,5 +1,4 @@
 import React from "react";
-import SignIn from "./components/SignIn/SiginIn";
 import SignUp from "./components/SignUp/SignUp";
 import SideBar from "./components/SideBar/SideBar";
 import Home from "./components/Home/Home";
@@ -8,7 +7,8 @@ import Settings from "./components/Profile/Settings";
 import AuthGuard from "./components/SignIn/AuthGuard";
 import ForgotPassword from "./components/SignIn/ForgotPassword";
 import ProviderSignUp from "./components/Providers/SignUp/SignUp";
-import ProviderSiginIn from "./components/Providers/SignIn/SignIn";
+import UserSignComponent from "./components/SignComponent/UserSignComponent";
+import ProviderSignComponent from "./components/SignComponent/ProviderSignComponent"
 import { Switch, Route, withRouter } from "react-router-dom";
 
 const Main = withRouter(({ location }) => {
@@ -18,7 +18,9 @@ const Main = withRouter(({ location }) => {
         location.pathname !== "/signup" &&
         location.pathname !== "/forgotpassword" &&
         location.pathname !== "/providers-signup" &&
-        location.pathname !== "/providers-signin" && (
+        location.pathname !== "/providers-signin" &&
+        location.pathname !== "/user-component" && 
+        location.pathname !== "/provider-component" && (
           <>
             <SideBar />
           </>
@@ -27,11 +29,11 @@ const Main = withRouter(({ location }) => {
         <AuthGuard exact path="/" component={Home} />
         <AuthGuard path="/profile" component={Profile} />
         <AuthGuard path="/settings" component={Settings} />
-        <Route path="/signin" component={SignIn} />
         <Route path="/forgotpassword" component={ForgotPassword} />
         <Route path="/signup" component={SignUp} />
         <Route path="/providers-signup" component={ProviderSignUp} />
-        <Route path="/providers-signin" component={ProviderSiginIn} />
+        <Route path="/user-component" component={UserSignComponent} />
+        <Route path="/provider-component" component={ProviderSignComponent} />
       </Switch>
     </>
   );

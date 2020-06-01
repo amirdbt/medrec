@@ -183,8 +183,8 @@ const SiginIn = () => {
                       </Link>
                     </Grid>
                     <Grid item>
-                      <Link href="/signup" variant="body2">
-                        Don't have an account? Sign Up
+                      <Link href="/provider-component" variant="body2">
+                        Provider? Sign in
                       </Link>
                     </Grid>
                   </Grid>

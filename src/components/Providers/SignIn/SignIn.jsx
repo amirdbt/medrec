@@ -178,8 +178,8 @@ const ProviderSiginIn = () => {
                       </Link>
                     </Grid>
                     <Grid item>
-                      <Link href="/providers-signup" variant="body2">
-                        Don't have an account? Sign Up
+                      <Link href="/user-component" variant="body2">
+                        User? Sign in
                       </Link>
                     </Grid>
                   </Grid>

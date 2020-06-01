@@ -189,7 +189,7 @@ const SideBar = (props) => {
               <Link to="/profile" className={classes.link1}>
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
               </Link>
-              <Link to="/signin" className={classes.link1}>
+              <Link to="/user-component" className={classes.link1}>
                 <MenuItem onClick={logout}>Log out</MenuItem>
               </Link>
             </Menu>
