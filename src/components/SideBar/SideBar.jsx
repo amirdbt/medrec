@@ -99,7 +99,7 @@ const SideBar = (props) => {
     localStorage.removeItem("_id");
     history.push("/signin");
   };
-
+  const userName = localStorage.getItem("userName")
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -125,7 +125,8 @@ const SideBar = (props) => {
             <Typography variant="h5">Dashboard</Typography>
           </ListItem>
         </Link>
-        <Link className={classes.link} to="/profile">
+        {userName && <>
+       <Link className={classes.link} to="/profile">
           <ListItem button className={classes.listItems}>
             <ListItemIcon className={classes.iconColor}>
               <AccountCircle />
@@ -141,6 +142,8 @@ const SideBar = (props) => {
             <Typography variant="h5">User Settings</Typography>
           </ListItem>
         </Link>
+        </>
+}
       </List>
     </>
   );
