@@ -56,12 +56,13 @@ const ProviderSiginIn = () => {
           console.log("Logging in", values);
           setLoading(true);
           axios
-            .post(``, values)
+            .post(`https://polar-dusk-61658.herokuapp.com/providers/login`, values)
             .then((res) => {
               console.log(res.data);
-              
+              localStorage.setItem("token", res.data.token);
+              localStorage.setItem("providerName", res.data.provider.providerName);
               setLoading(false);
-              history.push("/", { user: res.data.user });
+              history.push("/", { user: res.data.provider });
             })
             .catch((err) => {
               console.log(err.response.data.error);
