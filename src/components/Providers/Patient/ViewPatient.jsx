@@ -130,7 +130,7 @@ const ViewPatient = ({ match }) => {
               aria-label="scrollable force tabs example"
             >
               <Tab label="Details" {...a11yProps(0)} />
-              <Tab label="Files" {...a11yProps(1)} />
+              <Tab label="Records" {...a11yProps(1)} />
             </Tabs>
           </AppBar>
           <TabPanel value={value} index={0}>

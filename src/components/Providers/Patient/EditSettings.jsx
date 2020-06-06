@@ -48,7 +48,12 @@ const EditSettings = () => {
           console.log("Editing Account", values);
           setLoading(true);
           axios
-            .post(``, values, { headers: { Authorization: `Bearer ${token}` } })
+            .patch(
+              `https://polar-dusk-61658.herokuapp.com/providers/edit
+            `,
+              values,
+              { headers: { Authorization: `Bearer ${token}` } }
+            )
             .then((res) => {
               console.log(res);
               console.log(res.data.message);

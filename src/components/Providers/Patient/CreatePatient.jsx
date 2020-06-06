@@ -10,6 +10,8 @@ import {
   FormControl,
   InputLabel,
   MenuItem,
+  Snackbar,
+  Slide,
   LinearProgress,
 } from "@material-ui/core";
 import { Alert, AlertTitle } from "@material-ui/lab";
@@ -35,8 +37,15 @@ const CreatePatient = () => {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [severity, setSeverity] = useState("success");
-  const token = localStorage.getItem("token")
+  const [open, setOpen] = useState(true);
+  const token = localStorage.getItem("token");
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
+    setOpen(false);
+  };
   return (
     <Formik
       initialValues={{
@@ -49,7 +58,7 @@ const CreatePatient = () => {
         phoneNumber: "",
         genotype: "",
       }}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={(values, { setSubmitting, resetForm }) => {
         setTimeout(() => {
           console.log("Creating Patient", values);
           setLoading(true);
@@ -57,21 +66,23 @@ const CreatePatient = () => {
             .post(
               `https://polar-dusk-61658.herokuapp.com/providers/create_patient
             `,
-              values,{headers: {'Authorization': `Bearer ${token}`}}
+              values,
+              { headers: { Authorization: `Bearer ${token}` } }
             )
             .then((res) => {
               console.log(res);
-                console.log(res.data.message);
-                setMessage(res.data.message);
-                setAl(true)
+              console.log(res.data.message);
+              setMessage(res.data.message);
+              setAl(true);
               setLoading(false);
+              resetForm({});
             })
             .catch((err) => {
               console.log(err.response.data.error);
               setMessage(err.response.data.error);
               setErr(true);
-              setAl(true)
-              setSeverity("error")
+              setAl(true);
+              setSeverity("error");
               setLoading(false);
             });
           setSubmitting(false);
@@ -106,12 +117,22 @@ const CreatePatient = () => {
         return (
           <div className="content">
             {al ? (
-              <Alert severity={severity}>
-                <AlertTitle>{severity}</AlertTitle>
-                {message}
-              </Alert>
+              <>
+                <Alert severity={severity}>
+                  <AlertTitle>{severity}</AlertTitle>
+                  {message}
+                </Alert>
+                <Snackbar
+                  open={open}
+                  autoHideDuration={3000}
+                  TransitionComponent={Slide}
+                  onClose={handleClose}
+                >
+                  <Alert severity={severity}>{message}</Alert>
+                </Snackbar>
+              </>
             ) : (
-                <div></div>
+              <div></div>
             )}
             <Typography variant="h4"> Create Patient</Typography>
             <Card elevation={0}>
@@ -125,7 +146,7 @@ const CreatePatient = () => {
                       fullWidth
                       type="text"
                       error={err}
-                      value={values.firstName}
+                      value={values.firstName || ""}
                       className={
                         errors.firstName && touched.firstName && "error"
                       }
@@ -146,7 +167,7 @@ const CreatePatient = () => {
                       fullWidth
                       type="text"
                       error={err}
-                      value={values.lastName}
+                      value={values.lastName || ""}
                       className={errors.lastName && touched.lastName && "error"}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -170,7 +191,7 @@ const CreatePatient = () => {
                       labelId="demo-simple-select-outlined-label"
                       id="demo-simple-select-outlined"
                       fullWidth
-                      value={values.gender}
+                      value={values.gender || ""}
                       onChange={handleChange}
                       error={err}
                       onBlur={handleBlur}
@@ -194,7 +215,7 @@ const CreatePatient = () => {
                       variant="outlined"
                       type="email"
                       error={err}
-                      value={values.email}
+                      value={values.email || ""}
                       className={errors.email && touched.email && "error"}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -212,7 +233,7 @@ const CreatePatient = () => {
                       variant="outlined"
                       type="password"
                       error={err}
-                      value={values.password}
+                      value={values.password || ""}
                       className={errors.password && touched.password && "error"}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -231,7 +252,7 @@ const CreatePatient = () => {
                       variant="outlined"
                       type="text"
                       error={err}
-                      value={values.userName}
+                      value={values.userName || ""}
                       className={errors.userName && touched.userName && "error"}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -249,7 +270,7 @@ const CreatePatient = () => {
                       type="text"
                       variant="outlined"
                       error={err}
-                      value={values.phoneNumber}
+                      value={values.phoneNumber || ""}
                       className={
                         errors.phoneNumber && touched.phoneNumber && "error"
                       }
@@ -270,7 +291,7 @@ const CreatePatient = () => {
                       type="text"
                       variant="outlined"
                       error={err}
-                      value={values.genotype}
+                      value={values.genotype || ""}
                       className={errors.genotype && touched.genotype && "error"}
                       onChange={handleChange}
                       onBlur={handleBlur}
