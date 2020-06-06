@@ -15,12 +15,12 @@ import {
   IconButton,
 } from "@material-ui/core";
 import { AccountCircle, ArrowForward } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   head: {
     backgroundColor: "#1a237e",
-    color: theme.palette.common.white,
   },
   text: {
     color: "#fff",
@@ -56,14 +56,7 @@ const AllPatients = () => {
         <CircularProgress style={{ marginLeft: "50%" }} />
       ) : (
         <>
-          <Card
-            elevation={0}
-            style={{
-              background: "rgb(63,94,251)",
-              background:
-                " radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(16,31,62,1) 100%)",
-            }}
-          >
+          <Card elevation={0} className={classes.head}>
             <CardContent>
               <div style={{ display: "flex" }}>
                 <AccountCircle
@@ -110,9 +103,11 @@ const AllPatients = () => {
                     <TableCell>{patient.userName}</TableCell>
                     <TableCell>{patient.phoneNumber}</TableCell>
                     <TableCell>
-                      <IconButton>
-                        <ArrowForward />
-                      </IconButton>
+                      <Link to={`/all-patients/${patient.userName}`}>
+                        <IconButton>
+                          <ArrowForward />
+                        </IconButton>
+                      </Link>
                     </TableCell>
                   </TableRow>
                 ))}
