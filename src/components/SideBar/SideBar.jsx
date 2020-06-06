@@ -15,9 +15,17 @@ import {
   Menu,
   MenuItem,
   Hidden,
-  Chip
+  Chip,
 } from "@material-ui/core";
-import { Dashboard, AccountCircle, Search, Settings,PowerSettingsNew,AddBox } from "@material-ui/icons";
+import {
+  Dashboard,
+  AccountCircle,
+  Search,
+  Settings,
+  PowerSettingsNew,
+  AddBox,
+  Accessibility,
+} from "@material-ui/icons";
 import MenuIcon from "@material-ui/icons/Menu";
 
 const drawerWidth = 250;
@@ -100,7 +108,7 @@ const SideBar = (props) => {
     localStorage.removeItem("_id");
     history.push("/signin");
   };
-  const userName = localStorage.getItem("userName")
+  const userName = localStorage.getItem("userName");
   const providerName = localStorage.getItem("providerName");
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -118,9 +126,11 @@ const SideBar = (props) => {
       <div className={classes.toolbar} />
       <header className={classes.header}>
         MedRecords <br />
-        {providerName && <Chip label={providerName} style={{marginTop: "-15px"}} /> }
-        </header>
-  
+        {providerName && (
+          <Chip label={providerName} style={{ marginTop: "-15px" }} />
+        )}
+      </header>
+
       <Divider />
       <List>
         <Link className={classes.link} to="/">
@@ -131,31 +141,40 @@ const SideBar = (props) => {
             <Typography variant="h5">Dashboard</Typography>
           </ListItem>
         </Link>
-        {userName && <>
-       <Link className={classes.link} to="/profile">
-          <ListItem button className={classes.listItems}>
-            <ListItemIcon className={classes.iconColor}>
-              <AccountCircle />
-            </ListItemIcon>
-            <Typography variant="h5">Profile</Typography>
-          </ListItem>
-        </Link>
-        <Link className={classes.link} to="/settings">
-          <ListItem button className={classes.listItems}>
-            <ListItemIcon className={classes.iconColor}>
-              <Settings />
-            </ListItemIcon>
-            <Typography variant="h5">User Settings</Typography>
-          </ListItem>
-        </Link>
-        </>
-}
-<Link className={classes.link} to="/create-patient">
+        {userName && (
+          <>
+            <Link className={classes.link} to="/profile">
+              <ListItem button className={classes.listItems}>
+                <ListItemIcon className={classes.iconColor}>
+                  <AccountCircle />
+                </ListItemIcon>
+                <Typography variant="h5">Profile</Typography>
+              </ListItem>
+            </Link>
+            <Link className={classes.link} to="/settings">
+              <ListItem button className={classes.listItems}>
+                <ListItemIcon className={classes.iconColor}>
+                  <Settings />
+                </ListItemIcon>
+                <Typography variant="h5">User Settings</Typography>
+              </ListItem>
+            </Link>
+          </>
+        )}
+        <Link className={classes.link} to="/create-patient">
           <ListItem button className={classes.listItems}>
             <ListItemIcon className={classes.iconColor}>
               <AddBox />
             </ListItemIcon>
             <Typography variant="h5">Create Patient</Typography>
+          </ListItem>
+        </Link>
+        <Link className={classes.link} to="/all-patients">
+          <ListItem button className={classes.listItems}>
+            <ListItemIcon className={classes.iconColor}>
+              <Accessibility />
+            </ListItemIcon>
+            <Typography variant="h5">All Patients</Typography>
           </ListItem>
         </Link>
       </List>
@@ -239,7 +258,6 @@ const SideBar = (props) => {
             }}
             variant="permanent"
             open
-           
           >
             {drawer}
           </Drawer>

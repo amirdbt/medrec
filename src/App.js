@@ -10,6 +10,7 @@ import ProviderSignUp from "./components/Providers/SignUp/SignUp";
 import UserSignComponent from "./components/SignComponent/UserSignComponent";
 import ProviderSignComponent from "./components/SignComponent/ProviderSignComponent"
 import CreatePatient from "./components/Providers/Patient/CreatePatient"
+import AllPatients from "./components/Providers/Patient/AllPatients"
 import { Switch, Route, withRouter } from "react-router-dom";
 
 const Main = withRouter(({ location }) => {
@@ -36,6 +37,7 @@ const Main = withRouter(({ location }) => {
         <Route path="/user-component" component={UserSignComponent} />
         <Route path="/provider-component" component={ProviderSignComponent} />
         <Route path="/create-patient" component={CreatePatient} />
+        <Route path="/all-patients" component={AllPatients} />
       </Switch>
     </>
   );
