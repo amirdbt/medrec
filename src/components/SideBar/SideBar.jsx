@@ -161,6 +161,14 @@ const SideBar = (props) => {
             </Link>
           </>
         )}
+         <Link className={classes.link} to="/all-patients">
+          <ListItem button className={classes.listItems}>
+            <ListItemIcon className={classes.iconColor}>
+              <Accessibility />
+            </ListItemIcon>
+            <Typography variant="h5">All Patients</Typography>
+          </ListItem>
+        </Link>
         <Link className={classes.link} to="/create-patient">
           <ListItem button className={classes.listItems}>
             <ListItemIcon className={classes.iconColor}>
@@ -169,14 +177,7 @@ const SideBar = (props) => {
             <Typography variant="h5">Create Patient</Typography>
           </ListItem>
         </Link>
-        <Link className={classes.link} to="/all-patients">
-          <ListItem button className={classes.listItems}>
-            <ListItemIcon className={classes.iconColor}>
-              <Accessibility />
-            </ListItemIcon>
-            <Typography variant="h5">All Patients</Typography>
-          </ListItem>
-        </Link>
+       
         <Link className={classes.link} to="/edit-settings">
               <ListItem button className={classes.listItems}>
                 <ListItemIcon className={classes.iconColor}>
