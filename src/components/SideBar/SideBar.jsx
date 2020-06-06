@@ -15,8 +15,9 @@ import {
   Menu,
   MenuItem,
   Hidden,
+  Chip
 } from "@material-ui/core";
-import { Dashboard, AccountCircle, Search, Settings,PowerSettingsNew } from "@material-ui/icons";
+import { Dashboard, AccountCircle, Search, Settings,PowerSettingsNew,AddBox } from "@material-ui/icons";
 import MenuIcon from "@material-ui/icons/Menu";
 
 const drawerWidth = 250;
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   header: {
     fontSize: "22px",
     textAlign: "center",
-    lineHeight: "63px",
+    lineHeight: "50px",
     userSelect: "none",
     backgroundColor: "#18227c",
   },
@@ -100,6 +101,7 @@ const SideBar = (props) => {
     history.push("/signin");
   };
   const userName = localStorage.getItem("userName")
+  const providerName = localStorage.getItem("providerName");
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -114,7 +116,11 @@ const SideBar = (props) => {
   const drawer = (
     <>
       <div className={classes.toolbar} />
-      <header className={classes.header}>MedRecords</header>
+      <header className={classes.header}>
+        MedRecords <br />
+        {providerName && <Chip label={providerName} style={{marginTop: "-15px"}} /> }
+        </header>
+  
       <Divider />
       <List>
         <Link className={classes.link} to="/">
@@ -144,6 +150,14 @@ const SideBar = (props) => {
         </Link>
         </>
 }
+<Link className={classes.link} to="/create-patient">
+          <ListItem button className={classes.listItems}>
+            <ListItemIcon className={classes.iconColor}>
+              <AddBox />
+            </ListItemIcon>
+            <Typography variant="h5">Create Patient</Typography>
+          </ListItem>
+        </Link>
       </List>
     </>
   );

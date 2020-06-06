@@ -9,6 +9,7 @@ import ForgotPassword from "./components/SignIn/ForgotPassword";
 import ProviderSignUp from "./components/Providers/SignUp/SignUp";
 import UserSignComponent from "./components/SignComponent/UserSignComponent";
 import ProviderSignComponent from "./components/SignComponent/ProviderSignComponent"
+import CreatePatient from "./components/Providers/Patient/CreatePatient"
 import { Switch, Route, withRouter } from "react-router-dom";
 
 const Main = withRouter(({ location }) => {
@@ -34,6 +35,7 @@ const Main = withRouter(({ location }) => {
         <Route path="/providers-signup" component={ProviderSignUp} />
         <Route path="/user-component" component={UserSignComponent} />
         <Route path="/provider-component" component={ProviderSignComponent} />
+        <Route path="/create-patient" component={CreatePatient} />
       </Switch>
     </>
   );

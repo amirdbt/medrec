@@ -64,12 +64,13 @@ const ProviderSignUp = () => {
           console.log("Signing up", values);
           setLoading(true);
           axios
-            .post(``, values)
+            .post(`https://polar-dusk-61658.herokuapp.com/providers/signUp`, values)
             .then((res) => {
               console.log(res);
-
+              localStorage.setItem("token", res.data.token);
+              localStorage.setItem("providerName", res.data.provider.providerName);
               setLoading(false);
-              //   history.push("");
+                history.push("/");
             })
             .catch((err) => {
               console.log(err.response.data.error);
