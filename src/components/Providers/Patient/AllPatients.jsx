@@ -16,7 +16,7 @@ import {
   CircularProgress,
   IconButton,
   useTheme,
-  Grid
+  Grid,
 } from "@material-ui/core";
 import {
   AccountCircle,
@@ -26,6 +26,7 @@ import {
   KeyboardArrowRight,
   LastPage,
 } from "@material-ui/icons";
+import CountUp from "react-countup";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -169,84 +170,91 @@ const AllPatients = () => {
                 variant="h3"
                 style={{ textAlign: "center", color: "#fff" }}
               >
-                {totalPatients}
+                <CountUp
+                  start={0}
+                  end={totalPatients}
+                  duration={5}
+                  separator=","
+                />
               </Typography>
             </CardContent>
           </Card>
           <div style={{ marginBottom: "10px" }}></div>
-         <Grid container>
-           <Grid item xs={12} sm={12}>
-           <TableContainer component={Paper} elevation={0}>
-            <Table aria-label="customized table">
-              <TableHead className={classes.head}>
-                <TableRow>
-                  <TableCell className={classes.text}>First Name</TableCell>
-                  <TableCell className={classes.text}>Last Name</TableCell>
-                  <TableCell className={classes.text}>Email</TableCell>
-                  <TableCell className={classes.text}>Gender</TableCell>
-                  <TableCell className={classes.text}>Username</TableCell>
-                  <TableCell className={classes.text}>Phone Number</TableCell>
-                  <TableCell className={classes.text}>Actions</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {(rowsPerPage > 0
-                  ? patients.slice(
-                      page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
-                    )
-                  : patients
-                ).map((patient) => (
-                  <TableRow key={patient.id}>
-                    <TableCell>{patient.firstName}</TableCell>
-                    <TableCell>{patient.lastName}</TableCell>
-                    <TableCell>{patient.email}</TableCell>
-                    <TableCell>{patient.gender}</TableCell>
-                    <TableCell>{patient.userName}</TableCell>
-                    <TableCell>{patient.phoneNumber}</TableCell>
-                    <TableCell>
-                      <Link to={`/all-patients/${patient.userName}`}>
-                        <IconButton>
-                          <ArrowForward />
-                        </IconButton>
-                      </Link>
-                    </TableCell>
-                  </TableRow>
-                ))}
+          <Grid container>
+            <Grid item xs={12} sm={12}>
+              <TableContainer component={Paper} elevation={0}>
+                <Table aria-label="customized table">
+                  <TableHead className={classes.head}>
+                    <TableRow>
+                      <TableCell className={classes.text}>First Name</TableCell>
+                      <TableCell className={classes.text}>Last Name</TableCell>
+                      <TableCell className={classes.text}>Email</TableCell>
+                      <TableCell className={classes.text}>Gender</TableCell>
+                      <TableCell className={classes.text}>Username</TableCell>
+                      <TableCell className={classes.text}>
+                        Phone Number
+                      </TableCell>
+                      <TableCell className={classes.text}>Actions</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {(rowsPerPage > 0
+                      ? patients.slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        )
+                      : patients
+                    ).map((patient) => (
+                      <TableRow key={patient.id}>
+                        <TableCell>{patient.firstName}</TableCell>
+                        <TableCell>{patient.lastName}</TableCell>
+                        <TableCell>{patient.email}</TableCell>
+                        <TableCell>{patient.gender}</TableCell>
+                        <TableCell>{patient.userName}</TableCell>
+                        <TableCell>{patient.phoneNumber}</TableCell>
+                        <TableCell>
+                          <Link to={`/all-patients/${patient.userName}`}>
+                            <IconButton>
+                              <ArrowForward />
+                            </IconButton>
+                          </Link>
+                        </TableCell>
+                      </TableRow>
+                    ))}
 
-                {emptyRows > 0 && (
-                  <TableRow style={{ height: 53 * emptyRows }}>
-                    <TableCell colSpan={6} />
-                  </TableRow>
-                )}
-              </TableBody>
-              <TableFooter>
-                <TableRow>
-                  <TablePagination
-                    rowsPerPageOptions={[
-                      5,
-                      10,
-                      25,
-                      { label: "All", value: -1 },
-                    ]}
-                    colSpan={3}
-                    count={patients.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    SelectProps={{
-                      inputProps: { "aria-label": "rows per page" },
-                      native: true,
-                    }}
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
-                    ActionsComponent={TablePaginationActions}
-                  />
-                </TableRow>
-              </TableFooter>
-            </Table>
-          </TableContainer>
-           </Grid>
-         </Grid>
+                    {emptyRows > 0 && (
+                      <TableRow style={{ height: 53 * emptyRows }}>
+                        <TableCell colSpan={6} />
+                      </TableRow>
+                    )}
+                  </TableBody>
+                  <TableFooter>
+                    <TableRow>
+                      <TablePagination
+                        rowsPerPageOptions={[
+                          5,
+                          10,
+                          25,
+                          { label: "All", value: -1 },
+                        ]}
+                        colSpan={3}
+                        count={patients.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        SelectProps={{
+                          inputProps: { "aria-label": "rows per page" },
+                          native: true,
+                        }}
+                        onChangePage={handleChangePage}
+                        onChangeRowsPerPage={handleChangeRowsPerPage}
+                        ActionsComponent={TablePaginationActions}
+                      />
+                    </TableRow>
+                  </TableFooter>
+                </Table>
+              </TableContainer>
+            </Grid>
+          </Grid>
         </>
       )}
     </div>

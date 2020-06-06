@@ -1,5 +1,12 @@
 import React from "react";
-import { Snackbar, Slide, Typography } from "@material-ui/core";
+import {
+  Snackbar,
+  Slide,
+  Typography,
+  Card,
+  CardContent,
+  Grid,
+} from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 
 const Home = () => {
@@ -18,10 +25,15 @@ const Home = () => {
   };
   return (
     <div className="content">
-      <Typography variant="h5">
-        Welcome {firstName} {lastName}
-      </Typography>
-
+      {providerName ? (
+        <Typography variant="h5">
+         Here's what's happening.
+        </Typography>
+      ) : (
+        <Typography variant="h5">
+          Welcome {firstName} {lastName}
+        </Typography>
+      )}
       <Snackbar
         open={open}
         autoHideDuration={3000}
@@ -38,6 +50,25 @@ const Home = () => {
           </Alert>
         )}
       </Snackbar>
+      <div style={{ marginBottom: "20px" }}></div>
+      {providerName && (
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <Card elevation={0}>
+              <CardContent>
+                <Typography> Total Patients</Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Card elevation={0}>
+              <CardContent>
+                <Typography>Total Records</Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+      )}
     </div>
   );
 };

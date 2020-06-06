@@ -239,7 +239,7 @@ const ViewPatient = ({ match }) => {
                     </Typography>
                     <div style={{ marginBottom: "20px" }}></div>
                     <Button variant="contained" color="secondary">
-                      <Delete /> Delete Account
+                      <Delete /> Remove Account
                     </Button>
                   </CardContent>
                 </Card>
