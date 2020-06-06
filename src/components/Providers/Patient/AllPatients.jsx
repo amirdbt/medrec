@@ -16,6 +16,7 @@ import {
   CircularProgress,
   IconButton,
   useTheme,
+  Grid
 } from "@material-ui/core";
 import {
   AccountCircle,
@@ -173,7 +174,9 @@ const AllPatients = () => {
             </CardContent>
           </Card>
           <div style={{ marginBottom: "10px" }}></div>
-          <TableContainer component={Paper} elevation={0}>
+         <Grid container>
+           <Grid item xs={12} sm={12}>
+           <TableContainer component={Paper} elevation={0}>
             <Table aria-label="customized table">
               <TableHead className={classes.head}>
                 <TableRow>
@@ -242,6 +245,8 @@ const AllPatients = () => {
               </TableFooter>
             </Table>
           </TableContainer>
+           </Grid>
+         </Grid>
         </>
       )}
     </div>

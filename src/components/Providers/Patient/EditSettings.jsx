@@ -6,6 +6,8 @@ import {
   TextField,
   makeStyles,
   Button,
+  Snackbar,
+  Slide,
   LinearProgress,
 } from "@material-ui/core";
 import { Alert, AlertTitle } from "@material-ui/lab";
@@ -31,7 +33,15 @@ const EditSettings = () => {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [severity, setSeverity] = useState("success");
+  const [open, setOpen] = useState(true);
   const token = localStorage.getItem("token");
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   return (
     <Formik
@@ -43,7 +53,7 @@ const EditSettings = () => {
         phone_number_two: "",
         phone_number_three: "",
       }}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={(values, { setSubmitting, resetForm }) => {
         setTimeout(() => {
           console.log("Editing Account", values);
           setLoading(true);
@@ -60,6 +70,7 @@ const EditSettings = () => {
               setMessage(res.data.message);
               setAl(true);
               setLoading(false);
+              resetForm({});
             })
             .catch((err) => {
               console.log(err.response.data.error);
@@ -96,10 +107,20 @@ const EditSettings = () => {
         return (
           <div className="content">
             {al ? (
+              <>
               <Alert severity={severity}>
                 <AlertTitle>{severity}</AlertTitle>
                 {message}
               </Alert>
+              <Snackbar
+                  open={open}
+                  autoHideDuration={3000}
+                  TransitionComponent={Slide}
+                  onClose={handleClose}
+                >
+                  <Alert severity={severity}>{message}</Alert>
+                </Snackbar>
+              </>
             ) : (
               <div></div>
             )}
