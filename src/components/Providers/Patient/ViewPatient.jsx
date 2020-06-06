@@ -20,7 +20,7 @@ import {
   Button,
 } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
@@ -88,6 +88,24 @@ const ViewPatient = ({ match }) => {
     setPatient(response.data.patient);
     setLoading(false);
     console.log(response.data.patient);
+  };
+
+  let history = useHistory();
+  const removePatient = (username) => {
+    axios
+      .patch(
+        `https://polar-dusk-61658.herokuapp.com/providers/remove_patient/${username}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        history.push("/all-patients");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -238,7 +256,18 @@ const ViewPatient = ({ match }) => {
                       brough back.
                     </Typography>
                     <div style={{ marginBottom: "20px" }}></div>
-                    <Button variant="contained" color="secondary">
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      onClick={() => {
+                        if (
+                          window.confirm(
+                            "Are you sure you want to remove this patient?"
+                          )
+                        )
+                          removePatient(patient.userName);
+                      }}
+                    >
                       <Delete /> Remove Account
                     </Button>
                   </CardContent>
