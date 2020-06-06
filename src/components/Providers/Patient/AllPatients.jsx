@@ -173,7 +173,7 @@ const AllPatients = () => {
                 <CountUp
                   start={0}
                   end={totalPatients}
-                  duration={5}
+                  duration={2.5}
                   separator=","
                 />
               </Typography>
