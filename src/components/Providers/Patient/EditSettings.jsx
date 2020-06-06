@@ -62,7 +62,7 @@ const EditSettings = () => {
               `https://polar-dusk-61658.herokuapp.com/providers/edit
             `,
               values,
-              { headers: { Authorization: `Bearer ${token}` } }
+              { headers: { Authorization: `${token}` } }
             )
             .then((res) => {
               console.log(res);

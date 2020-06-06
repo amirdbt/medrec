@@ -82,7 +82,7 @@ const ViewPatient = ({ match }) => {
       `https://polar-dusk-61658.herokuapp.com/providers/patient/${match.params.id}
     `,
       {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `${token}` },
       }
     );
     setPatient(response.data.patient);
@@ -96,7 +96,7 @@ const ViewPatient = ({ match }) => {
       .patch(
         `https://polar-dusk-61658.herokuapp.com/providers/remove_patient/${username}`,
         {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: { Authorization: `${token}` },
         }
       )
       .then((res) => {

@@ -137,7 +137,7 @@ const AllPatients = () => {
     setLoading(true);
     const response = await axios.get(
       `https://polar-dusk-61658.herokuapp.com/providers/all_patients`,
-      { headers: { Authorization: `Bearer ${token}` } }
+      { headers: { Authorization: `${token}` } }
     );
     setPatients(response.data.patients);
     setTotalPatients(response.data.totalPatients);
