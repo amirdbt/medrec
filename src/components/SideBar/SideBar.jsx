@@ -177,6 +177,14 @@ const SideBar = (props) => {
             <Typography variant="h5">All Patients</Typography>
           </ListItem>
         </Link>
+        <Link className={classes.link} to="/edit-settings">
+              <ListItem button className={classes.listItems}>
+                <ListItemIcon className={classes.iconColor}>
+                  <Settings />
+                </ListItemIcon>
+                <Typography variant="h5">Edit Account</Typography>
+              </ListItem>
+            </Link>
       </List>
     </>
   );
