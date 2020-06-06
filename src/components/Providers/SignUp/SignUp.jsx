@@ -69,6 +69,7 @@ const ProviderSignUp = () => {
               console.log(res);
               localStorage.setItem("token", res.data.token);
               localStorage.setItem("providerName", res.data.provider.providerName);
+              localStorage.setItem("role", res.data.provider.role);
               setLoading(false);
                 history.push("/");
             })

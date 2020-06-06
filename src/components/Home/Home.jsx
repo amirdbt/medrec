@@ -13,6 +13,7 @@ const Home = () => {
   const firstName = localStorage.getItem("firstName");
   const lastName = localStorage.getItem("lastName");
   const providerName = localStorage.getItem("providerName");
+  const role = localStorage.getItem("role");
 
   const [open, setOpen] = React.useState(true);
 
@@ -25,7 +26,7 @@ const Home = () => {
   };
   return (
     <div className="content">
-      {providerName ? (
+      {role === "provider" ? (
         <Typography variant="h5">
          Here's what's happening.
         </Typography>
@@ -40,7 +41,7 @@ const Home = () => {
         TransitionComponent={Slide}
         onClose={handleClose}
       >
-        {providerName ? (
+        {role === "provider" ? (
           <Alert onClose={handleClose} severity="success">
             Welcome {providerName}
           </Alert>
@@ -51,7 +52,7 @@ const Home = () => {
         )}
       </Snackbar>
       <div style={{ marginBottom: "20px" }}></div>
-      {providerName && (
+      {role === "provider" && (
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <Card elevation={0}>

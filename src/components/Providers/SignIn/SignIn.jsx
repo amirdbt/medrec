@@ -61,6 +61,7 @@ const ProviderSiginIn = () => {
               console.log(res.data);
               localStorage.setItem("token", res.data.token);
               localStorage.setItem("providerName", res.data.provider.providerName);
+              localStorage.setItem("role", res.data.provider.role);
               setLoading(false);
               history.push("/", { user: res.data.provider });
             })

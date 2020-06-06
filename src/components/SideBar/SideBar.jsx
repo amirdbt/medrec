@@ -110,6 +110,7 @@ const SideBar = (props) => {
   };
   const userName = localStorage.getItem("userName");
   const providerName = localStorage.getItem("providerName");
+  const role = localStorage.getItem("role");
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -126,8 +127,10 @@ const SideBar = (props) => {
       <div className={classes.toolbar} />
       <header className={classes.header}>
         MedRecords <br />
-        {providerName && (
+        {role ==="provider" ? (
           <Chip label={providerName} style={{ marginTop: "-15px" }} />
+        ): (
+          <Chip label={userName} style={{ marginTop: "-15px" }} />
         )}
       </header>
 
@@ -161,31 +164,37 @@ const SideBar = (props) => {
             </Link>
           </>
         )}
-         <Link className={classes.link} to="/all-patients">
-          <ListItem button className={classes.listItems}>
-            <ListItemIcon className={classes.iconColor}>
-              <Accessibility />
-            </ListItemIcon>
-            <Typography variant="h5">All Patients</Typography>
-          </ListItem>
-        </Link>
-        <Link className={classes.link} to="/create-patient">
-          <ListItem button className={classes.listItems}>
-            <ListItemIcon className={classes.iconColor}>
-              <AddBox />
-            </ListItemIcon>
-            <Typography variant="h5">Create Patient</Typography>
-          </ListItem>
-        </Link>
-       
-        <Link className={classes.link} to="/edit-settings">
-              <ListItem button className={classes.listItems}>
-                <ListItemIcon className={classes.iconColor}>
-                  <Settings />
-                </ListItemIcon>
-                <Typography variant="h5">Edit Account</Typography>
-              </ListItem>
-            </Link>
+        {
+          role === "provider" && (
+            <>
+            <Link className={classes.link} to="/all-patients">
+            <ListItem button className={classes.listItems}>
+              <ListItemIcon className={classes.iconColor}>
+                <Accessibility />
+              </ListItemIcon>
+              <Typography variant="h5">All Patients</Typography>
+            </ListItem>
+          </Link>
+          <Link className={classes.link} to="/create-patient">
+            <ListItem button className={classes.listItems}>
+              <ListItemIcon className={classes.iconColor}>
+                <AddBox />
+              </ListItemIcon>
+              <Typography variant="h5">Create Patient</Typography>
+            </ListItem>
+          </Link>
+         
+          <Link className={classes.link} to="/edit-settings">
+                <ListItem button className={classes.listItems}>
+                  <ListItemIcon className={classes.iconColor}>
+                    <Settings />
+                  </ListItemIcon>
+                  <Typography variant="h5">Edit Account</Typography>
+                </ListItem>
+              </Link>
+              </>
+          )
+        }
       </List>
     </>
   );
