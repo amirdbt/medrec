@@ -144,7 +144,7 @@ const SideBar = (props) => {
             <Typography variant="h5">Dashboard</Typography>
           </ListItem>
         </Link>
-        {userName && (
+        {role ==="user" && (
           <>
             <Link className={classes.link} to="/profile">
               <ListItem button className={classes.listItems}>
