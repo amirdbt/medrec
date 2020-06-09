@@ -14,13 +14,12 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Card,
-  CardContent,
-  Button,
 } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
+import Hospitals from "./Hospitals";
+import Records from "./Records";
 
 const useStyles = makeStyles((theme) => ({
   links: {
@@ -69,20 +68,17 @@ const Profile = ({ match }) => {
   };
   console.log(match);
   const token = localStorage.getItem("token");
-
-
+  const userName = localStorage.getItem("userName");
 
   let history = useHistory();
- 
+
   return (
     <div className="content">
       {loading ? (
         <CircularProgress style={{ marginLeft: "50%" }} />
       ) : (
         <>
-          <Typography variant="h6">
-          Profile
-          </Typography>
+          <Typography variant="h6">{userName}'s Profile</Typography>
           <div style={{ marginTop: "20px" }}></div>
           <AppBar
             position="static"
@@ -199,14 +195,13 @@ const Profile = ({ match }) => {
                   </Table>
                 </TableContainer>
               </Grid>
-            
             </Grid>
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <Typography>Coming soon...</Typography>
+            <Records />
           </TabPanel>
           <TabPanel value={value} index={2}>
-            <Typography>Coming soon...</Typography>
+            <Hospitals />
           </TabPanel>
         </>
       )}
