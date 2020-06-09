@@ -67,6 +67,7 @@ const Settings = () => {
         nextOfKin: "",
         nationality: "",
         stateOfOrigin: "",
+        nextOfKin_contact: "",
       }}
       onSubmit={(values, { setSubmitting, resetForm }) => {
         setTimeout(() => {
@@ -114,6 +115,7 @@ const Settings = () => {
         nextOfKin: Yup.string().required("Required"),
         nationality: Yup.string().required("Required"),
         stateOfOrigin: Yup.string().required("Required"),
+        nextOfKin_contact: Yup.string().required("Required"),
       })}
     >
       {(props) => {
@@ -333,7 +335,7 @@ const Settings = () => {
                       className={errors.genotype && touched.genotype && "error"}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      style={{ marginBottom: "20px", marginRight: "10px" }}
+                      style={{ marginBottom: "20px" }}
                     />
                     {errors.genotype && touched.genotype && (
                       <div className={classes.error}> {errors.genotype} </div>
@@ -371,7 +373,7 @@ const Settings = () => {
                       }
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      style={{ marginBottom: "20px", marginRight: "10px" }}
+                      style={{ marginBottom: "20px" }}
                     />
                     {errors.nationality && touched.nationality && (
                       <div className={classes.error}>
@@ -379,6 +381,8 @@ const Settings = () => {
                         {errors.nationality}{" "}
                       </div>
                     )}
+                  </div>
+                  <div className={classes.input}>
                     <TextField
                       name="stateOfOrigin"
                       label="State of origin"
@@ -392,12 +396,35 @@ const Settings = () => {
                       }
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      style={{ marginBottom: "20px" }}
+                      style={{ marginBottom: "20px", marginRight: "10px" }}
                     />
                     {errors.stateOfOrigin && touched.stateOfOrigin && (
                       <div className={classes.error}>
                         {" "}
                         {errors.stateOfOrigin}{" "}
+                      </div>
+                    )}
+                    <TextField
+                      name="nextOfKin_contact"
+                      label="Next of kin contact"
+                      placeholder="Next of kin contact"
+                      variant="outlined"
+                      fullWidth
+                      error={err}
+                      value={values.nextOfKin_contact || ""}
+                      className={
+                        errors.nextOfKin_contact &&
+                        touched.nextOfKin_contact &&
+                        "error"
+                      }
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      style={{ marginBottom: "20px" }}
+                    />
+                    {errors.nextOfKin_contact && touched.nextOfKin_contact && (
+                      <div className={classes.error}>
+                        {" "}
+                        {errors.nextOfKin_contact}{" "}
                       </div>
                     )}
                   </div>
