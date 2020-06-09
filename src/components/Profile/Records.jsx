@@ -9,7 +9,7 @@ import {
   Button,
   makeStyles,
 } from "@material-ui/core";
-import { GetApp, Visibility } from "@material-ui/icons";
+import { Visibility } from "@material-ui/icons";
 
 const useStyles = makeStyles({
   root: {
@@ -52,10 +52,6 @@ const Records = ({ records }) => {
         </CardActionArea>
         <CardActions>
           <Button size="small" color="primary">
-            <GetApp style={{ marginRight: "5px" }} />
-            Download
-          </Button>
-          <Button size="small" color="primary">
             <Visibility style={{ marginRight: "5px" }} />
             Preview
           </Button>
@@ -81,10 +77,6 @@ const Records = ({ records }) => {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">
-            <GetApp style={{ marginRight: "5px" }} />
-            Download
-          </Button>
           <Button size="small" color="primary">
             <Visibility style={{ marginRight: "5px" }} />
             Preview
@@ -112,10 +104,6 @@ const Records = ({ records }) => {
         </CardActionArea>
         <CardActions>
           <Button size="small" color="primary">
-            <GetApp style={{ marginRight: "5px" }} />
-            Download
-          </Button>
-          <Button size="small" color="primary">
             <Visibility style={{ marginRight: "5px" }} />
             Preview
           </Button>
@@ -141,10 +129,6 @@ const Records = ({ records }) => {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">
-            <GetApp style={{ marginRight: "5px" }} />
-            Download
-          </Button>
           <Button size="small" color="primary">
             <Visibility style={{ marginRight: "5px" }} />
             Preview
@@ -172,10 +156,6 @@ const Records = ({ records }) => {
         </CardActionArea>
         <CardActions>
           <Button size="small" color="primary">
-            <GetApp style={{ marginRight: "5px" }} />
-            Download
-          </Button>
-          <Button size="small" color="primary">
             <Visibility style={{ marginRight: "5px" }} />
             Preview
           </Button>
@@ -201,10 +181,6 @@ const Records = ({ records }) => {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">
-            <GetApp style={{ marginRight: "5px" }} />
-            Download
-          </Button>
           <Button size="small" color="primary">
             <Visibility style={{ marginRight: "5px" }} />
             Preview
