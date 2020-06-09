@@ -64,6 +64,8 @@ const SiginIn = () => {
               localStorage.setItem("lastName", res.data.user.lastName);
               localStorage.setItem("email", res.data.user.email);
               localStorage.setItem("userName", res.data.user.userName);
+              localStorage.setItem("phoneNumber", res.data.user.phoneNumber);
+              localStorage.setItem("gender", res.data.user.gender);
               localStorage.setItem("role", res.data.user.role);
               localStorage.setItem("_id", res.data.user._id);
               setLoading(false);
