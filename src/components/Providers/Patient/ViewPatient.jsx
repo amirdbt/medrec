@@ -22,6 +22,7 @@ import {
 import { Delete } from "@material-ui/icons";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
+import Records from "./Records";
 
 const useStyles = makeStyles((theme) => ({
   links: {
@@ -276,7 +277,7 @@ const ViewPatient = ({ match }) => {
             </Grid>
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <Typography>Coming soon...</Typography>
+            <Records />
           </TabPanel>
         </>
       )}
