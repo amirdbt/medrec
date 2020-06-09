@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Typography,
-  Grid,
   Card,
   CardContent,
   CardActionArea,
@@ -28,7 +27,8 @@ const useStyles = makeStyles({
   },
 });
 
-const Records = () => {
+const Records = ({ records }) => {
+  console.log(records);
   const classes = useStyles();
   return (
     <div className={classes.cards}>
