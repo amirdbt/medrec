@@ -13,6 +13,7 @@ import CreatePatient from "./components/Providers/Patient/CreatePatient"
 import AllPatients from "./components/Providers/Patient/AllPatients"
 import ViewPatient from "./components/Providers/Patient/ViewPatient"
 import EditSettings from "./components/Providers/Patient/EditSettings"
+import ViewRecord from "./components/Providers/Patient/ViewRecord"
 import { Switch, Route, withRouter } from "react-router-dom";
 
 const Main = withRouter(({ location }) => {
@@ -42,6 +43,7 @@ const Main = withRouter(({ location }) => {
         <Route path="/edit-settings" component={EditSettings} />
         <Route exact path="/all-patients" component={AllPatients} />
         <Route path="/all-patients/:id" component={ViewPatient} />
+        <Route path="/all-records/:id" component={ViewRecord} />
       </Switch>
     </>
   );
