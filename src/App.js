@@ -8,12 +8,13 @@ import AuthGuard from "./components/SignIn/AuthGuard";
 import ForgotPassword from "./components/SignIn/ForgotPassword";
 import ProviderSignUp from "./components/Providers/SignUp/SignUp";
 import UserSignComponent from "./components/SignComponent/UserSignComponent";
-import ProviderSignComponent from "./components/SignComponent/ProviderSignComponent"
-import CreatePatient from "./components/Providers/Patient/CreatePatient"
-import AllPatients from "./components/Providers/Patient/AllPatients"
-import ViewPatient from "./components/Providers/Patient/ViewPatient"
-import EditSettings from "./components/Providers/Patient/EditSettings"
-import ViewRecord from "./components/Providers/Patient/ViewRecord"
+import ProviderSignComponent from "./components/SignComponent/ProviderSignComponent";
+import CreatePatient from "./components/Providers/Patient/CreatePatient";
+import AllPatients from "./components/Providers/Patient/AllPatients";
+import ViewPatient from "./components/Providers/Patient/ViewPatient";
+import EditSettings from "./components/Providers/Patient/EditSettings";
+import ViewRecord from "./components/Providers/Patient/ViewRecord";
+import AddPatient from "./components/Providers/Patient/AddPatient";
 import { Switch, Route, withRouter } from "react-router-dom";
 
 const Main = withRouter(({ location }) => {
@@ -24,7 +25,7 @@ const Main = withRouter(({ location }) => {
         location.pathname !== "/forgotpassword" &&
         location.pathname !== "/providers-signup" &&
         location.pathname !== "/providers-signin" &&
-        location.pathname !== "/user-component" && 
+        location.pathname !== "/user-component" &&
         location.pathname !== "/provider-component" && (
           <>
             <SideBar />
@@ -40,6 +41,7 @@ const Main = withRouter(({ location }) => {
         <Route path="/user-component" component={UserSignComponent} />
         <Route path="/provider-component" component={ProviderSignComponent} />
         <Route path="/create-patient" component={CreatePatient} />
+        <Route path="/add-patient" component={AddPatient} />
         <Route path="/edit-settings" component={EditSettings} />
         <Route exact path="/all-patients" component={AllPatients} />
         <Route path="/all-patients/:id" component={ViewPatient} />

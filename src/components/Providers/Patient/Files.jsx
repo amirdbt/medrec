@@ -10,7 +10,8 @@ import {
   Button,
   makeStyles,
 } from "@material-ui/core";
-import { Visibility } from "@material-ui/icons";
+import { Visibility, CloudUploadSharp } from "@material-ui/icons";
+import axios from "axios";
 
 const useStyles = makeStyles({
   root: {
@@ -61,6 +62,7 @@ const img = {
 
 function Previews(props) {
   const [files, setFiles] = useState([]);
+  // console.log(props.record);
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles) => {
@@ -90,6 +92,30 @@ function Previews(props) {
     [files]
   );
 
+  const uploadFiles = () => {
+    const token = localStorage.getItem("token");
+    console.log(files);
+    setTimeout(() => {
+      var formData = new FormData();
+      // formData.append("uploads", files[0]);
+      files.map((file, index) => {
+        formData.append(`file${index}`, file);
+      });
+      axios
+        .patch(
+          `https://polar-dusk-61658.herokuapp.com/records/update/files/${props.record}`,
+          { uploads: formData },
+          { headers: { Authorization: `${token}` } }
+        )
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, 200);
+  };
+
   return (
     <section className="container">
       <div {...getRootProps({ className: "dropzone" })}>
@@ -111,15 +137,18 @@ function Previews(props) {
         </p>
       </div>
       <aside style={thumbsContainer}>{thumbs}</aside>
+      <Button color="primary" variant="contained" onClick={uploadFiles}>
+        <CloudUploadSharp style={{ marginRight: "5px" }} /> Upload
+      </Button>
     </section>
   );
 }
 
-const Files = () => {
+const Files = ({ record }) => {
   const classes = useStyles();
   return (
     <div>
-      <Previews />
+      <Previews record={record} />
       <div className={classes.cards}>
         <Card className={classes.root}>
           <CardActionArea>

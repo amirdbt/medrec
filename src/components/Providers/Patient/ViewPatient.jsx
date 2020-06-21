@@ -72,7 +72,7 @@ const ViewPatient = ({ match }) => {
   };
   console.log(match);
   const token = localStorage.getItem("token");
-
+  // console.log(token);
   useEffect(() => {
     fetchPatient();
   }, []);
@@ -92,10 +92,12 @@ const ViewPatient = ({ match }) => {
   };
 
   let history = useHistory();
+
   const removePatient = (username) => {
     axios
       .patch(
         `https://polar-dusk-61658.herokuapp.com/providers/remove_patient/${username}`,
+        "",
         {
           headers: { Authorization: `${token}` },
         }
@@ -277,7 +279,7 @@ const ViewPatient = ({ match }) => {
             </Grid>
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <Records />
+            <Records user_id={patient._id} MRID={patient.MRID} />
           </TabPanel>
         </>
       )}

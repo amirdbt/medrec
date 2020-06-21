@@ -25,6 +25,7 @@ import {
   PowerSettingsNew,
   AddBox,
   Accessibility,
+  AddCircleOutline,
 } from "@material-ui/icons";
 import MenuIcon from "@material-ui/icons/Menu";
 
@@ -127,9 +128,9 @@ const SideBar = (props) => {
       <div className={classes.toolbar} />
       <header className={classes.header}>
         MedRecords <br />
-        {role ==="provider" ? (
+        {role === "provider" ? (
           <Chip label={providerName} style={{ marginTop: "-15px" }} />
-        ): (
+        ) : (
           <Chip label={userName} style={{ marginTop: "-15px" }} />
         )}
       </header>
@@ -144,7 +145,7 @@ const SideBar = (props) => {
             <Typography variant="h5">Dashboard</Typography>
           </ListItem>
         </Link>
-        {role ==="user" && (
+        {role === "user" && (
           <>
             <Link className={classes.link} to="/profile">
               <ListItem button className={classes.listItems}>
@@ -164,37 +165,43 @@ const SideBar = (props) => {
             </Link>
           </>
         )}
-        {
-          role === "provider" && (
-            <>
+        {role === "provider" && (
+          <>
             <Link className={classes.link} to="/all-patients">
-            <ListItem button className={classes.listItems}>
-              <ListItemIcon className={classes.iconColor}>
-                <Accessibility />
-              </ListItemIcon>
-              <Typography variant="h5">All Patients</Typography>
-            </ListItem>
-          </Link>
-          <Link className={classes.link} to="/create-patient">
-            <ListItem button className={classes.listItems}>
-              <ListItemIcon className={classes.iconColor}>
-                <AddBox />
-              </ListItemIcon>
-              <Typography variant="h5">Create Patient</Typography>
-            </ListItem>
-          </Link>
-         
-          <Link className={classes.link} to="/edit-settings">
-                <ListItem button className={classes.listItems}>
-                  <ListItemIcon className={classes.iconColor}>
-                    <Settings />
-                  </ListItemIcon>
-                  <Typography variant="h5">Edit Account</Typography>
-                </ListItem>
-              </Link>
-              </>
-          )
-        }
+              <ListItem button className={classes.listItems}>
+                <ListItemIcon className={classes.iconColor}>
+                  <Accessibility />
+                </ListItemIcon>
+                <Typography variant="h5">All Patients</Typography>
+              </ListItem>
+            </Link>
+            <Link className={classes.link} to="/create-patient">
+              <ListItem button className={classes.listItems}>
+                <ListItemIcon className={classes.iconColor}>
+                  <AddBox />
+                </ListItemIcon>
+                <Typography variant="h5">Create Patient</Typography>
+              </ListItem>
+            </Link>
+            <Link className={classes.link} to="/add-patient">
+              <ListItem button className={classes.listItems}>
+                <ListItemIcon className={classes.iconColor}>
+                  <AddCircleOutline />
+                </ListItemIcon>
+                <Typography variant="h5">Add Patient</Typography>
+              </ListItem>
+            </Link>
+
+            <Link className={classes.link} to="/edit-settings">
+              <ListItem button className={classes.listItems}>
+                <ListItemIcon className={classes.iconColor}>
+                  <Settings />
+                </ListItemIcon>
+                <Typography variant="h5">Edit Account</Typography>
+              </ListItem>
+            </Link>
+          </>
+        )}
       </List>
     </>
   );

@@ -26,6 +26,8 @@ const useStyles = makeStyles((theme) => ({
   },
   error: {
     color: "rgb(235, 54, 54)",
+    marginTop: "-20px",
+    marginBottom:"20px"
   },
 }));
 
@@ -68,6 +70,7 @@ const Settings = () => {
         nationality: "",
         stateOfOrigin: "",
         nextOfKin_contact: "",
+        nhis_number: "",
       }}
       onSubmit={(values, { setSubmitting, resetForm }) => {
         setTimeout(() => {
@@ -109,13 +112,14 @@ const Settings = () => {
         gender: Yup.string().required("Required"),
         email: Yup.string().email("Invalid email").required("Required"),
         dob: Yup.date().required("Required"),
-        genotype: Yup.string().required("Required"),
-        bloodGroup: Yup.string().required("Required"),
+        genotype: Yup.string(),
+        bloodGroup: Yup.string(),
         phoneNumber: Yup.string().required("Required"),
-        nextOfKin: Yup.string().required("Required"),
-        nationality: Yup.string().required("Required"),
-        stateOfOrigin: Yup.string().required("Required"),
-        nextOfKin_contact: Yup.string().required("Required"),
+        nextOfKin: Yup.string(),
+        nationality: Yup.string(),
+        stateOfOrigin: Yup.string(),
+        nextOfKin_contact: Yup.string(),
+        nhis_number :Yup.string(),
       })}
     >
       {(props) => {
@@ -301,7 +305,7 @@ const Settings = () => {
                         label="Blood Group"
                         name="bloodGroup"
                         error={err}
-                        value={values.bloodGroup || ""}
+                        value={values.bloodGroup || "null"}
                         className={
                           errors.bloodGroup && touched.bloodGroup && "error"
                         }
@@ -331,7 +335,7 @@ const Settings = () => {
                       type="text"
                       variant="outlined"
                       error={err}
-                      value={values.genotype || ""}
+                      value={values.genotype || "null"}
                       className={errors.genotype && touched.genotype && "error"}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -349,7 +353,7 @@ const Settings = () => {
                       variant="outlined"
                       fullWidth
                       error={err}
-                      value={values.nextOfKin || ""}
+                      value={values.nextOfKin || "null"}
                       className={
                         errors.nextOfKin && touched.nextOfKin && "error"
                       }
@@ -367,7 +371,7 @@ const Settings = () => {
                       variant="outlined"
                       fullWidth
                       error={err}
-                      value={values.nationality || ""}
+                      value={values.nationality || "null"}
                       className={
                         errors.nationality && touched.nationality && "error"
                       }
@@ -390,7 +394,7 @@ const Settings = () => {
                       variant="outlined"
                       fullWidth
                       error={err}
-                      value={values.stateOfOrigin || ""}
+                      value={values.stateOfOrigin || "null"}
                       className={
                         errors.stateOfOrigin && touched.stateOfOrigin && "error"
                       }
@@ -411,7 +415,7 @@ const Settings = () => {
                       variant="outlined"
                       fullWidth
                       error={err}
-                      value={values.nextOfKin_contact || ""}
+                      value={values.nextOfKin_contact || "null"}
                       className={
                         errors.nextOfKin_contact &&
                         touched.nextOfKin_contact &&
@@ -426,6 +430,27 @@ const Settings = () => {
                         {" "}
                         {errors.nextOfKin_contact}{" "}
                       </div>
+                    )}
+                  </div>
+                  <div>
+                    <TextField
+                      name="nhis_number"
+                      label="NHIS Number"
+                      variant="outlined"
+                      fullWidth
+                      type="text"
+                      error={err}
+                      value={values.nhis_number || "null"}
+                      className={
+                        errors.nhis_number && touched.nhis_number && "error"
+                      }
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      style={{ marginBottom: "20px", marginRight: "10px" }}
+                    />
+
+                    {errors.nhis_number && touched.nhis_number && (
+                      <div className={classes.error}> {errors.nhis_number} </div>
                     )}
                   </div>
                   <Button
