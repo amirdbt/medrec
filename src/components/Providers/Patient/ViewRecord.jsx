@@ -201,7 +201,7 @@ const ViewRecord = ({ match, location }) => {
                     <Typography variant="caption">
                       Remove this patient's record if he/she requested that, if
                       not please be aware that what has been deleted can never
-                      brough back.
+                      be brought back.
                     </Typography>
                     <div style={{ marginBottom: "20px" }}></div>
                     <Button

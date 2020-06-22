@@ -27,6 +27,7 @@ import {
   Accessibility,
   AddCircleOutline,
   Share,
+  LocalHospital,
 } from "@material-ui/icons";
 import MenuIcon from "@material-ui/icons/Menu";
 
@@ -171,6 +172,14 @@ const SideBar = (props) => {
                   <Share />
                 </ListItemIcon>
                 <Typography variant="h5">Share Records</Typography>
+              </ListItem>
+            </Link>
+            <Link className={classes.link} to="/hospitals">
+              <ListItem button className={classes.listItems}>
+                <ListItemIcon className={classes.iconColor}>
+                  <LocalHospital />
+                </ListItemIcon>
+                <Typography variant="h5">Hospitals</Typography>
               </ListItem>
             </Link>
           </>

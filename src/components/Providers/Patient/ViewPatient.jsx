@@ -256,7 +256,7 @@ const ViewPatient = ({ match }) => {
                     <Typography variant="caption">
                       Remove this patient's data if he/she requested that, if
                       not please be aware that what has been deleted can never
-                      brough back.
+                      be brought back.
                     </Typography>
                     <div style={{ marginBottom: "20px" }}></div>
                     <Button

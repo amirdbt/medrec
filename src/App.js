@@ -16,6 +16,9 @@ import EditSettings from "./components/Providers/Patient/EditSettings";
 import ViewRecord from "./components/Providers/Patient/ViewRecord";
 import AddPatient from "./components/Providers/Patient/AddPatient";
 import ShareRecords from "./components/Profile/ShareRecords";
+import ViewHospital from "./components/Profile/ViewHospital";
+import Hospitals from "./components/Profile/Hospitals";
+import Files from "./components/Profile/Files";
 import { Switch, Route, withRouter } from "react-router-dom";
 
 const Main = withRouter(({ location }) => {
@@ -48,6 +51,9 @@ const Main = withRouter(({ location }) => {
         <AuthGuard exact path="/all-patients" component={AllPatients} />
         <AuthGuard path="/all-patients/:id" component={ViewPatient} />
         <AuthGuard path="/all-records/:id" component={ViewRecord} />
+        <AuthGuard exact path="/hospitals" component={Hospitals} />
+        <AuthGuard exact path="/hospitals/:id" component={ViewHospital} />
+        <AuthGuard path="/hospitals/:id/:rid" component={Files} />
       </Switch>
     </>
   );

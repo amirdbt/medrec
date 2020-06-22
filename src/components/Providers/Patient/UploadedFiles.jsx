@@ -49,7 +49,12 @@ const UploadedFiles = ({ files }) => {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <a href={file} target="_blank" style={{ textDecoration: "none" }}>
+            <a
+              href={file}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: "none" }}
+            >
               <Button size="small" color="primary">
                 <Visibility style={{ marginRight: "5px" }} />
                 Preview
