@@ -15,6 +15,7 @@ import ViewPatient from "./components/Providers/Patient/ViewPatient";
 import EditSettings from "./components/Providers/Patient/EditSettings";
 import ViewRecord from "./components/Providers/Patient/ViewRecord";
 import AddPatient from "./components/Providers/Patient/AddPatient";
+import ShareRecords from "./components/Profile/ShareRecords";
 import { Switch, Route, withRouter } from "react-router-dom";
 
 const Main = withRouter(({ location }) => {
@@ -35,17 +36,18 @@ const Main = withRouter(({ location }) => {
         <AuthGuard exact path="/" component={Home} />
         <AuthGuard path="/profile" component={Profile} />
         <AuthGuard path="/settings" component={Settings} />
+        <AuthGuard path="/share-records" component={ShareRecords} />
         <Route path="/forgotpassword" component={ForgotPassword} />
         <Route path="/signup" component={SignUp} />
         <Route path="/providers-signup" component={ProviderSignUp} />
         <Route path="/user-component" component={UserSignComponent} />
         <Route path="/provider-component" component={ProviderSignComponent} />
-        <Route path="/create-patient" component={CreatePatient} />
-        <Route path="/add-patient" component={AddPatient} />
-        <Route path="/edit-settings" component={EditSettings} />
-        <Route exact path="/all-patients" component={AllPatients} />
-        <Route path="/all-patients/:id" component={ViewPatient} />
-        <Route path="/all-records/:id" component={ViewRecord} />
+        <AuthGuard path="/create-patient" component={CreatePatient} />
+        <AuthGuard path="/add-patient" component={AddPatient} />
+        <AuthGuard path="/edit-settings" component={EditSettings} />
+        <AuthGuard exact path="/all-patients" component={AllPatients} />
+        <AuthGuard path="/all-patients/:id" component={ViewPatient} />
+        <AuthGuard path="/all-records/:id" component={ViewRecord} />
       </Switch>
     </>
   );

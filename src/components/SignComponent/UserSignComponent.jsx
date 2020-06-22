@@ -1,8 +1,15 @@
 import React from "react";
-import { AppBar, Tab, Tabs, Typography, Box,makeStyles } from "@material-ui/core";
-import {AccountBox,AddBox } from "@material-ui/icons";
+import {
+  AppBar,
+  Tab,
+  Tabs,
+  Typography,
+  Box,
+  makeStyles,
+} from "@material-ui/core";
+import { AccountBox, AddBox } from "@material-ui/icons";
 import Signin from "../SignIn/SiginIn";
-import SignUp from "../SignUp/SignUp"
+import SignUp from "../SignUp/SignUp";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -31,19 +38,19 @@ function a11yProps(index) {
   };
 }
 
-const useStyles = makeStyles((theme) =>({
-    root:{
-        width: "50%",
-       marginLeft: "24%",
-
-    },
-    tabs:{
-        marginLeft: "24%"
-    }
-}))
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "50%",
+    marginLeft: "24%",
+  },
+  tabs: {
+    marginLeft: "24%",
+    // marginBottom: "-20px",
+  },
+}));
 const SignInComponent = () => {
   const [value, setValue] = React.useState(0);
-    const classes = useStyles()
+  const classes = useStyles();
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -60,12 +67,7 @@ const SignInComponent = () => {
           className={classes.tabs}
           aria-label="scrollable force tabs example"
         >
-          <Tab
-            label="User Sign up"
-            icon={<AddBox />}
-            {...a11yProps(0)}
-            
-          />
+          <Tab label="User Sign up" icon={<AddBox />} {...a11yProps(0)} />
           <Tab label="User Sign in" icon={<AccountBox />} {...a11yProps(1)} />
         </Tabs>
       </AppBar>

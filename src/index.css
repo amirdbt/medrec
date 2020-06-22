@@ -15,7 +15,7 @@ code {
   margin-top: 80px;
   transition: all 0.5s ease;
   margin-left: 290px;
-  margin-right: 70px;
+  margin-right: 43px;
   margin-bottom: 50px;
 }
 .reset-password {
@@ -44,7 +44,7 @@ code {
   }
 }
 
-@media only screen and (max-width: 1020px){
+@media only screen and (max-width: 1020px) {
   .reset-password {
     margin-top: 184px;
     transition: all 0.5s ease;
