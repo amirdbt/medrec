@@ -230,7 +230,7 @@ const ViewRecord = ({ match }) => {
             </Grid>
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <Files record={record._id} />
+            <Files record={record._id} files={record.files} />
           </TabPanel>
         </>
       )}
