@@ -32,7 +32,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Records = ({ user_id, MRID }) => {
+const Records = ({ user_id, MRID, username }) => {
   const [patientRecords, setPatientRecords] = useState([]);
   const [totalRecords, setTotalRecords] = useState("");
   const [loading, setLoading] = useState(false);
@@ -108,7 +108,10 @@ const Records = ({ user_id, MRID }) => {
                 </CardActionArea>
                 <CardActions>
                   <Link
-                    to={`/all-records/${records._id}`}
+                    to={{
+                      pathname: `/all-records/${records._id}`,
+                      state: { username },
+                    }}
                     style={{ textDecoration: "none" }}
                   >
                     <Button size="small" color="primary">

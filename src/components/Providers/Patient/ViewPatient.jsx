@@ -118,14 +118,14 @@ const ViewPatient = ({ match }) => {
       ) : (
         <>
           <Breadcrumbs aria-label="breadcrumb">
-            <Link to="/all-patients" className={classes.links}>
+            <Link
+              to="/all-patients"
+              color="textPrimary"
+              style={{ fontSize: "20px", textDecoration: "none" }}
+            >
               All Patients
             </Link>
-            <Link
-              color="textPrimary"
-              aria-current="page"
-              className={classes.links}
-            >
+            <Link aria-current="page" className={classes.links}>
               Patient
             </Link>
           </Breadcrumbs>
@@ -279,7 +279,11 @@ const ViewPatient = ({ match }) => {
             </Grid>
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <Records user_id={patient._id} MRID={patient.MRID} />
+            <Records
+              user_id={patient._id}
+              MRID={patient.MRID}
+              username={patient.userName}
+            />
           </TabPanel>
         </>
       )}

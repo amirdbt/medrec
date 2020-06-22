@@ -62,11 +62,11 @@ function a11yProps(index) {
   };
 }
 
-const ViewRecord = ({ match }) => {
+const ViewRecord = ({ match, location }) => {
   const classes = useStyles();
   const [record, setRecord] = useState({});
   const [loading, setLoading] = useState(false);
-
+  console.log(location.state.username);
   useEffect(() => {
     fetchSingleRecord();
   }, []);
@@ -105,14 +105,14 @@ const ViewRecord = ({ match }) => {
       ) : (
         <>
           <Breadcrumbs aria-label="breadcrumb">
-            <Link to="/all-patients" className={classes.links}>
+            <Link
+              to={`/all-patients/${location.state.username}`}
+              color="textPrimary"
+              style={{ fontSize: "20px", textDecoration: "none" }}
+            >
               Patient
             </Link>
-            <Link
-              color="textPrimary"
-              aria-current="page"
-              className={classes.links}
-            >
+            <Link aria-current="page" className={classes.links}>
               Record
             </Link>
           </Breadcrumbs>
