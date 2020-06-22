@@ -9,11 +9,15 @@ import {
   CardMedia,
   Button,
   makeStyles,
+  LinearProgress,
+  Slide,
+  Snackbar,
 } from "@material-ui/core";
 import { Visibility, CloudUploadSharp } from "@material-ui/icons";
+import { Alert, AlertTitle } from "@material-ui/lab";
 import axios from "axios";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
     width: "30%",
@@ -27,7 +31,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexWrap: "wrap",
   },
-});
+}));
 
 const thumbsContainer = {
   display: "flex",
@@ -62,6 +66,14 @@ const img = {
 
 function Previews(props) {
   const [files, setFiles] = useState([]);
+  // const [err, setErr] = useState(false);
+  const [al, setAl] = useState(false);
+
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [severity, setSeverity] = useState("success");
+  const [open, setOpen] = useState(false);
+
   // console.log(props.record);
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
@@ -91,33 +103,70 @@ function Previews(props) {
     },
     [files]
   );
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-  const uploadFiles = () => {
-    const token = localStorage.getItem("token");
+  const uploadFiles = (e) => {
+    let token = localStorage.getItem("token");
     console.log(files);
+    setLoading(true);
+    let formData = new FormData();
+    files.map((file, index) => {
+      formData.append("uploads", file);
+    });
+    console.log(formData.get("uploads"));
     setTimeout(() => {
-      var formData = new FormData();
-      // formData.append("uploads", files[0]);
-      files.map((file, index) => {
-        formData.append(`file${index}`, file);
-      });
       axios
-        .patch(
+        .post(
           `https://polar-dusk-61658.herokuapp.com/records/update/files/${props.record}`,
-          { uploads: formData },
-          { headers: { Authorization: `${token}` } }
+          formData,
+          {
+            headers: {
+              Authorization: `${token}`,
+              "content-type": "multipart/form-data",
+            },
+          }
         )
         .then((res) => {
           console.log(res.data);
+          console.log(res.data.message);
+          setMessage(res.data.message);
+          setAl(true);
+          setLoading(false);
         })
         .catch((err) => {
           console.log(err);
+          setMessage(err.response.data.error);
+
+          setAl(true);
+          setSeverity("error");
+          setLoading(false);
         });
     }, 200);
   };
 
   return (
     <section className="container">
+      {al ? (
+        <>
+          <Alert severity={severity}>
+            <AlertTitle>{severity}</AlertTitle>
+            {message}
+          </Alert>
+          <Snackbar
+            open={open}
+            autoHideDuration={3000}
+            TransitionComponent={Slide}
+            onClose={handleClose}
+          >
+            <Alert severity={severity}>{message}</Alert>
+          </Snackbar>
+        </>
+      ) : (
+        <div></div>
+      )}
+
       <div {...getRootProps({ className: "dropzone" })}>
         <input {...getInputProps()} />
         <p
@@ -137,9 +186,16 @@ function Previews(props) {
         </p>
       </div>
       <aside style={thumbsContainer}>{thumbs}</aside>
-      <Button color="primary" variant="contained" onClick={uploadFiles}>
+      <Button
+        color="primary"
+        variant="contained"
+        onClick={uploadFiles}
+        disabled={loading}
+        style={{ marginBottom: "5px" }}
+      >
         <CloudUploadSharp style={{ marginRight: "5px" }} /> Upload
       </Button>
+      {loading ? <LinearProgress /> : <div></div>}
     </section>
   );
 }
