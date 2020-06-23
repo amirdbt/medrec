@@ -23,6 +23,11 @@ const useStyles = makeStyles((theme) => ({
   dialog: {
     width: "100%",
   },
+  error: {
+    color: "rgb(235, 54, 54)",
+    marginTop: "-20px",
+    marginBottom: "10px",
+  },
 }));
 
 const AddRecord = ({ user_id }) => {
@@ -56,8 +61,12 @@ const AddRecord = ({ user_id }) => {
           console.log("Creating Records", values);
           setLoading(true);
           axios
-            .post(`https://polar-dusk-61658.herokuapp.com/records/upload
-            `, values, { headers: { Authorization: `${token}` } })
+            .post(
+              `https://polar-dusk-61658.herokuapp.com/records/upload
+            `,
+              values,
+              { headers: { Authorization: `${token}` } }
+            )
             .then((res) => {
               console.log(res);
               console.log(res.data.message);
