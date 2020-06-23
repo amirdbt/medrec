@@ -191,7 +191,7 @@ const Hospitals = () => {
                             <Link
                               to={{
                                 pathname: `/hospitals/${hospital.providerName}`,
-                                state: { hospitals },
+                                state: { hospital },
                               }}
                             >
                               <IconButton aria-label="View hospital">

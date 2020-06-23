@@ -37,13 +37,18 @@ const useStyles = makeStyles({
   },
 });
 
-const Records = ({ hospital, hospitals }) => {
+const Records = ({ hospital }) => {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
+  const [hospitals, setHospitals] = useState([]);
   console.log(hospital);
   const [hospitalRecords, setHospitalRecords] = useState([]);
   useEffect(() => {
     fetchSingleRecord();
+  }, []);
+
+  useEffect(() => {
+    fetchUser();
   }, []);
 
   const fetchSingleRecord = () => {
@@ -65,6 +70,23 @@ const Records = ({ hospital, hospitals }) => {
       .catch((error) => {
         console.log(error.response.data.error.message);
         setLoading(false);
+      });
+  };
+
+  const fetchUser = async () => {
+    const token = localStorage.getItem("token");
+    setLoading(true);
+    axios
+      .get(`https://polar-dusk-61658.herokuapp.com/users/user_info`, {
+        headers: { Authorization: `${token}` },
+      })
+      .then((res) => {
+        console.log(res.data.user);
+        setHospitals(res.data.user.hospitals);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
   return (

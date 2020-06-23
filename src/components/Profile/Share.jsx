@@ -6,7 +6,6 @@ import {
   DialogContent,
   DialogTitle,
   useMediaQuery,
-  TextField,
   useTheme,
   makeStyles,
   LinearProgress,
@@ -65,24 +64,24 @@ const ShareRecord = ({ record, hospitals, hospitalName }) => {
           console.log("Sharing Record", values);
           setLoading(true);
           axios
-            .post(
+            .patch(
               `https://polar-dusk-61658.herokuapp.com/users/share/record/${record}`,
               values,
               { headers: { Authorization: `${token}` } }
             )
             .then((res) => {
               console.log(res);
-              console.log(res.data.message);
-              setMessage(res.data.message);
+              console.log(res.data);
+              setMessage(res.data);
               setAl(true);
               setLoading(false);
               resetForm({});
             })
             .catch((err) => {
-              console.log(err.response.data.error);
-              setMessage(err.response.data.error);
-              setErr(true);
+              console.log(err.response.data.error.message);
+              setMessage(err.response.data.error.message);
               setAl(true);
+              setErr(true);
               setSeverity("error");
               setLoading(false);
             });

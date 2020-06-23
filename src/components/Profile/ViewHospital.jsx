@@ -62,9 +62,10 @@ function a11yProps(index) {
 
 const ViewHospital = ({ match, location }) => {
   console.log(match);
+  console.log(location);
   const classes = useStyles();
-  const { hospitals } = location.state;
-  console.log(hospitals[0].email);
+  const { hospital } = location.state;
+
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -104,7 +105,7 @@ const ViewHospital = ({ match, location }) => {
         </Link>
       </Breadcrumbs>
       <Typography variant="h5" style={{ marginBottom: "20px" }}>
-        {hospitals[0].providerName}
+        {hospital.providerName}
       </Typography>
       <div style={{ marginTop: "20px" }}></div>
       <AppBar
@@ -135,15 +136,15 @@ const ViewHospital = ({ match, location }) => {
                 <TableHead>
                   <TableRow>
                     <TableCell>Hospital Name</TableCell>
-                    <TableCell>{hospitals[0].providerName}</TableCell>
+                    <TableCell>{hospital.providerName}</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell>PRID</TableCell>
-                    <TableCell>{hospitals[0].PRID}</TableCell>
+                    <TableCell>{hospital.PRID}</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell>Email</TableCell>
-                    <TableCell>{hospitals[0].email}</TableCell>
+                    <TableCell>{hospital.email}</TableCell>
                   </TableRow>
                 </TableHead>
               </Table>
@@ -155,23 +156,23 @@ const ViewHospital = ({ match, location }) => {
                 <TableHead>
                   <TableRow>
                     <TableCell>Address</TableCell>
-                    <TableCell>{hospitals[0].address}</TableCell>
+                    <TableCell>{hospital.address}</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell>State</TableCell>
-                    <TableCell>{hospitals[0].state}</TableCell>
+                    <TableCell>{hospital.state}</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell>Phone Number</TableCell>
-                    <TableCell>{hospitals[0].phone_number_main}</TableCell>
+                    <TableCell>{hospital.phone_number_main}</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell>Phone Number (2)</TableCell>
-                    <TableCell>{hospitals[0].phone_number_two}</TableCell>
+                    <TableCell>{hospital.phone_number_two}</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell>Phone Number (3)</TableCell>
-                    <TableCell>{hospitals[0].phone_number_three}</TableCell>
+                    <TableCell>{hospital.phone_number_three}</TableCell>
                   </TableRow>
                 </TableHead>
               </Table>
@@ -196,7 +197,7 @@ const ViewHospital = ({ match, location }) => {
                         "Are you sure you want to remove this hospital?"
                       )
                     )
-                      removeHospital(hospitals[0].providerName);
+                      removeHospital(hospital.providerName);
                   }}
                 >
                   <Delete /> Remove Hospital
@@ -207,7 +208,7 @@ const ViewHospital = ({ match, location }) => {
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Records hospital={hospitals[0].providerName} hospitals={hospitals} />
+        <Records hospital={hospital.providerName} />
       </TabPanel>
     </div>
   );
