@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   error: {
     color: "rgb(235, 54, 54)",
     marginTop: "-20px",
-    marginBottom:"20px"
+    marginBottom: "20px",
   },
 }));
 
@@ -119,7 +119,7 @@ const Settings = () => {
         nationality: Yup.string(),
         stateOfOrigin: Yup.string(),
         nextOfKin_contact: Yup.string(),
-        nhis_number :Yup.string(),
+        nhis_number: Yup.string(),
       })}
     >
       {(props) => {
@@ -155,7 +155,7 @@ const Settings = () => {
               {" "}
               {userName}
             </Typography>
-            <Typography variant="h4">Edit your profile</Typography>
+            <Typography variant="h5">Edit your profile</Typography>
             <Card elevation={0}>
               <CardContent>
                 <form onSubmit={handleSubmit}>
@@ -450,7 +450,10 @@ const Settings = () => {
                     />
 
                     {errors.nhis_number && touched.nhis_number && (
-                      <div className={classes.error}> {errors.nhis_number} </div>
+                      <div className={classes.error}>
+                        {" "}
+                        {errors.nhis_number}{" "}
+                      </div>
                     )}
                   </div>
                   <Button

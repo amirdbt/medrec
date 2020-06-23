@@ -4,7 +4,7 @@ import { Typography } from "@material-ui/core";
 const ShareRecords = () => {
   return (
     <div className="content">
-      <Typography variant="h4">Share Records</Typography>
+      <Typography variant="h5">Share Records</Typography>
     </div>
   );
 };

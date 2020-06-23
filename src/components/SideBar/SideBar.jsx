@@ -171,7 +171,7 @@ const SideBar = (props) => {
                 <ListItemIcon className={classes.iconColor}>
                   <Share />
                 </ListItemIcon>
-                <Typography variant="h5">Share Records</Typography>
+                <Typography variant="h5">Shared Records</Typography>
               </ListItem>
             </Link>
             <Link className={classes.link} to="/hospitals">
