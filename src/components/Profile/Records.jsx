@@ -21,6 +21,7 @@ const useStyles = makeStyles({
     marginRight: "20px",
     marginTop: "20px",
     maxWidth: 345,
+    width: "30%",
   },
   details: {
     display: "flex",

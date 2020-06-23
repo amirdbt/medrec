@@ -52,6 +52,7 @@ const AddRecord = ({ user_id }) => {
   return (
     <Formik
       initialValues={{
+        record_name: "",
         user_id,
         ailments: "",
         comment: "",
@@ -70,23 +71,30 @@ const AddRecord = ({ user_id }) => {
             .then((res) => {
               console.log(res);
               console.log(res.data.message);
-              setMessage(res.data.message);
+              setMessage("Record created successfully");
               setAl(true);
               setLoading(false);
               resetForm({});
+              setTimeout(() => {
+                window.location.reload(false);
+              }, 700);
             })
             .catch((err) => {
               console.log(err.response.data.error);
-              setMessage(err.response.data.error);
+              setMessage("Record could not be created, try again");
               setErr(true);
               setAl(true);
               setSeverity("error");
               setLoading(false);
+              setTimeout(() => {
+                window.location.reload(false);
+              }, 700);
             });
           setSubmitting(false);
         }, 200);
       }}
       validationSchema={Yup.object().shape({
+        record_name: Yup.string().required("Required"),
         user_id: Yup.string().required("Required"),
         ailments: Yup.string().required("Required"),
         comment: Yup.string().required("Required"),
@@ -141,6 +149,30 @@ const AddRecord = ({ user_id }) => {
               )}
               <form onSubmit={handleSubmit}>
                 <DialogContent>
+                  <div>
+                    <TextField
+                      name="record_name"
+                      label="Record Name"
+                      variant="outlined"
+                      fullWidth
+                      type="text"
+                      error={err}
+                      value={values.record_name || ""}
+                      className={
+                        errors.record_name && touched.record_name && "error"
+                      }
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      style={{ marginBottom: "20px", marginRight: "10px" }}
+                    />
+
+                    {errors.record_name && touched.record_name && (
+                      <div className={classes.error}>
+                        {" "}
+                        {errors.record_name}{" "}
+                      </div>
+                    )}
+                  </div>
                   <div>
                     <TextField
                       name="user_id"

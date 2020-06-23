@@ -20,6 +20,7 @@ import axios from "axios";
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
+    width: "30%",
     marginRight: "20px",
     marginTop: "20px",
   },
@@ -62,7 +63,6 @@ const Records = ({ user_id, MRID, username }) => {
       })
       .catch((error) => {
         console.log(error);
-        console.log(token);
       });
   };
 
