@@ -125,7 +125,6 @@ const ViewHospital = ({ match, location }) => {
         >
           <Tab label="Details" {...a11yProps(0)} />
           <Tab label="Records" {...a11yProps(1)} />
-          <Tab label="Shared Records" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -209,9 +208,6 @@ const ViewHospital = ({ match, location }) => {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Records hospital={hospitals[0].providerName} hospitals={hospitals} />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        hello
       </TabPanel>
     </div>
   );
