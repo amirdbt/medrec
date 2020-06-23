@@ -208,7 +208,7 @@ const ViewHospital = ({ match, location }) => {
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Records hospital={hospitals[0].providerName} />
+        <Records hospital={hospitals[0].providerName} hospitals={hospitals} />
       </TabPanel>
       <TabPanel value={value} index={2}>
         hello

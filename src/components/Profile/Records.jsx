@@ -9,6 +9,8 @@ import {
   makeStyles,
   CircularProgress,
 } from "@material-ui/core";
+import ViewRecordDetails from "./Info";
+import ShareRecord from "./Share";
 import { Link } from "react-router-dom";
 import { Visibility } from "@material-ui/icons";
 import axios from "axios";
@@ -39,7 +41,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Records = ({ hospital }) => {
+const Records = ({ hospital, hospitals }) => {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
   console.log(hospital);
@@ -80,17 +82,7 @@ const Records = ({ hospital }) => {
               <div className={classes.details}>
                 <CardContent className={classes.content}>
                   <Typography component="h5" variant="h5">
-                    {records.record_name}
-                  </Typography>
-                  <Typography variant="subtitle1" color="textSecondary">
-                    Ailments: {records.ailments[0]}
-                  </Typography>
-                  <Typography variant="subtitle1" color="textSecondary">
-                    Comments: {records.comment}
-                  </Typography>
-                  <Typography variant="subtitle1" color="textSecondary">
-                    Created at:{" "}
-                    {moment(records.createdAt).format("DD MMM, YYYY")}
+                    {records.record_name.toUpperCase()}
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -106,6 +98,12 @@ const Records = ({ hospital }) => {
                       View
                     </Button>
                   </Link>
+                  <ShareRecord
+                    record={records._id}
+                    hospitals={hospitals}
+                    hospitalName={hospital}
+                  />
+                  <ViewRecordDetails records={records} />
                 </CardActions>
               </div>
               <CardMedia
