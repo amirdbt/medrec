@@ -9,9 +9,10 @@ import {
   Button,
   CardActions,
   Breadcrumbs,
+  Tooltip,
 } from "@material-ui/core";
 import { Visibility } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,18 +56,29 @@ const Files = ({ match, location }) => {
       return "https://banner2.cleanpng.com/20180702/hph/kisspng-computer-icons-google-sheets-5b3a2f1b216e87.3834502715305398031369.jpg";
     } else return file;
   }
+  let history = useHistory();
+  const goBack = (e) => {
+    e.preventDefault();
+    history.goBack();
+  };
 
   const classes = useStyles();
   return (
     <div className="content">
       <Breadcrumbs aria-label="breadcrumb">
-        <Link
-          to={`/hospitals`}
-          color="textPrimary"
-          style={{ fontSize: "20px", textDecoration: "none" }}
-        >
-          Records
-        </Link>
+        <Tooltip title="Click to go back">
+          <div
+            onClick={goBack}
+            color="textPrimary"
+            style={{
+              fontSize: "20px",
+              textDecoration: "none",
+              cursor: "pointer",
+            }}
+          >
+            Records
+          </div>
+        </Tooltip>
         <div aria-current="page" className={classes.links}>
           {location.state.records.record_name.toUpperCase()}
         </div>

@@ -1,5 +1,10 @@
 import React from "react";
-import { Typography, Breadcrumbs, makeStyles } from "@material-ui/core";
+import {
+  Typography,
+  Breadcrumbs,
+  makeStyles,
+  Tooltip,
+} from "@material-ui/core";
 import UploadedFiles from "./UploadedFiles";
 import { Link, useHistory } from "react-router-dom";
 
@@ -29,17 +34,19 @@ const SharedRecordsFile = ({ match, location }) => {
         Files
       </Typography>
       <Breadcrumbs aria-label="breadcrumb">
-        <div
-          onClick={goBack}
-          color="textPrimary"
-          style={{
-            fontSize: "20px",
-            textDecoration: "none",
-            cursor: "pointer",
-          }}
-        >
-          All Records
-        </div>
+        <Tooltip title="Click to go back">
+          <div
+            onClick={goBack}
+            color="textPrimary"
+            style={{
+              fontSize: "20px",
+              textDecoration: "none",
+              cursor: "pointer",
+            }}
+          >
+            All Records
+          </div>
+        </Tooltip>
         <Link aria-current="page" className={classes.links}>
           Record
         </Link>
