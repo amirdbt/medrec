@@ -138,10 +138,7 @@ const ViewHospital = ({ match, location }) => {
                     <TableCell>Hospital Name</TableCell>
                     <TableCell>{hospital.providerName}</TableCell>
                   </TableRow>
-                  <TableRow>
-                    <TableCell>PRID</TableCell>
-                    <TableCell>{hospital.PRID}</TableCell>
-                  </TableRow>
+
                   <TableRow>
                     <TableCell>Email</TableCell>
                     <TableCell>{hospital.email}</TableCell>

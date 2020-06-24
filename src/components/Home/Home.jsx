@@ -27,9 +27,7 @@ const Home = () => {
   return (
     <div className="content">
       {role === "provider" ? (
-        <Typography variant="h5">
-         Here's what's happening.
-        </Typography>
+        <Typography variant="h5">Here's what's happening.</Typography>
       ) : (
         <Typography variant="h5">
           Welcome {firstName} {lastName}
@@ -65,6 +63,13 @@ const Home = () => {
             <Card elevation={0}>
               <CardContent>
                 <Typography>Total Records</Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Card elevation={0}>
+              <CardContent>
+                <Typography>Total Shared Records</Typography>
               </CardContent>
             </Card>
           </Grid>

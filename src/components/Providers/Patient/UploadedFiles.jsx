@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import { Visibility } from "@material-ui/icons";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     maxWidth: 345,
     width: "30%",

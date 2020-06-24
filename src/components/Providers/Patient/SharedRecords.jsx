@@ -12,9 +12,9 @@ import {
   CardHeader,
 } from "@material-ui/core";
 import { Visibility } from "@material-ui/icons";
-import AddRecord from "./AddRecord";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import ViewRecordDetails from "../../Profile/Info";
 
 const useStyles = makeStyles({
   root: {
@@ -33,14 +33,14 @@ const useStyles = makeStyles({
   },
 });
 
-const Records = ({ user_id, MRID, username }) => {
+const SharedRecords = ({ MRID, username }) => {
   const [patientRecords, setPatientRecords] = useState([]);
   const [totalRecords, setTotalRecords] = useState("");
   const [loading, setLoading] = useState(false);
+  console.log(username);
   console.log(MRID);
   useEffect(() => {
     fetchRecords();
-    console.log("hello");
   }, []);
 
   const fetchRecords = () => {
@@ -56,12 +56,13 @@ const Records = ({ user_id, MRID, username }) => {
       )
       .then((response) => {
         console.log(response.data);
-        setPatientRecords(response.data.records);
-        setTotalRecords(response.data.total_records);
+        setPatientRecords(response.data.shared_records);
+        setTotalRecords(response.data.shared_records.length);
         setLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
       });
   };
 
@@ -74,13 +75,10 @@ const Records = ({ user_id, MRID, username }) => {
         <>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <AddRecord user_id={user_id} />
-            </Grid>
-            <Grid item xs={12} sm={6}>
               <Card elevation={0}>
                 <CardContent>
                   <Typography variant="h5">
-                    Total Number of Records: {totalRecords}
+                    Total Number of Shared Records: {totalRecords}
                   </Typography>
                 </CardContent>
               </Card>
@@ -112,6 +110,7 @@ const Records = ({ user_id, MRID, username }) => {
                       View
                     </Button>
                   </Link>
+                  <ViewRecordDetails records={records} />
                 </CardActions>
               </Card>
             ))}
@@ -122,4 +121,4 @@ const Records = ({ user_id, MRID, username }) => {
   );
 };
 
-export default Records;
+export default SharedRecords;

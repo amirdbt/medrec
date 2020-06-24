@@ -23,6 +23,7 @@ import { Delete } from "@material-ui/icons";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import Records from "./Records";
+import SharedRecords from "./SharedRecords";
 
 const useStyles = makeStyles((theme) => ({
   links: {
@@ -152,6 +153,7 @@ const ViewPatient = ({ match }) => {
             >
               <Tab label="Details" {...a11yProps(0)} />
               <Tab label="Records" {...a11yProps(1)} />
+              <Tab label="Shared Records" {...a11yProps(2)} />
             </Tabs>
           </AppBar>
           <TabPanel value={value} index={0}>
@@ -280,6 +282,13 @@ const ViewPatient = ({ match }) => {
           </TabPanel>
           <TabPanel value={value} index={1}>
             <Records
+              user_id={patient._id}
+              MRID={patient.MRID}
+              username={patient.userName}
+            />
+          </TabPanel>
+          <TabPanel value={value} index={2}>
+            <SharedRecords
               user_id={patient._id}
               MRID={patient.MRID}
               username={patient.userName}

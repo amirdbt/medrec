@@ -159,7 +159,7 @@ const Hospitals = () => {
                   <TableHead className={classes.head}>
                     <TableRow>
                       <TableCell className={classes.text}>Name</TableCell>
-                      <TableCell className={classes.text}>PRID</TableCell>
+
                       <TableCell className={classes.text}>Email</TableCell>
 
                       <TableCell className={classes.text}>State</TableCell>
@@ -180,7 +180,7 @@ const Hospitals = () => {
                     ).map((hospital) => (
                       <TableRow key={hospital._id}>
                         <TableCell>{hospital.providerName}</TableCell>
-                        <TableCell>{hospital.PRID}</TableCell>
+
                         <TableCell>{hospital.email}</TableCell>
 
                         <TableCell>{hospital.state}</TableCell>
