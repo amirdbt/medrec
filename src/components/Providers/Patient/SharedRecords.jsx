@@ -100,8 +100,8 @@ const SharedRecords = ({ MRID, username }) => {
                 <CardActions>
                   <Link
                     to={{
-                      pathname: `/all-records/${records._id}`,
-                      state: { username },
+                      pathname: `/shared-records/${records._id}`,
+                      state: { records },
                     }}
                     style={{ textDecoration: "none" }}
                   >
