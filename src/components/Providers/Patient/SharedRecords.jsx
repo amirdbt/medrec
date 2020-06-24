@@ -88,7 +88,7 @@ const SharedRecords = ({ MRID, username }) => {
             {patientRecords.map((records) => (
               <Card className={classes.root} elevation={1} key={records._id}>
                 <CardHeader
-                  title={`Name: ${records.record_name.toUpperCase()}`}
+                  subheader={`Name: ${records.record_name.toUpperCase()}`}
                 />
 
                 <CardMedia
