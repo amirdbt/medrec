@@ -37,7 +37,7 @@ const ViewRecordDetails = ({ records }) => {
   return (
     <div>
       <Button size="small" color="info" onClick={handleClickOpen}>
-        <Info style={{ marginRight: "5px" }} />
+        <Info style={{ marginRight: "2px" }} />
         Info
       </Button>
       <Dialog

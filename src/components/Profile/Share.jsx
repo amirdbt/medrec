@@ -104,7 +104,7 @@ const ShareRecord = ({ record, hospitals, hospitalName }) => {
         return (
           <div>
             <Button size="small" color="secondary" onClick={handleClickOpen}>
-              <Share style={{ marginRight: "5px" }} />
+              <Share style={{ marginRight: "2px" }} />
               Share
             </Button>
             <Dialog

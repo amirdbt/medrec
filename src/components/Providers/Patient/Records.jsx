@@ -108,7 +108,7 @@ const Records = ({ user_id, MRID, username }) => {
                     style={{ textDecoration: "none" }}
                   >
                     <Button size="small" color="primary">
-                      <Visibility style={{ marginRight: "5px" }} />
+                      <Visibility style={{ marginRight: "2px" }} />
                       View
                     </Button>
                   </Link>
