@@ -113,7 +113,7 @@ const Hospitals = () => {
 
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const token = localStorage.getItem("token");
-
+  const divRef = React.useRef();
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, hospitals.length - page * rowsPerPage);
 
@@ -144,7 +144,7 @@ const Hospitals = () => {
       });
   };
   return (
-    <div className="content">
+    <div className="content" ref={divRef}>
       <Typography variant="h5" style={{ marginBottom: "20px" }}>
         Hospitals (Providers)
       </Typography>

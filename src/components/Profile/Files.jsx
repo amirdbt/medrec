@@ -39,6 +39,7 @@ const Files = ({ match, location }) => {
   console.log(match);
   console.log(location);
   const { files } = location.state.records;
+  const divRef = React.useRef();
   function getFile(file) {
     if (file.includes("pdf")) {
       return "https://banner2.cleanpng.com/20180420/ypq/kisspng-pdf-computer-icons-theme-clip-art-cool-business-card-background-5ad9c522531736.0976301015242212183404.jpg";
@@ -64,7 +65,7 @@ const Files = ({ match, location }) => {
 
   const classes = useStyles();
   return (
-    <div className="content">
+    <div className="content" ref={divRef}>
       <Breadcrumbs aria-label="breadcrumb">
         <Tooltip title="Click to go back">
           <div

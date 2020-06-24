@@ -7,7 +7,6 @@ import {
   DialogTitle,
   useMediaQuery,
   useTheme,
-  makeStyles,
   Grid,
   Table,
   TableCell,
@@ -20,24 +19,12 @@ import moment from "moment";
 
 import { Info } from "@material-ui/icons";
 
-const useStyles = makeStyles((theme) => ({
-  dialog: {
-    width: "100%",
-  },
-  error: {
-    color: "rgb(235, 54, 54)",
-    marginTop: "-20px",
-    marginBottom: "10px",
-  },
-}));
-
 const ViewRecordDetails = ({ records }) => {
   const [open, setOpen] = useState(false);
 
   const theme = useTheme();
 
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const classes = useStyles();
 
   const handleClickOpen = () => {
     setOpen(true);

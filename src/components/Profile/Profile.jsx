@@ -15,7 +15,6 @@ import {
   Button,
 } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
@@ -35,13 +34,9 @@ const Profile = ({ match }) => {
   const [loading, setLoading] = useState(false);
 
   console.log(match);
-  const token = localStorage.getItem("token");
-  let history = useHistory();
+  let token = localStorage.getItem("token");
   const userName = localStorage.getItem("userName");
-  useEffect(() => {
-    fetchUser();
-  }, []);
-  const fetchUser = async () => {
+  const fetchUser = () => {
     setLoading(true);
     axios
       .get(`https://polar-dusk-61658.herokuapp.com/users/user_info`, {
@@ -56,6 +51,9 @@ const Profile = ({ match }) => {
         console.log(err);
       });
   };
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   return (
     <div className="content">

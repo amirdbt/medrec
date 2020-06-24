@@ -67,7 +67,7 @@ const ViewHospital = ({ match, location }) => {
   const { hospital } = location.state;
 
   const [value, setValue] = React.useState(0);
-
+  const divRef = React.useRef();
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -91,7 +91,7 @@ const ViewHospital = ({ match, location }) => {
       });
   };
   return (
-    <div className="content">
+    <div className="content" ref={divRef}>
       <Breadcrumbs aria-label="breadcrumb">
         <Link
           to="/hospitals"
@@ -100,9 +100,9 @@ const ViewHospital = ({ match, location }) => {
         >
           All Hospitals
         </Link>
-        <Link aria-current="page" className={classes.links}>
+        <div aria-current="page" className={classes.links}>
           Hospital
-        </Link>
+        </div>
       </Breadcrumbs>
       <Typography variant="h5" style={{ marginBottom: "20px" }}>
         {hospital.providerName}

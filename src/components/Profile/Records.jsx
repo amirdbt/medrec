@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
-  Typography,
   Card,
-  CardContent,
   CardActions,
   CardMedia,
   Button,

@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import {
-  Button,
-  makeStyles,
-  LinearProgress,
-  Slide,
-  Snackbar,
-} from "@material-ui/core";
+import { Button, LinearProgress, Slide, Snackbar } from "@material-ui/core";
 import { CloudUploadSharp } from "@material-ui/icons";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import axios from "axios";

@@ -305,7 +305,7 @@ const Settings = () => {
                         label="Blood Group"
                         name="bloodGroup"
                         error={err}
-                        value={values.bloodGroup || "null"}
+                        value={values.bloodGroup || ""}
                         className={
                           errors.bloodGroup && touched.bloodGroup && "error"
                         }
@@ -335,7 +335,7 @@ const Settings = () => {
                       type="text"
                       variant="outlined"
                       error={err}
-                      value={values.genotype || "null"}
+                      value={values.genotype || ""}
                       className={errors.genotype && touched.genotype && "error"}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -353,7 +353,7 @@ const Settings = () => {
                       variant="outlined"
                       fullWidth
                       error={err}
-                      value={values.nextOfKin || "null"}
+                      value={values.nextOfKin || ""}
                       className={
                         errors.nextOfKin && touched.nextOfKin && "error"
                       }
@@ -371,7 +371,7 @@ const Settings = () => {
                       variant="outlined"
                       fullWidth
                       error={err}
-                      value={values.nationality || "null"}
+                      value={values.nationality || ""}
                       className={
                         errors.nationality && touched.nationality && "error"
                       }
@@ -394,7 +394,7 @@ const Settings = () => {
                       variant="outlined"
                       fullWidth
                       error={err}
-                      value={values.stateOfOrigin || "null"}
+                      value={values.stateOfOrigin || ""}
                       className={
                         errors.stateOfOrigin && touched.stateOfOrigin && "error"
                       }
@@ -415,7 +415,7 @@ const Settings = () => {
                       variant="outlined"
                       fullWidth
                       error={err}
-                      value={values.nextOfKin_contact || "null"}
+                      value={values.nextOfKin_contact || ""}
                       className={
                         errors.nextOfKin_contact &&
                         touched.nextOfKin_contact &&
@@ -440,7 +440,7 @@ const Settings = () => {
                       fullWidth
                       type="text"
                       error={err}
-                      value={values.nhis_number || "null"}
+                      value={values.nhis_number || ""}
                       className={
                         errors.nhis_number && touched.nhis_number && "error"
                       }
