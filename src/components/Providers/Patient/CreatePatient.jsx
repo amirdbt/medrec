@@ -26,6 +26,13 @@ const useStyles = makeStyles((theme) => ({
   },
   error: {
     color: "rgb(235, 54, 54)",
+    marginTop: "-20px",
+    marginBottom: "20px",
+  },
+  errorG: {
+    color: "rgb(235, 54, 54)",
+    marginTop: "0px",
+    marginBottom: "10px",
   },
 }));
 
@@ -207,7 +214,7 @@ const CreatePatient = () => {
                       <MenuItem value="female">Female</MenuItem>
                     </Select>
                     {errors.gender && touched.gender && (
-                      <div className={classes.error}> {errors.gender} </div>
+                      <div className={classes.errorG}> {errors.gender} </div>
                     )}
                   </FormControl>
                   <div>
