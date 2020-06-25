@@ -22,6 +22,8 @@ const useStyles = makeStyles((theme) => ({
   },
   error: {
     color: "rgb(235, 54, 54)",
+    marginTop: "-20px",
+    marginBottom: "10px",
   },
 }));
 
@@ -108,11 +110,11 @@ const EditSettings = () => {
           <div className="content">
             {al ? (
               <>
-              <Alert severity={severity}>
-                <AlertTitle>{severity}</AlertTitle>
-                {message}
-              </Alert>
-              <Snackbar
+                <Alert severity={severity}>
+                  <AlertTitle>{severity}</AlertTitle>
+                  {message}
+                </Alert>
+                <Snackbar
                   open={open}
                   autoHideDuration={3000}
                   TransitionComponent={Slide}
