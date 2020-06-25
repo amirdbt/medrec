@@ -31,6 +31,7 @@ import {
   KeyboardArrowRight,
   LastPage,
   RemoveCircle,
+  ShareRounded,
 } from "@material-ui/icons";
 import axios from "axios";
 
@@ -181,8 +182,8 @@ const SharedHospitals = ({ hospitals, record }) => {
   return (
     <div>
       <Button size="small" color="secondary" onClick={handleClickOpen}>
-        <LocalHospital style={{ marginRight: "2px" }} />
-        Shared With
+        <ShareRounded style={{ marginRight: "2px" }} />
+        Shared
       </Button>
       <Dialog
         fullScreen={fullScreen}
