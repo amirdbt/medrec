@@ -36,24 +36,25 @@ const Profile = ({ match }) => {
   console.log(match);
   let token = localStorage.getItem("token");
   const userName = localStorage.getItem("userName");
-  const fetchUser = () => {
-    setLoading(true);
-    axios
-      .get(`https://polar-dusk-61658.herokuapp.com/users/user_info`, {
-        headers: { Authorization: `${token}` },
-      })
-      .then((res) => {
-        console.log(res.data.user);
-        setUser(res.data.user);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+
   useEffect(() => {
+    const fetchUser = () => {
+      setLoading(true);
+      axios
+        .get(`https://polar-dusk-61658.herokuapp.com/users/user_info`, {
+          headers: { Authorization: `${token}` },
+        })
+        .then((res) => {
+          console.log(res.data.user);
+          setUser(res.data.user);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
     fetchUser();
-  }, []);
+  }, [token]);
 
   return (
     <div className="content">

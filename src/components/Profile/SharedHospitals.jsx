@@ -1,5 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  useMediaQuery,
+  useTheme,
   Table,
   TableBody,
   TableCell,
@@ -11,21 +18,21 @@ import {
   Paper,
   makeStyles,
   IconButton,
-  useTheme,
   Grid,
   Tooltip,
-  Typography,
-  CircularProgress,
+  Snackbar,
+  Slide,
 } from "@material-ui/core";
+import { Alert, AlertTitle } from "@material-ui/lab";
 import {
+  LocalHospital,
   FirstPage,
   KeyboardArrowLeft,
   KeyboardArrowRight,
   LastPage,
-  ArrowForward,
+  RemoveCircle,
 } from "@material-ui/icons";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   head: {
@@ -105,14 +112,19 @@ function TablePaginationActions(props) {
   );
 }
 
-const Hospitals = () => {
+const SharedHospitals = ({ hospitals, record }) => {
+  const [open, setOpen] = useState(false);
   const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const [hospitals, setHospitals] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(0);
+  const theme = useTheme();
+  const [al, setAl] = useState(false);
 
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const token = localStorage.getItem("token");
+  const [message, setMessage] = useState("");
+
+  const [severity, setSeverity] = useState("success");
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   const divRef = React.useRef();
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, hospitals.length - page * rowsPerPage);
@@ -125,37 +137,87 @@ const Hospitals = () => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-  useEffect(() => {
-    const fetchUser = () => {
-      setLoading(true);
-      axios
-        .get(`https://polar-dusk-61658.herokuapp.com/users/user_info`, {
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  let token = localStorage.getItem("token");
+
+  const removeProvider = (providerName) => {
+    axios
+      .post(
+        `https://polar-dusk-61658.herokuapp.com/users/remove_provider/${record}`,
+        { providerName },
+        {
           headers: { Authorization: `${token}` },
-        })
-        .then((res) => {
-          console.log(res.data.user);
-          setHospitals(res.data.user.hospitals);
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    fetchUser();
-  }, [token]);
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        setMessage(res.data);
+        setAl(true);
+
+        setTimeout(() => {
+          window.location.reload(false);
+        }, 500);
+      })
+      .catch((error) => {
+        console.log(error);
+        setMessage(error.response.data);
+
+        setAl(true);
+        setSeverity("error");
+
+        setTimeout(() => {
+          window.location.reload(false);
+        }, 500);
+      });
+  };
 
   return (
-    <div className="content" ref={divRef}>
-      <Typography variant="h5" style={{ marginBottom: "20px" }}>
-        Hospitals (Providers)
-      </Typography>
-      {loading ? (
-        <CircularProgress style={{ marginLeft: "50%" }} />
-      ) : (
-        <>
+    <div>
+      <Button size="small" color="secondary" onClick={handleClickOpen}>
+        <LocalHospital style={{ marginRight: "2px" }} />
+        Shared With
+      </Button>
+      <Dialog
+        fullScreen={fullScreen}
+        open={open}
+        maxWidth="md"
+        onClose={handleClose}
+        fullWidth
+        aria-labelledby="responsive-dialog-title"
+      >
+        {al ? (
+          <>
+            <Alert severity={severity}>
+              <AlertTitle>{severity}</AlertTitle>
+              {message}
+            </Alert>
+            <Snackbar
+              open={open}
+              autoHideDuration={3000}
+              TransitionComponent={Slide}
+              onClose={handleClose}
+            >
+              <Alert severity={severity}>{message}</Alert>
+            </Snackbar>
+          </>
+        ) : (
+          <div></div>
+        )}
+        <DialogTitle id="responsive-dialog-title">
+          {"Hospitals you shared your records with"}
+        </DialogTitle>
+
+        <DialogContent>
           <Grid container>
             <Grid item xs={12} sm={12}>
-              <TableContainer component={Paper} elevation={0}>
+              <TableContainer component={Paper} elevation={0} ref={divRef}>
                 <Table aria-label="customized table">
                   <TableHead className={classes.head}>
                     <TableRow>
@@ -167,7 +229,6 @@ const Hospitals = () => {
                       <TableCell className={classes.text}>
                         Phone Number
                       </TableCell>
-
                       <TableCell className={classes.text}>Actions</TableCell>
                     </TableRow>
                   </TableHead>
@@ -186,19 +247,21 @@ const Hospitals = () => {
 
                         <TableCell>{hospital.state}</TableCell>
                         <TableCell>{hospital.phone_number_main}</TableCell>
-
                         <TableCell>
-                          <Tooltip title="View Hospital">
-                            <Link
-                              to={{
-                                pathname: `/hospitals/${hospital.providerName}`,
-                                state: { hospital },
+                          <Tooltip title="Remove Hospital">
+                            <IconButton
+                              color="secondary"
+                              onClick={() => {
+                                if (
+                                  window.confirm(
+                                    "Are you sure you want to remove this hospital?"
+                                  )
+                                )
+                                  removeProvider(hospital.providerName);
                               }}
                             >
-                              <IconButton aria-label="View hospital">
-                                <ArrowForward />
-                              </IconButton>
-                            </Link>
+                              <RemoveCircle />
+                            </IconButton>
                           </Tooltip>
                         </TableCell>
                       </TableRow>
@@ -237,10 +300,15 @@ const Hospitals = () => {
               </TableContainer>
             </Grid>
           </Grid>
-        </>
-      )}
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleClose} color="primary">
+            Done
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
 
-export default Hospitals;
+export default SharedHospitals;
