@@ -62,6 +62,9 @@ const AddPatient = () => {
               setAl(true);
               setLoading(false);
               resetForm({});
+              setTimeout(() => {
+                window.location.reload(false);
+              }, 1000);
             })
             .catch((err) => {
               console.log(err.response.data.error);
@@ -70,6 +73,9 @@ const AddPatient = () => {
               setAl(true);
               setSeverity("error");
               setLoading(false);
+              setTimeout(() => {
+                window.location.reload(false);
+              }, 1000);
             });
           setSubmitting(false);
         }, 200);

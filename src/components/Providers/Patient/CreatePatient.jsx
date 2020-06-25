@@ -84,6 +84,9 @@ const CreatePatient = () => {
               setAl(true);
               setSeverity("error");
               setLoading(false);
+              setTimeout(() => {
+                window.location.reload(false);
+              }, 1000);
             });
           setSubmitting(false);
         }, 200);
