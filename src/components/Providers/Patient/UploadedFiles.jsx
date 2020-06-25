@@ -7,6 +7,7 @@ import {
   Typography,
   makeStyles,
   Button,
+  Grid,
   CardActions,
 } from "@material-ui/core";
 import { Visibility } from "@material-ui/icons";
@@ -50,6 +51,17 @@ const UploadedFiles = ({ files }) => {
 
   return (
     <div className={classes.cards}>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={6}>
+          <Card elevation={0}>
+            <CardContent>
+              <Typography variant="h5">
+                Total Number of files: {files.length}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
       {files.map((file) => (
         <Card className={classes.root}>
           <CardActionArea>

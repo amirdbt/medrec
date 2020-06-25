@@ -20,6 +20,7 @@ import ViewHospital from "./components/Profile/ViewHospital";
 import Hospitals from "./components/Profile/Hospitals";
 import Files from "./components/Profile/Files";
 import SharedRecordsFile from "./components/Providers/Patient/SharedRecordsFile";
+import ShareRecordsFile from "./components/Profile/ShareRecordsFile";
 import { Switch, Route, withRouter } from "react-router-dom";
 
 const Main = withRouter(({ location }) => {
@@ -40,7 +41,8 @@ const Main = withRouter(({ location }) => {
         <AuthGuard exact path="/" component={Home} />
         <AuthGuard path="/profile" component={Profile} />
         <AuthGuard path="/settings" component={Settings} />
-        <AuthGuard path="/share-records" component={ShareRecords} />
+        <AuthGuard exact path="/share-records" component={ShareRecords} />
+        <AuthGuard path="/share-records/:id" component={ShareRecordsFile} />
         <Route path="/forgotpassword" component={ForgotPassword} />
         <Route path="/signup" component={SignUp} />
         <Route path="/providers-signup" component={ProviderSignUp} />

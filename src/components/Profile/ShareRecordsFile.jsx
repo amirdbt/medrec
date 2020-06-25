@@ -1,27 +1,14 @@
 import React from "react";
 import {
   Typography,
-  makeStyles,
   Breadcrumbs,
+  makeStyles,
   Tooltip,
 } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
 import UploadedFiles from "../Providers/Patient/UploadedFiles";
+import { Link, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: 345,
-    width: "30%",
-    marginRight: "20px",
-    marginTop: "20px",
-  },
-  media: {
-    height: 170,
-  },
-  cards: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
   links: {
     textDecoration: "none",
     fontSize: "20px",
@@ -29,21 +16,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Files = ({ match, location }) => {
-  console.log(match);
+const ShareRecordsFile = ({ match, location }) => {
   console.log(location);
-  const { files } = location.state.records;
-  const divRef = React.useRef();
-
+  console.log(match);
+  //   console.log(location.state.records[0]);
+  const { files } = location.state.record;
+  //   console.log(files);
   let history = useHistory();
+
   const goBack = (e) => {
     e.preventDefault();
     history.goBack();
   };
-
   const classes = useStyles();
   return (
-    <div className="content" ref={divRef}>
+    <div className="content">
+      <Typography variant="h5" style={{ marginBottom: "10px" }}>
+        Files
+      </Typography>
       <Breadcrumbs aria-label="breadcrumb">
         <Tooltip title="Click to go back">
           <div
@@ -55,17 +45,16 @@ const Files = ({ match, location }) => {
               cursor: "pointer",
             }}
           >
-            Records
+            All Shared Records
           </div>
         </Tooltip>
-        <div aria-current="page" className={classes.links}>
-          {location.state.records.record_name.toUpperCase()}
-        </div>
+        <Link aria-current="page" className={classes.links}>
+          Record
+        </Link>
       </Breadcrumbs>
-
       <UploadedFiles files={files} />
     </div>
   );
 };
 
-export default Files;
+export default ShareRecordsFile;

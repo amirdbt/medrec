@@ -98,7 +98,7 @@ const ShareRecords = () => {
                 <CardActions>
                   <Link
                     to={{
-                      pathname: `/shared-records/${record._id}`,
+                      pathname: `/share-records/${record._id}`,
                       state: { record },
                     }}
                     style={{ textDecoration: "none" }}
