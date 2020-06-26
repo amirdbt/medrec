@@ -10,6 +10,7 @@ import {
   Grid,
   CircularProgress,
   CardHeader,
+  Tooltip,
 } from "@material-ui/core";
 import { Visibility } from "@material-ui/icons";
 import AddRecord from "./AddRecord";
@@ -19,13 +20,14 @@ import axios from "axios";
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
-    width: "30%",
+    width: "20%",
     marginRight: "20px",
     marginTop: "20px",
   },
   media: {
     height: 0,
     paddingTop: "56.25%",
+    marginBottom: "-10px",
   },
   cards: {
     display: "flex",

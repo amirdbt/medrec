@@ -15,6 +15,8 @@ import {
   FormControl,
   Grid,
   InputLabel,
+  IconButton,
+  Tooltip,
   Select,
 } from "@material-ui/core";
 import axios from "axios";
@@ -103,10 +105,15 @@ const ShareRecord = ({ record, hospitals, hospitalName }) => {
         } = props;
         return (
           <div>
-            <Button size="small" color="secondary" onClick={handleClickOpen}>
-              <Share style={{ marginRight: "2px" }} />
-              Share
-            </Button>
+            <Tooltip title="Click to share record with another hospital" arrow>
+              <IconButton
+                size="small"
+                color="secondary"
+                onClick={handleClickOpen}
+              >
+                <Share style={{ marginRight: "10px", fontSize: "20px" }} />
+              </IconButton>
+            </Tooltip>
             <Dialog
               fullScreen={fullScreen}
               open={open}

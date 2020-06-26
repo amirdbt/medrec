@@ -3,10 +3,11 @@ import {
   Card,
   CardActions,
   CardMedia,
-  Button,
   makeStyles,
   CircularProgress,
   CardHeader,
+  IconButton,
+  Tooltip,
 } from "@material-ui/core";
 import ViewRecordDetails from "./Info";
 import ShareRecord from "./Share";
@@ -19,7 +20,7 @@ const useStyles = makeStyles({
     marginRight: "20px",
     marginTop: "20px",
     maxWidth: 345,
-    width: "30%",
+    width: "17%",
   },
   details: {
     display: "flex",
@@ -112,10 +113,20 @@ const Records = ({ hospital }) => {
                   }}
                   style={{ textDecoration: "none" }}
                 >
-                  <Button size="small" color="primary">
-                    <Visibility style={{ marginRight: "2px" }} />
-                    View
-                  </Button>
+                  <Tooltip
+                    title="Click to see all files belonging to this record"
+                    arrow
+                  >
+                    <IconButton size="small" color="primary">
+                      <Visibility
+                        style={{
+                          marginLeft: "5px",
+                          marginRight: "10px",
+                          fontSize: "20px",
+                        }}
+                      />
+                    </IconButton>
+                  </Tooltip>
                 </Link>
                 <ShareRecord
                   record={records._id}

@@ -9,18 +9,21 @@ import {
   Button,
   Grid,
   CardActions,
+  IconButton,
+  Tooltip,
 } from "@material-ui/core";
 import { Visibility } from "@material-ui/icons";
 
 const useStyles = makeStyles(() => ({
   root: {
     maxWidth: 345,
-    width: "30%",
+    width: "10%",
     marginRight: "20px",
     marginTop: "20px",
   },
   media: {
-    height: 170,
+    height: 120,
+    marginBottom: "-25px",
   },
   cards: {
     display: "flex",
@@ -85,10 +88,11 @@ const UploadedFiles = ({ files }) => {
               rel="noopener noreferrer"
               style={{ textDecoration: "none" }}
             >
-              <Button size="small" color="primary">
-                <Visibility style={{ marginRight: "5px" }} />
-                Preview
-              </Button>
+              <Tooltip title="Click to view file" arrow>
+                <IconButton size="small" color="primary">
+                  <Visibility style={{ marginRight: "3px" }} /> View
+                </IconButton>
+              </Tooltip>
             </a>
           </CardActions>
         </Card>

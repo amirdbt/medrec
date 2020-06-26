@@ -181,10 +181,11 @@ const SharedHospitals = ({ hospitals, record }) => {
 
   return (
     <div>
-      <Button size="small" color="secondary" onClick={handleClickOpen}>
-        <ShareRounded style={{ marginRight: "2px" }} />
-        Shared
-      </Button>
+      <Tooltip title="Click to view hospitals shared with">
+        <IconButton size="small" color="secondary" onClick={handleClickOpen}>
+          <ShareRounded style={{ marginRight: "10px" }} />
+        </IconButton>
+      </Tooltip>
       <Dialog
         fullScreen={fullScreen}
         open={open}

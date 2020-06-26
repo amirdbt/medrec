@@ -5,11 +5,12 @@ import {
   CardContent,
   CardActions,
   CardMedia,
-  Button,
   makeStyles,
   Grid,
   CircularProgress,
   CardHeader,
+  IconButton,
+  Tooltip,
 } from "@material-ui/core";
 import { Visibility } from "@material-ui/icons";
 import { Link } from "react-router-dom";
@@ -20,7 +21,7 @@ import SharedHospitals from "./SharedHospitals";
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
-    width: "30%",
+    width: "17%",
     marginRight: "20px",
     marginTop: "20px",
   },
@@ -103,16 +104,17 @@ const ShareRecords = () => {
                     }}
                     style={{ textDecoration: "none" }}
                   >
-                    <Button size="small" color="primary">
-                      <Visibility style={{ marginRight: "2px" }} />
-                      View
-                    </Button>
+                    <Tooltip title="Click to view files">
+                      <IconButton size="small" color="primary">
+                        <Visibility style={{ marginRight: "10px" }} />
+                      </IconButton>
+                    </Tooltip>
                   </Link>
-                  <ViewRecordDetails records={record} />
                   <SharedHospitals
                     hospitals={record.shared_with}
                     record={record._id}
                   />
+                  <ViewRecordDetails records={record} />
                 </CardActions>
               </Card>
             ))}

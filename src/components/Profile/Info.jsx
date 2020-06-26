@@ -10,9 +10,11 @@ import {
   Grid,
   Table,
   TableCell,
+  IconButton,
   TableContainer,
   TableHead,
   Paper,
+  Tooltip,
   TableRow,
 } from "@material-ui/core";
 import moment from "moment";
@@ -36,10 +38,11 @@ const ViewRecordDetails = ({ records }) => {
 
   return (
     <div>
-      <Button size="small" color="info" onClick={handleClickOpen}>
-        <Info style={{ marginRight: "2px" }} />
-        Info
-      </Button>
+      <Tooltip title="Click to view information about this record" arrow>
+        <IconButton size="small" color="info" onClick={handleClickOpen}>
+          <Info style={{ fontSize: "20px" }} />
+        </IconButton>
+      </Tooltip>
       <Dialog
         fullScreen={fullScreen}
         open={open}

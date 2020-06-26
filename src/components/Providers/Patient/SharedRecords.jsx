@@ -5,11 +5,12 @@ import {
   CardContent,
   CardActions,
   CardMedia,
-  Button,
+  Tooltip,
   makeStyles,
   Grid,
   CircularProgress,
   CardHeader,
+  IconButton,
 } from "@material-ui/core";
 import { Visibility } from "@material-ui/icons";
 import { Link } from "react-router-dom";
@@ -19,7 +20,7 @@ import ViewRecordDetails from "../../Profile/Info";
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
-    width: "30%",
+    width: "20%",
     marginRight: "20px",
     marginTop: "20px",
   },
@@ -105,12 +106,14 @@ const SharedRecords = ({ MRID, username }) => {
                     }}
                     style={{ textDecoration: "none" }}
                   >
-                    <Button size="small" color="primary">
-                      <Visibility style={{ marginRight: "2px" }} />
-                      View
-                    </Button>
+                    <Tooltip title="Click to view files">
+                      <IconButton size="small" color="primary">
+                        <Visibility style={{ marginRight: "2px" }} />
+                      </IconButton>
+                    </Tooltip>
                   </Link>
-                  <ViewRecordDetails records={records} />
+                  View
+                  <ViewRecordDetails records={records} /> Info
                 </CardActions>
               </Card>
             ))}
