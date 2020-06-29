@@ -328,19 +328,39 @@ const Settings = () => {
                     {errors.bloodGroup && touched.bloodGroup && (
                       <div className={classes.error}> {errors.bloodGroup} </div>
                     )}
-                    <TextField
-                      name="genotype"
-                      label="Genotype"
+                    <FormControl
                       fullWidth
-                      type="text"
                       variant="outlined"
-                      error={err}
-                      value={values.genotype || ""}
-                      className={errors.genotype && touched.genotype && "error"}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      style={{ marginBottom: "20px" }}
-                    />
+                      style={{ marginBottom: "20px", marginRight: "10px" }}
+                    >
+                      <InputLabel id="demo-simple-select-outlined-label">
+                        Genotype
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-outlined-label"
+                        id="demo-simple-select-outlined"
+                        fullWidth
+                        label="Genotype"
+                        name="genotype"
+                        error={err}
+                        value={values.genotype || ""}
+                        className={
+                          errors.genotype && touched.genotype && "error"
+                        }
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        <MenuItem value="AA">AA</MenuItem>
+                        <MenuItem value="AO">AO</MenuItem>
+                        <MenuItem value="BB">BB</MenuItem>
+                        <MenuItem value="AB">AB</MenuItem>
+                        <MenuItem value="OO">OO</MenuItem>
+                        <MenuItem value="AS">AS</MenuItem>
+                      </Select>
+                    </FormControl>
                     {errors.genotype && touched.genotype && (
                       <div className={classes.error}> {errors.genotype} </div>
                     )}
@@ -387,21 +407,72 @@ const Settings = () => {
                     )}
                   </div>
                   <div className={classes.input}>
-                    <TextField
-                      name="stateOfOrigin"
-                      label="State of origin"
-                      placeholder="State of origin"
-                      variant="outlined"
+                    <FormControl
                       fullWidth
-                      error={err}
-                      value={values.stateOfOrigin || ""}
-                      className={
-                        errors.stateOfOrigin && touched.stateOfOrigin && "error"
-                      }
-                      onChange={handleChange}
-                      onBlur={handleBlur}
+                      variant="outlined"
                       style={{ marginBottom: "20px", marginRight: "10px" }}
-                    />
+                    >
+                      <InputLabel id="demo-simple-select-outlined-label">
+                        State of Origin
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-outlined-label"
+                        id="demo-simple-select-outlined"
+                        fullWidth
+                        label="State of Origin"
+                        name="stateOfOrigin"
+                        error={err}
+                        value={values.stateOfOrigin || ""}
+                        className={
+                          errors.stateOfOrigin &&
+                          touched.stateOfOrigin &&
+                          "error"
+                        }
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        <MenuItem value="Abuja FCT">Abuja FCT</MenuItem>
+                        <MenuItem value="Abia">Abia</MenuItem>
+                        <MenuItem value="Adamawa">Adamawa</MenuItem>
+                        <MenuItem value="Akwa Ibom">Akwa Ibom</MenuItem>
+                        <MenuItem value="Anambra">Anambra</MenuItem>
+                        <MenuItem value="Bauchi">Bauchi</MenuItem>
+                        <MenuItem value="Bayelsa">Bayelsa</MenuItem>
+                        <MenuItem value="Benue">Benue</MenuItem>
+                        <MenuItem value="Borno">Borno</MenuItem>
+                        <MenuItem value="Cross River">Cross River</MenuItem>
+                        <MenuItem value="Delta">Delta</MenuItem>
+                        <MenuItem value="Ebonyi">Ebonyi</MenuItem>
+                        <MenuItem value="Edo">Edo</MenuItem>
+                        <MenuItem value="Ekiti">Ekiti</MenuItem>
+                        <MenuItem value="Enugu">Enugu</MenuItem>
+                        <MenuItem value="Gombe">Gombe</MenuItem>
+                        <MenuItem value="Imo">Imo</MenuItem>
+                        <MenuItem value="Jigawa">Jigawa</MenuItem>
+                        <MenuItem value="Kaduna">Kaduna</MenuItem>
+                        <MenuItem value="Kano">Kano</MenuItem>
+                        <MenuItem value="Katsina">Katsina</MenuItem>
+                        <MenuItem value="Kebbi">Kebbi</MenuItem>
+                        <MenuItem value="Kogi">Kogi</MenuItem>
+                        <MenuItem value="Kwara">Kwara</MenuItem>
+                        <MenuItem value="Lagos">Lagos</MenuItem>
+                        <MenuItem value="Nassarawa">Nassarawa</MenuItem>
+                        <MenuItem value="Niger">Niger</MenuItem>
+                        <MenuItem value="Ogun">Ogun</MenuItem>
+                        <MenuItem value="Ondo">Ondo</MenuItem>
+                        <MenuItem value="Osun">Osun</MenuItem>
+                        <MenuItem value="Oyo">Oyo</MenuItem>
+                        <MenuItem value="Plateau">Plateau</MenuItem>
+                        <MenuItem value="Rivers">Rivers</MenuItem>
+                        <MenuItem value="Sokoto">Sokoto</MenuItem>
+                        <MenuItem value="Taraba">Taraba</MenuItem>
+                        <MenuItem value="Yobe">Yobe</MenuItem>
+                        <MenuItem value="Zamfara">Zamfara</MenuItem>
+                      </Select>
+                    </FormControl>
                     {errors.stateOfOrigin && touched.stateOfOrigin && (
                       <div className={classes.error}>
                         {" "}
