@@ -294,19 +294,39 @@ const CreatePatient = () => {
                   </div>
 
                   <div>
-                    <TextField
-                      name="genotype"
-                      label="Genotype"
+                    <FormControl
                       fullWidth
-                      type="text"
                       variant="outlined"
-                      error={err}
-                      value={values.genotype || ""}
-                      className={errors.genotype && touched.genotype && "error"}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
                       style={{ marginBottom: "20px", marginRight: "10px" }}
-                    />
+                    >
+                      <InputLabel id="demo-simple-select-outlined-label">
+                        Genotype
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-outlined-label"
+                        id="demo-simple-select-outlined"
+                        fullWidth
+                        label="Genotype"
+                        name="genotype"
+                        error={err}
+                        value={values.genotype || ""}
+                        className={
+                          errors.genotype && touched.genotype && "error"
+                        }
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        <MenuItem value="AA">AA</MenuItem>
+                        <MenuItem value="AO">AO</MenuItem>
+                        <MenuItem value="BB">BB</MenuItem>
+                        <MenuItem value="AB">AB</MenuItem>
+                        <MenuItem value="OO">OO</MenuItem>
+                        <MenuItem value="AS">AS</MenuItem>
+                      </Select>
+                    </FormControl>
                     {errors.genotype && touched.genotype && (
                       <div className={classes.error}> {errors.genotype} </div>
                     )}
