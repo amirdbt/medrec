@@ -1,13 +1,7 @@
 import React from "react";
-import {
-  Snackbar,
-  Slide,
-  Typography,
-  Card,
-  CardContent,
-  Grid,
-} from "@material-ui/core";
+import { Snackbar, Slide, Typography } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
+import Dashboard from "../Providers/Dashboard/Dashboard";
 
 const Home = () => {
   const firstName = localStorage.getItem("firstName");
@@ -50,31 +44,7 @@ const Home = () => {
         )}
       </Snackbar>
       <div style={{ marginBottom: "20px" }}></div>
-      {role === "provider" && (
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
-            <Card elevation={0}>
-              <CardContent>
-                <Typography> Total Patients</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Card elevation={0}>
-              <CardContent>
-                <Typography>Total Records</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Card elevation={0}>
-              <CardContent>
-                <Typography>Total Shared Records</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      )}
+      {role === "provider" && <Dashboard />}
     </div>
   );
 };
