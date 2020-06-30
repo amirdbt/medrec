@@ -16,7 +16,7 @@ import {
   MenuItem,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import { LockOutlined } from "@material-ui/icons";
+import { PersonAdd } from "@material-ui/icons";
 import { Alert } from "@material-ui/lab";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -124,7 +124,7 @@ const SignUp = () => {
             {err ? <Alert severity="error">{message}</Alert> : <div></div>}
             <div className={classes.paper}>
               <Avatar className={classes.avatar}>
-                <LockOutlined />
+                <PersonAdd />
               </Avatar>
 
               <div className={classes.display}>
@@ -290,15 +290,14 @@ const SignUp = () => {
                     style={{ marginTop: "10px" }}
                   />
                 )}
-                 <Grid container>
-                    <Grid item xs>
-                      <Link href="/provider-component" variant="body2">
-                        Provider? Sign up
-                      </Link>
-                    </Grid>
-            
+                <Grid container>
+                  <Grid item xs>
+                    <Link href="/provider-component" variant="body2">
+                      Provider? Sign up
+                    </Link>
                   </Grid>
-                  <div style={{marginBottom:"20px"}}></div>
+                </Grid>
+                <div style={{ marginBottom: "20px" }}></div>
               </form>
             </div>
           </Container>

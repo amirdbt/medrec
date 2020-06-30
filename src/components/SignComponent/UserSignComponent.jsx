@@ -7,7 +7,7 @@ import {
   Box,
   makeStyles,
 } from "@material-ui/core";
-import { AccountBox, AddBox } from "@material-ui/icons";
+import { PersonAdd, Person } from "@material-ui/icons";
 import Signin from "../SignIn/SiginIn";
 import SignUp from "../SignUp/SignUp";
 
@@ -67,8 +67,8 @@ const SignInComponent = () => {
           className={classes.tabs}
           aria-label="scrollable force tabs example"
         >
-          <Tab label="User Sign up" icon={<AddBox />} {...a11yProps(0)} />
-          <Tab label="User Sign in" icon={<AccountBox />} {...a11yProps(1)} />
+          <Tab label="User Sign up" icon={<PersonAdd />} {...a11yProps(0)} />
+          <Tab label="User Sign in" icon={<Person />} {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>

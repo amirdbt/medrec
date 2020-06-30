@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { Alert } from "@material-ui/lab";
-import { LockOutlined } from "@material-ui/icons";
+import { Person } from "@material-ui/icons";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
@@ -106,7 +106,7 @@ const SiginIn = () => {
             )}
             <div className={classes.paper}>
               <Avatar className={classes.avatar}>
-                <LockOutlined />
+                <Person />
               </Avatar>
 
               <Typography component="h1" variant="h5">
