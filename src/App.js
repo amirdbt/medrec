@@ -3,7 +3,6 @@ import SignUp from "./components/SignUp/SignUp";
 import SideBar from "./components/SideBar/SideBar";
 import Home from "./components/Home/Home";
 import Profile from "./components/Profile/Profile";
-import Settings from "./components/Profile/Settings";
 import AuthGuard from "./components/SignIn/AuthGuard";
 import ForgotPassword from "./components/SignIn/ForgotPassword";
 import ProviderSignUp from "./components/Providers/SignUp/SignUp";
@@ -40,7 +39,6 @@ const Main = withRouter(({ location }) => {
       <Switch>
         <AuthGuard exact path="/" component={Home} />
         <AuthGuard path="/profile" component={Profile} />
-        <AuthGuard path="/settings" component={Settings} />
         <AuthGuard exact path="/share-records" component={ShareRecords} />
         <AuthGuard path="/share-records/:id" component={ShareRecordsFile} />
         <Route path="/forgotpassword" component={ForgotPassword} />

@@ -95,7 +95,6 @@ const AddRecord = ({ user_id }) => {
       }}
       validationSchema={Yup.object().shape({
         record_name: Yup.string().required("Required"),
-        user_id: Yup.string().required("Required"),
         ailments: Yup.string().required("Required"),
         comment: Yup.string().required("Required"),
       })}
@@ -173,25 +172,7 @@ const AddRecord = ({ user_id }) => {
                       </div>
                     )}
                   </div>
-                  <div>
-                    <TextField
-                      name="user_id"
-                      label="User ID"
-                      variant="outlined"
-                      fullWidth
-                      type="text"
-                      error={err}
-                      value={values.user_id || ""}
-                      className={errors.user_id && touched.user_id && "error"}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      style={{ marginBottom: "20px", marginRight: "10px" }}
-                    />
 
-                    {errors.user_id && touched.user_id && (
-                      <div className={classes.error}> {errors.user_id} </div>
-                    )}
-                  </div>
                   <div>
                     <TextField
                       name="ailments"

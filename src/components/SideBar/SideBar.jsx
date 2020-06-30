@@ -158,14 +158,14 @@ const SideBar = (props) => {
               </ListItem>
             </Link>
 
-            <Link className={classes.link} to="/settings">
+            {/* <Link className={classes.link} to="/settings">
               <ListItem button className={classes.listItems}>
                 <ListItemIcon className={classes.iconColor}>
                   <Settings />
                 </ListItemIcon>
                 <Typography variant="h5">User Settings</Typography>
               </ListItem>
-            </Link>
+            </Link> */}
             <Link className={classes.link} to="/share-records">
               <ListItem button className={classes.listItems}>
                 <ListItemIcon className={classes.iconColor}>

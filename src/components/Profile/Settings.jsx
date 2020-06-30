@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Typography,
   Card,
@@ -18,6 +18,7 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   input: {
@@ -54,23 +55,59 @@ const Settings = () => {
 
     setOpen(false);
   };
+  const [user, setUser] = useState({
+    firstName,
+    lastName,
+    gender,
+    email,
+    dob: "",
+    genotype: "",
+    bloodGroup: "BB",
+    phoneNumber,
+    nextOfKin: "",
+    nationality: "Naija",
+    stateOfOrigin: "",
+    nextOfKin_contact: "",
+    nhis_number: "",
+  });
+  // let user = {};
 
+  useEffect(() => {
+    // fetchUser();
+  }, [user]);
+  const fetchUser = () => {
+    // setLoading(true);
+    axios
+      .get(`https://polar-dusk-61658.herokuapp.com/users/user_info`, {
+        headers: { Authorization: `${token}` },
+      })
+      .then((res) => {
+        console.log(res.data.user);
+        user = res.data.user;
+        // setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  fetchUser();
   return (
     <Formik
+      enableReinitialize={true}
       initialValues={{
         firstName,
         lastName,
         gender,
         email,
-        dob: "",
-        genotype: "",
-        bloodGroup: "",
+        dob: user.dob,
+        genotype: user.genotype,
+        bloodGroup: "BB",
         phoneNumber,
-        nextOfKin: "",
-        nationality: "",
-        stateOfOrigin: "",
-        nextOfKin_contact: "",
-        nhis_number: "",
+        nextOfKin: user.nextOfKin,
+        nationality: "Naija",
+        stateOfOrigin: user.stateOfOrigin,
+        nextOfKin_contact: user.nextOfKin_contact,
+        nhis_number: user.nhis_number,
       }}
       onSubmit={(values, { setSubmitting, resetForm }) => {
         setTimeout(() => {
@@ -111,7 +148,7 @@ const Settings = () => {
           .min(2, "The last name can not be less than 2"),
         gender: Yup.string().required("Required"),
         email: Yup.string().email("Invalid email").required("Required"),
-        dob: Yup.date().required("Required"),
+        dob: Yup.date(),
         genotype: Yup.string(),
         bloodGroup: Yup.string(),
         phoneNumber: Yup.string().required("Required"),
@@ -131,6 +168,7 @@ const Settings = () => {
           handleBlur,
           handleSubmit,
         } = props;
+
         return (
           <div className="content">
             {al ? (
@@ -255,7 +293,11 @@ const Settings = () => {
                       fullWidth
                       name="dob"
                       error={err}
-                      value={values.dob || ""}
+                      value={
+                        values.dob ||
+                        moment(user.dob).format("DD MMM, YYYY") ||
+                        ""
+                      }
                       className={errors.dob && touched.dob && "error"}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -305,7 +347,7 @@ const Settings = () => {
                         label="Blood Group"
                         name="bloodGroup"
                         error={err}
-                        value={values.bloodGroup || ""}
+                        value={values.bloodGroup}
                         className={
                           errors.bloodGroup && touched.bloodGroup && "error"
                         }
@@ -325,6 +367,7 @@ const Settings = () => {
                         <MenuItem value="AB-">AB-</MenuItem>
                       </Select>
                     </FormControl>
+                    {JSON.stringify(values.bloodGroup)}
                     {errors.bloodGroup && touched.bloodGroup && (
                       <div className={classes.error}> {errors.bloodGroup} </div>
                     )}
@@ -343,7 +386,7 @@ const Settings = () => {
                         label="Genotype"
                         name="genotype"
                         error={err}
-                        value={values.genotype || ""}
+                        value={values.genotype || user.genotype || ""}
                         className={
                           errors.genotype && touched.genotype && "error"
                         }
@@ -373,7 +416,7 @@ const Settings = () => {
                       variant="outlined"
                       fullWidth
                       error={err}
-                      value={values.nextOfKin || ""}
+                      value={values.nextOfKin || user.nextOfKin || ""}
                       className={
                         errors.nextOfKin && touched.nextOfKin && "error"
                       }
@@ -391,7 +434,7 @@ const Settings = () => {
                       variant="outlined"
                       fullWidth
                       error={err}
-                      value={values.nationality || ""}
+                      value={values.nationality || user.nationality || ""}
                       className={
                         errors.nationality && touched.nationality && "error"
                       }
@@ -422,7 +465,7 @@ const Settings = () => {
                         label="State of Origin"
                         name="stateOfOrigin"
                         error={err}
-                        value={values.stateOfOrigin || ""}
+                        value={values.stateOfOrigin || user.stateOfOrigin || ""}
                         className={
                           errors.stateOfOrigin &&
                           touched.stateOfOrigin &&
@@ -486,7 +529,9 @@ const Settings = () => {
                       variant="outlined"
                       fullWidth
                       error={err}
-                      value={values.nextOfKin_contact || ""}
+                      value={
+                        values.nextOfKin_contact || user.nextOfKin_contact || ""
+                      }
                       className={
                         errors.nextOfKin_contact &&
                         touched.nextOfKin_contact &&
@@ -511,7 +556,7 @@ const Settings = () => {
                       fullWidth
                       type="text"
                       error={err}
-                      value={values.nhis_number || ""}
+                      value={values.nhis_number || user.nhis_number || ""}
                       className={
                         errors.nhis_number && touched.nhis_number && "error"
                       }

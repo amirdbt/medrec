@@ -15,7 +15,9 @@ import {
   Button,
 } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
+import EditProfile from "./EditProfile";
 import axios from "axios";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   links: {
@@ -62,7 +64,6 @@ const Profile = ({ match }) => {
         <CircularProgress style={{ marginLeft: "50%" }} />
       ) : (
         <>
-          <Typography variant="h6">{userName}'s Profile</Typography>
           <div style={{ marginTop: "20px" }}></div>
 
           <Grid container spacing={2}>
@@ -96,6 +97,12 @@ const Profile = ({ match }) => {
                       </TableCell>
                       <TableCell>{user.phoneNumber}</TableCell>
                     </TableRow>
+                    <TableRow>
+                      <TableCell className={classes.text}>
+                        NHIS Number
+                      </TableCell>
+                      <TableCell>{user.nhis_number}</TableCell>
+                    </TableRow>
                   </TableHead>
                 </Table>
               </TableContainer>
@@ -112,7 +119,9 @@ const Profile = ({ match }) => {
                       <TableCell className={classes.text}>
                         Date of Birth
                       </TableCell>
-                      <TableCell>{user.dob}</TableCell>
+                      <TableCell>
+                        {moment(user.dob).format("DD MMM, YYYY")}
+                      </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell className={classes.text}>Genotype</TableCell>
@@ -157,14 +166,19 @@ const Profile = ({ match }) => {
                 <CardContent>
                   <Typography>Other Actions</Typography>
                   <hr />
-                  <Typography variant="caption">
-                    Deactivate your account if you are sure, if not please be
-                    aware that what has been deleted can never be brought back.
-                  </Typography>
+
                   <div style={{ marginBottom: "20px" }}></div>
-                  <Button variant="contained" color="secondary">
-                    <Delete /> Deactivate Account
-                  </Button>
+                  <Grid container spacing={3}>
+                    <Grid item>
+                      <EditProfile user={user} />
+                    </Grid>
+                    <Grid item>
+                      <Button variant="contained" color="secondary">
+                        <Delete style={{ marginRight: "5px" }} /> Deactivate
+                        Account
+                      </Button>
+                    </Grid>
+                  </Grid>
                 </CardContent>
               </Card>
             </Grid>

@@ -25,7 +25,6 @@ import {
 } from "@material-ui/core";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import {
-  LocalHospital,
   FirstPage,
   KeyboardArrowLeft,
   KeyboardArrowRight,
