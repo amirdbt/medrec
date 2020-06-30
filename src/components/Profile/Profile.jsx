@@ -38,23 +38,23 @@ const Profile = ({ match }) => {
   const userName = localStorage.getItem("userName");
 
   useEffect(() => {
-    const fetchUser = () => {
-      setLoading(true);
-      axios
-        .get(`https://polar-dusk-61658.herokuapp.com/users/user_info`, {
-          headers: { Authorization: `${token}` },
-        })
-        .then((res) => {
-          console.log(res.data.user);
-          setUser(res.data.user);
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
     fetchUser();
-  }, [token]);
+  }, []);
+  const fetchUser = () => {
+    setLoading(true);
+    axios
+      .get(`https://polar-dusk-61658.herokuapp.com/users/user_info`, {
+        headers: { Authorization: `${token}` },
+      })
+      .then((res) => {
+        console.log(res.data.user);
+        setUser(res.data.user);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div className="content">
