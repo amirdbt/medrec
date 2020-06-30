@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Typography,
-  makeStyles,
-  Breadcrumbs,
-  Tooltip,
-} from "@material-ui/core";
+import { makeStyles, Breadcrumbs, Tooltip } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import UploadedFiles from "../Providers/Patient/UploadedFiles";
 

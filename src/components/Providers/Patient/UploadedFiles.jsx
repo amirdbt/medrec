@@ -6,7 +6,6 @@ import {
   CardMedia,
   Typography,
   makeStyles,
-  Button,
   Grid,
   CardActions,
   IconButton,

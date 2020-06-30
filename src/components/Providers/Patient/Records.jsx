@@ -10,7 +10,6 @@ import {
   Grid,
   CircularProgress,
   CardHeader,
-  Tooltip,
 } from "@material-ui/core";
 import { Visibility } from "@material-ui/icons";
 import AddRecord from "./AddRecord";

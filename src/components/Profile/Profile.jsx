@@ -34,10 +34,7 @@ const Profile = ({ match }) => {
   const classes = useStyles();
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
-
-  console.log(match);
   let token = localStorage.getItem("token");
-  const userName = localStorage.getItem("userName");
 
   useEffect(() => {
     fetchUser();
