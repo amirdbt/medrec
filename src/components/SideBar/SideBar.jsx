@@ -114,6 +114,8 @@ const SideBar = (props) => {
   const userName = localStorage.getItem("userName");
   const providerName = localStorage.getItem("providerName");
   const role = localStorage.getItem("role");
+  const activate = localStorage.getItem("activate");
+  // console.log(activate);
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -124,6 +126,86 @@ const SideBar = (props) => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  let display;
+  console.log(role === "provider" && activate === "true");
+  // console.log("role " + role);
+  if (role === "provider" && activate === "true") {
+    display = (
+      <>
+        <Link className={classes.link} to="/all-patients">
+          <ListItem button className={classes.listItems}>
+            <ListItemIcon className={classes.iconColor}>
+              <Accessibility />
+            </ListItemIcon>
+            <Typography variant="h5">All Patients</Typography>
+          </ListItem>
+        </Link>
+        <Link className={classes.link} to="/create-patient">
+          <ListItem button className={classes.listItems}>
+            <ListItemIcon className={classes.iconColor}>
+              <AddBox />
+            </ListItemIcon>
+            <Typography variant="h5">Create Patient</Typography>
+          </ListItem>
+        </Link>
+        <Link className={classes.link} to="/add-patient">
+          <ListItem button className={classes.listItems}>
+            <ListItemIcon className={classes.iconColor}>
+              <AddCircleOutline />
+            </ListItemIcon>
+            <Typography variant="h5">Add Patient</Typography>
+          </ListItem>
+        </Link>
+
+        {/* <Link className={classes.link} to="/edit-settings">
+          <ListItem button className={classes.listItems}>
+            <ListItemIcon className={classes.iconColor}>
+              <Settings />
+            </ListItemIcon>
+            <Typography variant="h5">Edit Account</Typography>
+          </ListItem>
+        </Link> */}
+      </>
+    );
+  } else {
+    display = (
+      <>
+        <Link className={classes.link} to="#">
+          <ListItem button className={classes.listItems} disabled>
+            <ListItemIcon className={classes.iconColor}>
+              <Accessibility />
+            </ListItemIcon>
+            <Typography variant="h5">All Patients</Typography>
+          </ListItem>
+        </Link>
+        <Link className={classes.link} to="#">
+          <ListItem button className={classes.listItems} disabled>
+            <ListItemIcon className={classes.iconColor}>
+              <AddBox />
+            </ListItemIcon>
+            <Typography variant="h5">Create Patient</Typography>
+          </ListItem>
+        </Link>
+        <Link className={classes.link} to="#">
+          <ListItem button className={classes.listItems} disabled>
+            <ListItemIcon className={classes.iconColor}>
+              <AddCircleOutline />
+            </ListItemIcon>
+            <Typography variant="h5">Add Patient</Typography>
+          </ListItem>
+        </Link>
+
+        {/* <Link className={classes.link} to="#">
+          <ListItem button className={classes.listItems} disabled>
+            <ListItemIcon className={classes.iconColor}>
+              <Settings />
+            </ListItemIcon>
+            <Typography variant="h5">Edit Account</Typography>
+          </ListItem>
+        </Link> */}
+      </>
+    );
+  }
 
   const drawer = (
     <>
@@ -157,15 +239,6 @@ const SideBar = (props) => {
                 <Typography variant="h5">Profile</Typography>
               </ListItem>
             </Link>
-
-            {/* <Link className={classes.link} to="/settings">
-              <ListItem button className={classes.listItems}>
-                <ListItemIcon className={classes.iconColor}>
-                  <Settings />
-                </ListItemIcon>
-                <Typography variant="h5">User Settings</Typography>
-              </ListItem>
-            </Link> */}
             <Link className={classes.link} to="/share-records">
               <ListItem button className={classes.listItems}>
                 <ListItemIcon className={classes.iconColor}>
@@ -184,7 +257,8 @@ const SideBar = (props) => {
             </Link>
           </>
         )}
-        {role === "provider" && (
+        {display}
+        {/* {role === "provider" && activate === true && (
           <>
             <Link className={classes.link} to="/all-patients">
               <ListItem button className={classes.listItems}>
@@ -220,7 +294,7 @@ const SideBar = (props) => {
               </ListItem>
             </Link>
           </>
-        )}
+        )} */}
       </List>
     </>
   );

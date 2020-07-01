@@ -9,7 +9,7 @@ import {
   Avatar,
   CssBaseline,
   Container,
-  Grid
+  Grid,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { LocalHospital } from "@material-ui/icons";
@@ -64,14 +64,21 @@ const ProviderSignUp = () => {
           console.log("Signing up", values);
           setLoading(true);
           axios
-            .post(`https://polar-dusk-61658.herokuapp.com/providers/signUp`, values)
+            .post(
+              `https://polar-dusk-61658.herokuapp.com/providers/signUp`,
+              values
+            )
             .then((res) => {
               console.log(res);
               localStorage.setItem("token", res.data.token);
-              localStorage.setItem("providerName", res.data.provider.providerName);
+              localStorage.setItem(
+                "providerName",
+                res.data.provider.providerName
+              );
               localStorage.setItem("role", res.data.provider.role);
+              localStorage.setItem("activate", res.data.provider.activate);
               setLoading(false);
-                history.push("/");
+              history.push("/");
             })
             .catch((err) => {
               console.log(err.response.data.error);
@@ -120,7 +127,7 @@ const ProviderSignUp = () => {
 
               <form onSubmit={handleSubmit} className={classes.form}>
                 <Grid container spacing={2}>
-                  <Grid item xs={12} >
+                  <Grid item xs={12}>
                     <TextField
                       name="providerName"
                       label="Provider Name *"
@@ -142,7 +149,7 @@ const ProviderSignUp = () => {
                       </div>
                     )}
                   </Grid>
-                  <Grid item xs={12} >
+                  <Grid item xs={12}>
                     <TextField
                       name="address"
                       label="Address *"
@@ -235,8 +242,6 @@ const ProviderSignUp = () => {
                       <div className={classes.error}> {errors.password} </div>
                     )}
                   </Grid>
-
-                  
                 </Grid>
                 <Button
                   fullWidth
@@ -255,13 +260,13 @@ const ProviderSignUp = () => {
                   />
                 )}
                 <Grid container>
-                    <Grid item>
-                      <Link href="/user-component" variant="body2">
-                        User? Sign up
-                      </Link>
-                    </Grid>
+                  <Grid item>
+                    <Link href="/user-component" variant="body2">
+                      User? Sign up
+                    </Link>
                   </Grid>
-                <div style={{marginBottom: "20px"}}></div>
+                </Grid>
+                <div style={{ marginBottom: "20px" }}></div>
               </form>
             </div>
           </Container>

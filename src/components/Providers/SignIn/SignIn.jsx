@@ -56,12 +56,19 @@ const ProviderSiginIn = () => {
           console.log("Logging in", values);
           setLoading(true);
           axios
-            .post(`https://polar-dusk-61658.herokuapp.com/providers/login`, values)
+            .post(
+              `https://polar-dusk-61658.herokuapp.com/providers/login`,
+              values
+            )
             .then((res) => {
               console.log(res.data);
               localStorage.setItem("token", res.data.token);
-              localStorage.setItem("providerName", res.data.provider.providerName);
+              localStorage.setItem(
+                "providerName",
+                res.data.provider.providerName
+              );
               localStorage.setItem("role", res.data.provider.role);
+              localStorage.setItem("activate", res.data.provider.activate);
               setLoading(false);
               history.push("/", { user: res.data.provider });
             })
@@ -122,18 +129,13 @@ const ProviderSiginIn = () => {
                     error={err}
                     value={values.providerName}
                     className={
-                      errors.providerName &&
-                      touched.providerName &&
-                      "error"
+                      errors.providerName && touched.providerName && "error"
                     }
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
                   {errors.providerName && touched.providerName && (
-                    <div className={classes.error}>
-                      {" "}
-                      {errors.providerName}{" "}
-                    </div>
+                    <div className={classes.error}> {errors.providerName} </div>
                   )}
                   <div style={{ marginTop: "20px" }}></div>
                   <TextField
