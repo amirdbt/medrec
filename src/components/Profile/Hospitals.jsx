@@ -26,6 +26,7 @@ import {
 } from "@material-ui/icons";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import SearchBox from "../Providers/Patient/SearchBox";
 
 const useStyles = makeStyles((theme) => ({
   head: {
@@ -110,7 +111,7 @@ const Hospitals = () => {
   const [page, setPage] = React.useState(0);
   const [hospitals, setHospitals] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const [searchField, setSearchField] = useState("");
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const token = localStorage.getItem("token");
   const divRef = React.useRef();
@@ -120,7 +121,9 @@ const Hospitals = () => {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-
+  const searchChange = (e) => {
+    setSearchField(e.target.value);
+  };
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -143,12 +146,17 @@ const Hospitals = () => {
     };
     fetchUser();
   }, [token]);
-
+  const filteredHospitals = hospitals.filter((hospital) => {
+    return hospital.providerName
+      .toLowerCase()
+      .includes(searchField.toLowerCase());
+  });
   return (
     <div className="content" ref={divRef}>
       <Typography variant="h5" style={{ marginBottom: "20px" }}>
         Hospitals (Providers)
       </Typography>
+      <SearchBox place="Search hospital..." searchChange={searchChange} />
       {loading ? (
         <CircularProgress style={{ marginLeft: "50%" }} />
       ) : (
@@ -173,11 +181,11 @@ const Hospitals = () => {
                   </TableHead>
                   <TableBody>
                     {(rowsPerPage > 0
-                      ? hospitals.slice(
+                      ? filteredHospitals.slice(
                           page * rowsPerPage,
                           page * rowsPerPage + rowsPerPage
                         )
-                      : hospitals
+                      : filteredHospitals
                     ).map((hospital) => (
                       <TableRow key={hospital._id}>
                         <TableCell>{hospital.providerName}</TableCell>
@@ -220,7 +228,7 @@ const Hospitals = () => {
                           { label: "All", value: -1 },
                         ]}
                         colSpan={3}
-                        count={hospitals.length}
+                        count={filteredHospitals.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         SelectProps={{

@@ -20,8 +20,6 @@ import {
 import {
   Dashboard,
   AccountCircle,
-  Search,
-  Settings,
   PowerSettingsNew,
   AddBox,
   Accessibility,
@@ -277,10 +275,8 @@ const SideBar = (props) => {
             <MenuIcon />
           </IconButton>
           <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <Search />
-            </div>
-            <InputBase placeholder="Search..." />
+            <div className={classes.searchIcon}>{/* <Search /> */}</div>
+            <InputBase />
           </div>
           <div />
           <div className={classes.appIcons}>

@@ -158,7 +158,10 @@ const AllPatients = () => {
         <CircularProgress style={{ marginLeft: "50%" }} />
       ) : (
         <>
-          <SearchBox searchChange={searchChange} place="Search by last name" />
+          <SearchBox
+            searchChange={searchChange}
+            place="Search by last name..."
+          />
           <Card elevation={0} className={classes.head}>
             <CardContent>
               <div style={{ display: "flex" }}>

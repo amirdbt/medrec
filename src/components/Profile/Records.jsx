@@ -7,13 +7,17 @@ import {
   CircularProgress,
   CardHeader,
   IconButton,
+  Grid,
   Tooltip,
+  CardContent,
+  Typography,
 } from "@material-ui/core";
 import ViewRecordDetails from "./Info";
 import ShareRecord from "./Share";
 import { Link } from "react-router-dom";
 import { Visibility } from "@material-ui/icons";
 import axios from "axios";
+import SearchBox from "../Providers/Patient/SearchBox";
 
 const useStyles = makeStyles({
   root: {
@@ -40,6 +44,7 @@ const Records = ({ hospital }) => {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
   const [hospitals, setHospitals] = useState([]);
+  const [searchField, setSearchField] = useState("");
   console.log(hospital);
   const [hospitalRecords, setHospitalRecords] = useState([]);
   useEffect(() => {
@@ -88,13 +93,35 @@ const Records = ({ hospital }) => {
         console.log(err);
       });
   };
+  const searchChange = (e) => {
+    setSearchField(e.target.value);
+  };
+  const filteredRecords = hospitalRecords.filter((records) => {
+    return records.record_name
+      .toLowerCase()
+      .includes(searchField.toLowerCase());
+  });
   return (
     <div className={classes.cards}>
       {loading ? (
         <CircularProgress style={{ marginLeft: "50%" }} />
       ) : (
         <>
-          {hospitalRecords.map((records) => (
+          <Grid container spacing={6}>
+            <Grid item xs={12} sm={6}>
+              <Card elevation={0}>
+                <CardContent>
+                  <Typography variant="h5">
+                    Total Number of Records: {hospitalRecords.length}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <SearchBox searchChange={searchChange} place="Search Record..." />
+            </Grid>
+          </Grid>
+          {filteredRecords.map((records) => (
             <Card className={classes.root} elevation={1} key={records._id}>
               <CardHeader
                 subheader={`Name: ${records.record_name.toUpperCase()}`}

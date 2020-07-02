@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import ViewRecordDetails from "../Profile/Info";
 import SharedHospitals from "./SharedHospitals";
+import SearchBox from "../Providers/Patient/SearchBox";
 
 const useStyles = makeStyles({
   root: {
@@ -40,6 +41,7 @@ const ShareRecords = () => {
   const [records, setRecords] = useState([]);
   const [totalRecords, setTotalRecords] = useState("");
   const [loading, setLoading] = useState(false);
+  const [searchField, setSearchField] = useState("");
   useEffect(() => {
     const fetchSharedRecords = () => {
       setLoading(true);
@@ -66,7 +68,19 @@ const ShareRecords = () => {
     };
     fetchSharedRecords();
   }, []);
-
+  const searchChange = (e) => {
+    setSearchField(e.target.value);
+  };
+  const filteredSharedRecords =
+    typeof records == "array" ? (
+      records.filter((record) => {
+        return record.record_name
+          .toLowerCase()
+          .includes(searchField.toLowerCase());
+      })
+    ) : (
+      <div></div>
+    );
   const classes = useStyles();
   return (
     <div className="content">
@@ -74,7 +88,7 @@ const ShareRecords = () => {
         <CircularProgress style={{ marginLeft: "50%" }} />
       ) : (
         <>
-          <Grid container spacing={2}>
+          <Grid container spacing={6}>
             <Grid item xs={12} sm={6}>
               <Card elevation={0}>
                 <CardContent>
@@ -84,10 +98,16 @@ const ShareRecords = () => {
                 </CardContent>
               </Card>
             </Grid>
+            <Grid item xs={12} sm={6}>
+              <SearchBox
+                searchChange={searchChange}
+                place="Search shared records..."
+              />
+            </Grid>
           </Grid>
           <div className={classes.cards}>
             {typeof records == "array" ? (
-              records.map((record) => (
+              filteredSharedRecords.map((record) => (
                 <Card className={classes.root} elevation={1} key={record._id}>
                   <CardHeader
                     subheader={`Name: ${record.record_name.toUpperCase()}`}
