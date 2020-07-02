@@ -10,6 +10,11 @@ import {
   CssBaseline,
   Container,
   Grid,
+  Tooltip,
+  FormControl,
+  MenuItem,
+  Select,
+  InputLabel,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { LocalHospital } from "@material-ui/icons";
@@ -17,6 +22,7 @@ import { Alert } from "@material-ui/lab";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import HelpInfo from "./Help";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -95,7 +101,13 @@ const ProviderSignUp = () => {
         state: Yup.string().required("Required"),
         email: Yup.string().email("Invalid email").required("Required"),
         phone_number_main: Yup.string().required("Required"),
-        password: Yup.string().required("No password provided").min(8),
+        password: Yup.string()
+          .required("No password provided")
+          .min(8)
+          .matches(
+            /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+            "Password must contain at least 8 characters, one uppercase, one number and one special case character"
+          ),
       })}
     >
       {(props) => {
@@ -168,18 +180,64 @@ const ProviderSignUp = () => {
                     )}
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField
-                      name="state"
-                      label="State *"
-                      fullWidth
-                      variant="outlined"
-                      type="text"
-                      error={err}
-                      value={values.state}
-                      className={errors.state && touched.state && "error"}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
+                    <FormControl fullWidth variant="outlined">
+                      <InputLabel id="demo-simple-select-outlined-label">
+                        State
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-outlined-label"
+                        id="demo-simple-select-outlined"
+                        fullWidth
+                        label="state"
+                        name="state"
+                        error={err}
+                        value={values.state || ""}
+                        className={errors.state && touched.state && "error"}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        <MenuItem value="Abuja FCT">Abuja FCT</MenuItem>
+                        <MenuItem value="Abia">Abia</MenuItem>
+                        <MenuItem value="Adamawa">Adamawa</MenuItem>
+                        <MenuItem value="Akwa Ibom">Akwa Ibom</MenuItem>
+                        <MenuItem value="Anambra">Anambra</MenuItem>
+                        <MenuItem value="Bauchi">Bauchi</MenuItem>
+                        <MenuItem value="Bayelsa">Bayelsa</MenuItem>
+                        <MenuItem value="Benue">Benue</MenuItem>
+                        <MenuItem value="Borno">Borno</MenuItem>
+                        <MenuItem value="Cross River">Cross River</MenuItem>
+                        <MenuItem value="Delta">Delta</MenuItem>
+                        <MenuItem value="Ebonyi">Ebonyi</MenuItem>
+                        <MenuItem value="Edo">Edo</MenuItem>
+                        <MenuItem value="Ekiti">Ekiti</MenuItem>
+                        <MenuItem value="Enugu">Enugu</MenuItem>
+                        <MenuItem value="Gombe">Gombe</MenuItem>
+                        <MenuItem value="Imo">Imo</MenuItem>
+                        <MenuItem value="Jigawa">Jigawa</MenuItem>
+                        <MenuItem value="Kaduna">Kaduna</MenuItem>
+                        <MenuItem value="Kano">Kano</MenuItem>
+                        <MenuItem value="Katsina">Katsina</MenuItem>
+                        <MenuItem value="Kebbi">Kebbi</MenuItem>
+                        <MenuItem value="Kogi">Kogi</MenuItem>
+                        <MenuItem value="Kwara">Kwara</MenuItem>
+                        <MenuItem value="Lagos">Lagos</MenuItem>
+                        <MenuItem value="Nassarawa">Nassarawa</MenuItem>
+                        <MenuItem value="Niger">Niger</MenuItem>
+                        <MenuItem value="Ogun">Ogun</MenuItem>
+                        <MenuItem value="Ondo">Ondo</MenuItem>
+                        <MenuItem value="Osun">Osun</MenuItem>
+                        <MenuItem value="Oyo">Oyo</MenuItem>
+                        <MenuItem value="Plateau">Plateau</MenuItem>
+                        <MenuItem value="Rivers">Rivers</MenuItem>
+                        <MenuItem value="Sokoto">Sokoto</MenuItem>
+                        <MenuItem value="Taraba">Taraba</MenuItem>
+                        <MenuItem value="Yobe">Yobe</MenuItem>
+                        <MenuItem value="Zamfara">Zamfara</MenuItem>
+                      </Select>
+                    </FormControl>
                     {errors.state && touched.state && (
                       <div className={classes.error}> {errors.state} </div>
                     )}
@@ -226,18 +284,25 @@ const ProviderSignUp = () => {
                     )}
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField
-                      name="password"
-                      label="Password *"
-                      fullWidth
-                      type="password"
-                      variant="outlined"
-                      error={err}
-                      className={errors.password && touched.password && "error"}
-                      value={values.password}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
+                    <Tooltip
+                      title="Password must contain at least 8 characters, one uppercase, one number and one special character, e.g Realmadrid1%"
+                      arrow
+                    >
+                      <TextField
+                        name="password"
+                        label="Password *"
+                        fullWidth
+                        type="password"
+                        variant="outlined"
+                        error={err}
+                        className={
+                          errors.password && touched.password && "error"
+                        }
+                        value={values.password}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      />
+                    </Tooltip>
                     {errors.password && touched.password && (
                       <div className={classes.error}> {errors.password} </div>
                     )}
@@ -260,10 +325,13 @@ const ProviderSignUp = () => {
                   />
                 )}
                 <Grid container>
-                  <Grid item>
+                  <Grid item xs>
                     <Link href="/user-component" variant="body2">
                       User? Sign up
                     </Link>
+                  </Grid>
+                  <Grid item xs>
+                    <HelpInfo />
                   </Grid>
                 </Grid>
                 <div style={{ marginBottom: "20px" }}></div>

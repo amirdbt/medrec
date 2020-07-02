@@ -105,7 +105,13 @@ const SignUp = () => {
           .required("Required")
           .min(4, "The username can not be less than 4"),
         gender: Yup.string().required("Required"),
-        password: Yup.string().required("No password provided").min(8),
+        password: Yup.string()
+          .required("No password provided")
+          .min(8)
+          .matches(
+            /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+            "Password must contain at least 8 characters, one uppercase, one number and one special case character"
+          ),
         phoneNumber: Yup.string().required("Required"),
       })}
     >
