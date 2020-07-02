@@ -257,44 +257,7 @@ const SideBar = (props) => {
             </Link>
           </>
         )}
-        {display}
-        {/* {role === "provider" && activate === true && (
-          <>
-            <Link className={classes.link} to="/all-patients">
-              <ListItem button className={classes.listItems}>
-                <ListItemIcon className={classes.iconColor}>
-                  <Accessibility />
-                </ListItemIcon>
-                <Typography variant="h5">All Patients</Typography>
-              </ListItem>
-            </Link>
-            <Link className={classes.link} to="/create-patient">
-              <ListItem button className={classes.listItems}>
-                <ListItemIcon className={classes.iconColor}>
-                  <AddBox />
-                </ListItemIcon>
-                <Typography variant="h5">Create Patient</Typography>
-              </ListItem>
-            </Link>
-            <Link className={classes.link} to="/add-patient">
-              <ListItem button className={classes.listItems}>
-                <ListItemIcon className={classes.iconColor}>
-                  <AddCircleOutline />
-                </ListItemIcon>
-                <Typography variant="h5">Add Patient</Typography>
-              </ListItem>
-            </Link>
-
-            <Link className={classes.link} to="/edit-settings">
-              <ListItem button className={classes.listItems}>
-                <ListItemIcon className={classes.iconColor}>
-                  <Settings />
-                </ListItemIcon>
-                <Typography variant="h5">Edit Account</Typography>
-              </ListItem>
-            </Link>
-          </>
-        )} */}
+        {role === "provider" && display}
       </List>
     </>
   );

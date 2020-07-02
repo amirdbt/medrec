@@ -15,6 +15,7 @@ import { Visibility } from "@material-ui/icons";
 import AddRecord from "./AddRecord";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import SearchBox from "./SearchBox";
 
 const useStyles = makeStyles({
   root: {
@@ -38,6 +39,7 @@ const Records = ({ user_id, MRID, username }) => {
   const [patientRecords, setPatientRecords] = useState([]);
   const [totalRecords, setTotalRecords] = useState("");
   const [loading, setLoading] = useState(false);
+  const [searchField, setSearchField] = useState("");
   console.log(MRID);
   useEffect(() => {
     fetchRecords();
@@ -65,6 +67,14 @@ const Records = ({ user_id, MRID, username }) => {
         console.log(error);
       });
   };
+  const searchChange = (e) => {
+    setSearchField(e.target.value);
+  };
+  const filteredRecords = patientRecords.filter((records) => {
+    return records.record_name
+      .toLowerCase()
+      .includes(searchField.toLowerCase());
+  });
 
   const classes = useStyles();
   return (
@@ -74,10 +84,13 @@ const Records = ({ user_id, MRID, username }) => {
       ) : (
         <>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={4}>
               <AddRecord user_id={user_id} />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={4}>
+              <SearchBox place="Search record" searchChange={searchChange} />
+            </Grid>
+            <Grid item xs={12} sm={4}>
               <Card elevation={0}>
                 <CardContent>
                   <Typography variant="h5">
@@ -88,7 +101,7 @@ const Records = ({ user_id, MRID, username }) => {
             </Grid>
           </Grid>
           <div className={classes.cards}>
-            {patientRecords.map((records) => (
+            {filteredRecords.map((records) => (
               <Card className={classes.root} elevation={1} key={records._id}>
                 <CardHeader
                   subheader={`Name: ${records.record_name.toUpperCase()}`}

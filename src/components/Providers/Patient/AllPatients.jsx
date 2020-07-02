@@ -29,6 +29,7 @@ import {
 import CountUp from "react-countup";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import SearchBox from "./SearchBox";
 
 const useStyles = makeStyles((theme) => ({
   head: {
@@ -117,6 +118,8 @@ const AllPatients = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
+  const [searchField, setSearchField] = useState("");
+
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, patients.length - page * rowsPerPage);
 
@@ -128,7 +131,9 @@ const AllPatients = () => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
+  const searchChange = (e) => {
+    setSearchField(e.target.value);
+  };
   useEffect(() => {
     fetchPatients();
   }, []);
@@ -144,13 +149,16 @@ const AllPatients = () => {
     setLoading(false);
     console.log(response.data);
   };
-
+  const filteredPatients = patients.filter((patient) => {
+    return patient.lastName.toLowerCase().includes(searchField.toLowerCase());
+  });
   return (
     <div className="content">
       {loading ? (
         <CircularProgress style={{ marginLeft: "50%" }} />
       ) : (
         <>
+          <SearchBox searchChange={searchChange} place="Search by last name" />
           <Card elevation={0} className={classes.head}>
             <CardContent>
               <div style={{ display: "flex" }}>
@@ -199,11 +207,11 @@ const AllPatients = () => {
                   </TableHead>
                   <TableBody>
                     {(rowsPerPage > 0
-                      ? patients.slice(
+                      ? filteredPatients.slice(
                           page * rowsPerPage,
                           page * rowsPerPage + rowsPerPage
                         )
-                      : patients
+                      : filteredPatients
                     ).map((patient) => (
                       <TableRow key={patient.id}>
                         <TableCell>{patient.firstName}</TableCell>
@@ -238,7 +246,7 @@ const AllPatients = () => {
                           { label: "All", value: -1 },
                         ]}
                         colSpan={3}
-                        count={patients.length}
+                        count={filteredPatients.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         SelectProps={{

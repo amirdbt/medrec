@@ -16,6 +16,7 @@ import { Visibility } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import ViewRecordDetails from "../../Profile/Info";
+import SearchBox from "./SearchBox";
 
 const useStyles = makeStyles({
   root: {
@@ -38,6 +39,7 @@ const SharedRecords = ({ MRID, username }) => {
   const [patientRecords, setPatientRecords] = useState([]);
   const [totalRecords, setTotalRecords] = useState("");
   const [loading, setLoading] = useState(false);
+  const [searchField, setSearchField] = useState("");
   console.log(username);
   console.log(MRID);
   useEffect(() => {
@@ -66,6 +68,14 @@ const SharedRecords = ({ MRID, username }) => {
         setLoading(false);
       });
   };
+  const searchChange = (e) => {
+    setSearchField(e.target.value);
+  };
+  const filteredSharedRecords = patientRecords.filter((records) => {
+    return records.record_name
+      .toLowerCase()
+      .includes(searchField.toLowerCase());
+  });
 
   const classes = useStyles();
   return (
@@ -74,7 +84,7 @@ const SharedRecords = ({ MRID, username }) => {
         <CircularProgress style={{ marginLeft: "50%" }} />
       ) : (
         <>
-          <Grid container spacing={2}>
+          <Grid container spacing={6}>
             <Grid item xs={12} sm={6}>
               <Card elevation={0}>
                 <CardContent>
@@ -84,9 +94,15 @@ const SharedRecords = ({ MRID, username }) => {
                 </CardContent>
               </Card>
             </Grid>
+            <Grid item xs={12} sm={6}>
+              <SearchBox
+                place="Search shared records"
+                searchChange={searchChange}
+              />
+            </Grid>
           </Grid>
           <div className={classes.cards}>
-            {patientRecords.map((records) => (
+            {filteredSharedRecords.map((records) => (
               <Card className={classes.root} elevation={1} key={records._id}>
                 <CardHeader
                   subheader={`Name: ${records.record_name.toUpperCase()}`}
