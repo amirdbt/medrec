@@ -24,6 +24,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Files from "./Files";
 import moment from "moment";
+import UpdateRecord from "./UpdateRecord";
 
 const useStyles = makeStyles((theme) => ({
   links: {
@@ -204,26 +205,28 @@ const ViewRecord = ({ match, location }) => {
                       be brought back.
                     </Typography>
                     <div style={{ marginBottom: "20px" }}></div>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      style={{ marginRight: "5%" }}
-                    >
-                      <Update /> Update Record
-                    </Button>
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      onClick={() => {
-                        if (
-                          window.confirm(
-                            "Are you sure you want to remove this patient?"
-                          )
-                        );
-                      }}
-                    >
-                      <Delete /> Delete Record
-                    </Button>
+                    <Grid container spacing={6}>
+                      <Grid item>
+                        {" "}
+                        <UpdateRecord record={record} />
+                      </Grid>
+                      <Grid item>
+                        {" "}
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          onClick={() => {
+                            if (
+                              window.confirm(
+                                "Are you sure you want to remove this patient?"
+                              )
+                            );
+                          }}
+                        >
+                          <Delete /> Delete Record
+                        </Button>
+                      </Grid>
+                    </Grid>
                   </CardContent>
                 </Card>
               </Grid>
