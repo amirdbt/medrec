@@ -32,7 +32,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const EditProfile = () => {
+const EditProfile = ({ hospital }) => {
+  console.log(hospital);
   const [open, setOpen] = useState(false);
   const [al, setAl] = useState(false);
   const [err, setErr] = useState(false);
@@ -41,6 +42,8 @@ const EditProfile = () => {
   const [severity, setSeverity] = useState("success");
   const theme = useTheme();
   const token = localStorage.getItem("token");
+
+  const { address, email, state, phone_number_main } = hospital;
 
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const classes = useStyles();
@@ -56,10 +59,10 @@ const EditProfile = () => {
     <Formik
       enableReinitialize={true}
       initialValues={{
-        address: "",
-        email: "",
-        state: "",
-        phone_number_main: "",
+        address,
+        email,
+        state,
+        phone_number_main,
         phone_number_two: "",
         phone_number_three: "",
       }}
@@ -98,14 +101,13 @@ const EditProfile = () => {
       }}
       validationSchema={Yup.object().shape({
         address: Yup.string()
-          .required("Required")
-          .min(2, "The address can not be less than 2"),
+        .min(2, "The address can not be less than 2"),
 
-        email: Yup.string().email("Invalid email").required("Required"),
-        state: Yup.string().required("Required"),
-        phone_number_main: Yup.string().required("Required"),
-        phone_number_two: Yup.string().required("Required"),
-        phone_number_three: Yup.string().required("Required"),
+        email: Yup.string().email("Invalid email"),
+        state: Yup.string(),
+        phone_number_main: Yup.string(),
+        phone_number_two: Yup.string(),
+        phone_number_three: Yup.string(),
       })}
     >
       {(props) => {
@@ -169,7 +171,7 @@ const EditProfile = () => {
                         fullWidth
                         type="text"
                         error={err}
-                        value={values.address}
+                        value={values.address || ""}
                         className={errors.address && touched.address && "error"}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -188,7 +190,7 @@ const EditProfile = () => {
                         variant="outlined"
                         type="email"
                         error={err}
-                        value={values.email}
+                        value={values.email || ""}
                         className={errors.email && touched.email && "error"}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -206,7 +208,7 @@ const EditProfile = () => {
                         fullWidth
                         type="text"
                         error={err}
-                        value={values.state}
+                        value={values.state || ""}
                         className={errors.state && touched.state && "error"}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -225,7 +227,7 @@ const EditProfile = () => {
                         variant="outlined"
                         type="text"
                         error={err}
-                        value={values.phone_number_main}
+                        value={values.phone_number_main || ""}
                         className={
                           errors.phone_number_main &&
                           touched.phone_number_main &&
@@ -252,7 +254,7 @@ const EditProfile = () => {
                         variant="outlined"
                         type="text"
                         error={err}
-                        value={values.phone_number_two}
+                        value={values.phone_number_two || ""}
                         className={
                           errors.phone_number_two &&
                           touched.phone_number_two &&
@@ -277,7 +279,7 @@ const EditProfile = () => {
                         type="text"
                         variant="outlined"
                         error={err}
-                        value={values.phone_number_three}
+                        value={values.phone_number_three || ""}
                         className={
                           errors.phone_number_three &&
                           touched.phone_number_three &&

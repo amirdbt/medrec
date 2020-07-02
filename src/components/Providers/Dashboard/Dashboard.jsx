@@ -16,6 +16,7 @@ import {
 import EditProfile from "./EditProfile";
 import axios from "axios";
 import moment from "moment";
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 const Dashboard = () => {
   const token = localStorage.getItem("token");
@@ -51,6 +52,14 @@ const Dashboard = () => {
         <CircularProgress style={{ marginLeft: "50%" }} />
       ) : (
         <>
+          {hospital.activate === false ? (
+            <Alert severity="warning" style={{ marginBottom: "10px" }}>
+              <AlertTitle>Warning</AlertTitle>
+              Account is not activated, Please contact admin
+            </Alert>
+          ) : (
+            <div></div>
+          )}
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <Card elevation={0}>
@@ -180,7 +189,7 @@ const Dashboard = () => {
                           <Typography>Other Actions</Typography>
                           <hr />
                           <div style={{ marginBottom: "20px" }}></div>
-                          <EditProfile />
+                          <EditProfile hospital={hospital} />
                         </CardContent>
                       </Card>
                     </Grid>
