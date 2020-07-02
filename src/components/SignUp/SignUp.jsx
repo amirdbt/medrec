@@ -82,7 +82,7 @@ const SignUp = () => {
               localStorage.setItem("role", res.data.user.role);
               localStorage.setItem("_id", res.data.user._id);
               setLoading(false);
-              history.push("/settings");
+              history.push("/profile");
             })
             .catch((err) => {
               console.log(err.response.data.error);
