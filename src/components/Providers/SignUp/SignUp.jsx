@@ -15,9 +15,11 @@ import {
   MenuItem,
   Select,
   InputLabel,
+  InputAdornment,
+  IconButton,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import { LocalHospital } from "@material-ui/icons";
+import { LocalHospital, Visibility, VisibilityOff } from "@material-ui/icons";
 import { Alert } from "@material-ui/lab";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -52,6 +54,9 @@ const ProviderSignUp = () => {
   const [err, setErr] = useState(false);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleMouseDownPassword = () => setShowPassword(!showPassword);
   let history = useHistory();
   const classes = useStyles();
 
@@ -284,25 +289,37 @@ const ProviderSignUp = () => {
                     )}
                   </Grid>
                   <Grid item xs={12}>
-                    <Tooltip
-                      title="Password must contain at least 8 characters, one uppercase, one number and one special character, e.g Realmadrid1%"
-                      arrow
-                    >
-                      <TextField
-                        name="password"
-                        label="Password *"
-                        fullWidth
-                        type="password"
-                        variant="outlined"
-                        error={err}
-                        className={
-                          errors.password && touched.password && "error"
-                        }
-                        value={values.password}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                      />
-                    </Tooltip>
+                    <TextField
+                      name="password"
+                      label="Password *"
+                      fullWidth
+                      type={showPassword ? "text" : "password"}
+                      variant="outlined"
+                      error={err}
+                      className={errors.password && touched.password && "error"}
+                      value={values.password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      InputProps={{
+                        // <-- This is where the toggle button is added.
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={handleClickShowPassword}
+                              onMouseDown={handleMouseDownPassword}
+                            >
+                              {showPassword ? (
+                                <Visibility />
+                              ) : (
+                                <VisibilityOff />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+
                     {errors.password && touched.password && (
                       <div className={classes.error}> {errors.password} </div>
                     )}

@@ -14,9 +14,11 @@ import {
   FormControl,
   Select,
   MenuItem,
+  InputAdornment,
+  IconButton,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import { PersonAdd } from "@material-ui/icons";
+import { PersonAdd, Visibility, VisibilityOff } from "@material-ui/icons";
 import { Alert } from "@material-ui/lab";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -50,6 +52,9 @@ const SignUp = () => {
   const [err, setErr] = useState(false);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleMouseDownPassword = () => setShowPassword(!showPassword);
   let history = useHistory();
   const classes = useStyles();
 
@@ -267,13 +272,31 @@ const SignUp = () => {
                       name="password"
                       label="Password *"
                       fullWidth
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       variant="outlined"
                       error={err}
                       className={errors.password && touched.password && "error"}
                       value={values.password}
                       onChange={handleChange}
                       onBlur={handleBlur}
+                      InputProps={{
+                        // <-- This is where the toggle button is added.
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={handleClickShowPassword}
+                              onMouseDown={handleMouseDownPassword}
+                            >
+                              {showPassword ? (
+                                <Visibility />
+                              ) : (
+                                <VisibilityOff />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
                     />
                     {errors.password && touched.password && (
                       <div className={classes.error}> {errors.password} </div>

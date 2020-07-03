@@ -27,6 +27,7 @@ import {
 import axios from "axios";
 import { Link } from "react-router-dom";
 import SearchBox from "../Providers/Patient/SearchBox";
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   head: {
@@ -113,6 +114,7 @@ const Hospitals = () => {
   const [loading, setLoading] = useState(false);
   const [searchField, setSearchField] = useState("");
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [err, setErr] = useState(false);
   const token = localStorage.getItem("token");
   const divRef = React.useRef();
   const emptyRows =
@@ -142,17 +144,27 @@ const Hospitals = () => {
         })
         .catch((err) => {
           console.log(err);
+          setLoading(false);
+          setErr(true);
         });
     };
     fetchUser();
   }, [token]);
-  const filteredHospitals = hospitals.filter((hospital) => {
-    return hospital.providerName
-      .toLowerCase()
-      .includes(searchField.toLowerCase());
-  });
+  const filteredHospitals = hospitals.length
+    ? hospitals.filter((hospital) => {
+        return hospital.providerName
+          .toLowerCase()
+          .includes(searchField.toLowerCase());
+      })
+    : "";
   return (
     <div className="content" ref={divRef}>
+      {err && (
+        <Alert severity="error">
+          <AlertTitle>Error</AlertTitle>
+          There is an error with the server. Please refresh the page.
+        </Alert>
+      )}
       <Typography variant="h5" style={{ marginBottom: "20px" }}>
         Hospitals (Providers)
       </Typography>
@@ -162,88 +174,94 @@ const Hospitals = () => {
       ) : (
         <>
           <Grid container>
-            <Grid item xs={12} sm={12}>
-              <TableContainer component={Paper} elevation={0}>
-                <Table aria-label="customized table">
-                  <TableHead className={classes.head}>
-                    <TableRow>
-                      <TableCell className={classes.text}>Name</TableCell>
+            {filteredHospitals.length ? (
+              <Grid item xs={12} sm={12}>
+                <TableContainer component={Paper} elevation={0}>
+                  <Table aria-label="customized table">
+                    <TableHead className={classes.head}>
+                      <TableRow>
+                        <TableCell className={classes.text}>Name</TableCell>
 
-                      <TableCell className={classes.text}>Email</TableCell>
+                        <TableCell className={classes.text}>Email</TableCell>
 
-                      <TableCell className={classes.text}>State</TableCell>
-                      <TableCell className={classes.text}>
-                        Phone Number
-                      </TableCell>
-
-                      <TableCell className={classes.text}>Actions</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {(rowsPerPage > 0
-                      ? filteredHospitals.slice(
-                          page * rowsPerPage,
-                          page * rowsPerPage + rowsPerPage
-                        )
-                      : filteredHospitals
-                    ).map((hospital) => (
-                      <TableRow key={hospital._id}>
-                        <TableCell>{hospital.providerName}</TableCell>
-
-                        <TableCell>{hospital.email}</TableCell>
-
-                        <TableCell>{hospital.state}</TableCell>
-                        <TableCell>{hospital.phone_number_main}</TableCell>
-
-                        <TableCell>
-                          <Tooltip title="View Hospital">
-                            <Link
-                              to={{
-                                pathname: `/hospitals/${hospital.providerName}`,
-                                state: { hospital },
-                              }}
-                            >
-                              <IconButton aria-label="View hospital">
-                                <ArrowForward />
-                              </IconButton>
-                            </Link>
-                          </Tooltip>
+                        <TableCell className={classes.text}>State</TableCell>
+                        <TableCell className={classes.text}>
+                          Phone Number
                         </TableCell>
-                      </TableRow>
-                    ))}
 
-                    {emptyRows > 0 && (
-                      <TableRow style={{ height: 53 * emptyRows }}>
-                        <TableCell colSpan={6} />
+                        <TableCell className={classes.text}>Actions</TableCell>
                       </TableRow>
-                    )}
-                  </TableBody>
-                  <TableFooter>
-                    <TableRow>
-                      <TablePagination
-                        rowsPerPageOptions={[
-                          5,
-                          10,
-                          25,
-                          { label: "All", value: -1 },
-                        ]}
-                        colSpan={3}
-                        count={filteredHospitals.length}
-                        rowsPerPage={rowsPerPage}
-                        page={page}
-                        SelectProps={{
-                          inputProps: { "aria-label": "rows per page" },
-                          native: true,
-                        }}
-                        onChangePage={handleChangePage}
-                        onChangeRowsPerPage={handleChangeRowsPerPage}
-                        ActionsComponent={TablePaginationActions}
-                      />
-                    </TableRow>
-                  </TableFooter>
-                </Table>
-              </TableContainer>
-            </Grid>
+                    </TableHead>
+                    <TableBody>
+                      {(rowsPerPage > 0
+                        ? filteredHospitals.slice(
+                            page * rowsPerPage,
+                            page * rowsPerPage + rowsPerPage
+                          )
+                        : filteredHospitals
+                      ).map((hospital) => (
+                        <TableRow key={hospital._id}>
+                          <TableCell>{hospital.providerName}</TableCell>
+
+                          <TableCell>{hospital.email}</TableCell>
+
+                          <TableCell>{hospital.state}</TableCell>
+                          <TableCell>{hospital.phone_number_main}</TableCell>
+
+                          <TableCell>
+                            <Tooltip title="View Hospital">
+                              <Link
+                                to={{
+                                  pathname: `/hospitals/${hospital.providerName}`,
+                                  state: { hospital },
+                                }}
+                              >
+                                <IconButton aria-label="View hospital">
+                                  <ArrowForward />
+                                </IconButton>
+                              </Link>
+                            </Tooltip>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+
+                      {emptyRows > 0 && (
+                        <TableRow style={{ height: 53 * emptyRows }}>
+                          <TableCell colSpan={6} />
+                        </TableRow>
+                      )}
+                    </TableBody>
+                    <TableFooter>
+                      <TableRow>
+                        <TablePagination
+                          rowsPerPageOptions={[
+                            5,
+                            10,
+                            25,
+                            { label: "All", value: -1 },
+                          ]}
+                          colSpan={3}
+                          count={filteredHospitals.length}
+                          rowsPerPage={rowsPerPage}
+                          page={page}
+                          SelectProps={{
+                            inputProps: { "aria-label": "rows per page" },
+                            native: true,
+                          }}
+                          onChangePage={handleChangePage}
+                          onChangeRowsPerPage={handleChangeRowsPerPage}
+                          ActionsComponent={TablePaginationActions}
+                        />
+                      </TableRow>
+                    </TableFooter>
+                  </Table>
+                </TableContainer>
+              </Grid>
+            ) : (
+              <Grid item>
+                <Typography variant="h5">No Hospitals</Typography>
+              </Grid>
+            )}
           </Grid>
         </>
       )}

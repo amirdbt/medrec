@@ -94,8 +94,11 @@ const Dashboard = () => {
             <Grid item xs={12} sm={6}>
               <Card elevation={0}>
                 <CardContent>
-                  <Typography>Total Files</Typography>
-                  <Typography variant="h4">0</Typography>
+                  <Typography>Joined</Typography>
+                  <Typography variant="h4">
+                    {" "}
+                    {moment(hospital.createdA).format("DD MMM, YYYY")}
+                  </Typography>
                 </CardContent>
               </Card>
             </Grid>
@@ -119,15 +122,7 @@ const Dashboard = () => {
                               <TableCell>PRID</TableCell>
                               <TableCell>{hospital.PRID}</TableCell>
                             </TableRow>
-                            <TableRow>
-                              <TableCell>Joined</TableCell>
-                              <TableCell>
-                                {" "}
-                                {moment(hospital.createdA).format(
-                                  "DD MMM, YYYY"
-                                )}
-                              </TableCell>
-                            </TableRow>
+
                             <TableRow>
                               <TableCell>Status</TableCell>
                               <TableCell>

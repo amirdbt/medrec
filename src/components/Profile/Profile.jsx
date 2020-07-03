@@ -18,6 +18,7 @@ import { Delete } from "@material-ui/icons";
 import EditProfile from "./EditProfile";
 import axios from "axios";
 import moment from "moment";
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   links: {
@@ -34,6 +35,7 @@ const Profile = ({ match }) => {
   const classes = useStyles();
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState(false);
   let token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -53,6 +55,7 @@ const Profile = ({ match }) => {
       .catch((err) => {
         console.log(err);
         setLoading(false);
+        setErr(true);
       });
   };
 
@@ -63,7 +66,13 @@ const Profile = ({ match }) => {
       ) : (
         <>
           <div style={{ marginTop: "20px" }}></div>
-
+          {err && (
+            <Alert severity="error">
+              <AlertTitle>Error</AlertTitle>
+              There is an error with the server. Please refresh the page.
+            </Alert>
+          )}
+          <div style={{ marginBottom: "10px" }}></div>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TableContainer component={Paper} elevation={0}>
