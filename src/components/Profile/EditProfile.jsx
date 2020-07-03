@@ -133,15 +133,15 @@ const EditProfile = ({ user }) => {
           .min(2, "The last name can not be less than 2"),
         gender: Yup.string().required("Required"),
         email: Yup.string().email("Invalid email").required("Required"),
-        dob: Yup.date(),
-        genotype: Yup.string(),
-        bloodGroup: Yup.string(),
+        dob: Yup.date().nullable(),
+        genotype: Yup.string().nullable(),
+        bloodGroup: Yup.string().nullable(),
         phoneNumber: Yup.string().required("Required"),
-        nextOfKin: Yup.string(),
-        nationality: Yup.string(),
-        stateOfOrigin: Yup.string(),
-        nextOfKin_contact: Yup.string(),
-        nhis_number: Yup.string(),
+        nextOfKin: Yup.string().nullable(),
+        nationality: Yup.string().nullable(),
+        stateOfOrigin: Yup.string().nullable(),
+        nextOfKin_contact: Yup.string().nullable(),
+        nhis_number: Yup.string().nullable(),
       })}
     >
       {(props) => {
