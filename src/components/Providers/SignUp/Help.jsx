@@ -50,10 +50,10 @@ const HelpInfo = () => {
 
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Password must contain at least 8 characters, one uppercase, one
-            number and one special character. <br /> Example: Realmadrid10!@#{" "}
-            <br /> If you are not sure of your password strength, you can use
-            the link below.
+            Password must contain at least 8 characters,one lowercase, one
+            uppercase, one number and one special character. <br /> Example:
+            Realmadrid10!@# <br /> If you are not sure of your password
+            strength, you can use the link below.
             <br />
             <a
               href="https://www.my1login.com/resources/password-strength-test/"
