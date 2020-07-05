@@ -19,6 +19,7 @@ import EditProfile from "./EditProfile";
 import axios from "axios";
 import moment from "moment";
 import { Alert, AlertTitle } from "@material-ui/lab";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   links: {
@@ -57,6 +58,32 @@ const Profile = ({ match }) => {
         setLoading(false);
         setErr(true);
       });
+  };
+
+  let history = useHistory();
+
+  const deactivateAccount = () => {
+    setTimeout(() => {
+      console.log("Deactivating account");
+      setLoading(true);
+      axios
+        .delete(`https://polar-dusk-61658.herokuapp.com/users/deactivate`, {
+          headers: { Authorization: `${token}` },
+        })
+        .then((res) => {
+          console.log(res);
+          localStorage.removeItem("token");
+          localStorage.removeItem("firstName");
+          localStorage.removeItem("lastName");
+          localStorage.removeItem("email");
+          localStorage.removeItem("userName");
+          localStorage.removeItem("_id");
+          history.push("/user-component");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }, 200);
   };
 
   return (
@@ -180,7 +207,19 @@ const Profile = ({ match }) => {
                       <EditProfile user={user} />
                     </Grid>
                     <Grid item>
-                      <Button variant="contained" color="secondary">
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        color="secondary"
+                        onClick={() => {
+                          if (
+                            window.confirm(
+                              "Are you sure you want to deactivate your account?"
+                            )
+                          )
+                            deactivateAccount();
+                        }}
+                      >
                         <Delete style={{ marginRight: "5px" }} /> Deactivate
                         Account
                       </Button>
