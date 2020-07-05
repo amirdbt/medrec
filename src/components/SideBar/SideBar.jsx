@@ -130,6 +130,14 @@ const SideBar = (props) => {
   if (role === "provider" && activate === "true") {
     display = (
       <>
+        <Link className={classes.link} to="/">
+          <ListItem button className={classes.listItems}>
+            <ListItemIcon className={classes.iconColor}>
+              <Dashboard />
+            </ListItemIcon>
+            <Typography variant="h5">Dashboard</Typography>
+          </ListItem>
+        </Link>
         <Link className={classes.link} to="/all-patients">
           <ListItem button className={classes.listItems}>
             <ListItemIcon className={classes.iconColor}>
@@ -168,6 +176,14 @@ const SideBar = (props) => {
   } else {
     display = (
       <>
+        <Link className={classes.link} to="/">
+          <ListItem button className={classes.listItems}>
+            <ListItemIcon className={classes.iconColor}>
+              <Dashboard />
+            </ListItemIcon>
+            <Typography variant="h5">Dashboard</Typography>
+          </ListItem>
+        </Link>
         <Link className={classes.link} to="#">
           <ListItem button className={classes.listItems} disabled>
             <ListItemIcon className={classes.iconColor}>
@@ -219,14 +235,6 @@ const SideBar = (props) => {
 
       <Divider />
       <List>
-        <Link className={classes.link} to="/">
-          <ListItem button className={classes.listItems}>
-            <ListItemIcon className={classes.iconColor}>
-              <Dashboard />
-            </ListItemIcon>
-            <Typography variant="h5">Dashboard</Typography>
-          </ListItem>
-        </Link>
         {role === "user" && (
           <>
             <Link className={classes.link} to="/profile">

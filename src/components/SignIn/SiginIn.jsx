@@ -74,7 +74,7 @@ const SiginIn = () => {
               localStorage.setItem("role", res.data.user.role);
               localStorage.setItem("_id", res.data.user._id);
               setLoading(false);
-              history.push("/", { user: res.data.user });
+              history.push("/profile", { user: res.data.user });
             })
             .catch((err) => {
               console.log(err.response.data.error);
