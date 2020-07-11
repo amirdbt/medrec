@@ -67,15 +67,9 @@ const ProviderSiginIn = () => {
             )
             .then((res) => {
               console.log(res.data);
-              localStorage.setItem("token", res.data.token);
-              localStorage.setItem(
-                "providerName",
-                res.data.provider.providerName
-              );
-              localStorage.setItem("role", res.data.provider.role);
-              localStorage.setItem("activate", res.data.provider.activate);
+
               setLoading(false);
-              history.push("/", { user: res.data.provider });
+              history.push("/otp-verify");
             })
             .catch((err) => {
               console.log(err.response.data.error);

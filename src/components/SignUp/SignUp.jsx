@@ -90,6 +90,7 @@ const SignUp = () => {
               history.push("/profile");
             })
             .catch((err) => {
+              console.log(err);
               console.log(err.response.data.error);
               setMessage(err.response.data.error);
               setErr(true);

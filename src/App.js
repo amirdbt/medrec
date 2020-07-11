@@ -20,6 +20,8 @@ import Hospitals from "./components/Profile/Hospitals";
 import Files from "./components/Profile/Files";
 import SharedRecordsFile from "./components/Providers/Patient/SharedRecordsFile";
 import ShareRecordsFile from "./components/Profile/ShareRecordsFile";
+import OTPVerification from "./components/SignIn/OTP";
+import OTPProviderVerification from "./components/Providers/SignIn/OTP";
 import { Switch, Route, withRouter } from "react-router-dom";
 
 const Main = withRouter(({ location }) => {
@@ -31,7 +33,9 @@ const Main = withRouter(({ location }) => {
         location.pathname !== "/providers-signup" &&
         location.pathname !== "/providers-signin" &&
         location.pathname !== "/user-component" &&
-        location.pathname !== "/provider-component" && (
+        location.pathname !== "/provider-component" &&
+        location.pathname !== "/otp-verify" &&
+        location.pathname !== "/otp-verification" && (
           <>
             <SideBar />
           </>
@@ -43,6 +47,8 @@ const Main = withRouter(({ location }) => {
         <AuthGuard path="/share-records/:id" component={ShareRecordsFile} />
         <Route path="/forgotpassword" component={ForgotPassword} />
         <Route path="/signup" component={SignUp} />
+        <Route path="/otp-verification" component={OTPVerification} />
+        <Route path="/otp-verify" component={OTPProviderVerification} />
         <Route path="/providers-signup" component={ProviderSignUp} />
         <Route path="/user-component" component={UserSignComponent} />
         <Route path="/provider-component" component={ProviderSignComponent} />

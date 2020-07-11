@@ -4,14 +4,16 @@ const jwtDecode = require("jwt-decode");
 
 const CheckToken = () => {
   let token = localStorage.getItem("token");
-  let decodedToken = jwtDecode(token);
+  if (token) {
+    let decodedToken = jwtDecode(token);
 
-  if (decodedToken.exp < new Date().getTime() / 1000) {
-    console.log("Expired");
-    return false;
-  } else {
-    console.log("NOPE");
-    return true;
+    if (decodedToken.exp < new Date().getTime() / 1000) {
+      console.log("Expired");
+      return false;
+    } else {
+      console.log("NOPE");
+      return true;
+    }
   }
 };
 

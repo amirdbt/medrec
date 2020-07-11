@@ -19,12 +19,14 @@ import {
   CardContent,
   Button,
 } from "@material-ui/core";
-import { Delete, Update } from "@material-ui/icons";
+import { Delete } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Files from "./Files";
 import moment from "moment";
 import UpdateRecord from "./UpdateRecord";
+import { useHistory } from "react-router-dom";
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   links: {
@@ -67,13 +69,16 @@ const ViewRecord = ({ match, location }) => {
   const classes = useStyles();
   const [record, setRecord] = useState({});
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [severity, setSeverity] = useState("success");
+  const [error, setError] = useState(false);
+  const token = localStorage.getItem("token");
   console.log(location.state.username);
   useEffect(() => {
     fetchSingleRecord();
   }, []);
 
   const fetchSingleRecord = () => {
-    const token = localStorage.getItem("token");
     setLoading(true);
     axios
       .post(
@@ -90,6 +95,28 @@ const ViewRecord = ({ match, location }) => {
       })
       .catch((error) => {
         console.log(error);
+      });
+  };
+
+  let history = useHistory();
+  const deleteRecord = (record_id) => {
+    axios
+      .delete(`https://polar-dusk-61658.herokuapp.com/records/${record_id}`, {
+        headers: { Authorization: `${token}` },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setMessage("Record deleted successfully.");
+        setError(true);
+        setTimeout(() => {
+          history.push(`/all-patients/${location.state.username}`);
+        }, 1000);
+      })
+      .catch((error) => {
+        console.log(error);
+        setMessage("Record could not be deleted, Try again");
+        setError(true);
+        setSeverity("error");
       });
   };
   const [value, setValue] = React.useState(0);
@@ -117,6 +144,13 @@ const ViewRecord = ({ match, location }) => {
               Record
             </Link>
           </Breadcrumbs>
+          {error ? (
+            <Alert style={{ marginTop: "20px" }} severity={severity}>
+              {message}
+            </Alert>
+          ) : (
+            <div></div>
+          )}
           <div style={{ marginTop: "20px" }}></div>
           <AppBar
             position="static"
@@ -218,9 +252,10 @@ const ViewRecord = ({ match, location }) => {
                           onClick={() => {
                             if (
                               window.confirm(
-                                "Are you sure you want to remove this patient?"
+                                "Are you sure you want to delete this record?"
                               )
                             );
+                            deleteRecord(record._id);
                           }}
                         >
                           <Delete /> Delete Record
