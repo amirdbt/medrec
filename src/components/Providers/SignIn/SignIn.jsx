@@ -12,7 +12,13 @@ import {
   Container,
   InputAdornment,
   IconButton,
+  Card,
+  CardContent,
+  CardActions,
+  Collapse,
 } from "@material-ui/core";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import clsx from "clsx";
 import { useHistory } from "react-router-dom";
 import { Alert } from "@material-ui/lab";
 import { LocalHospital, Visibility, VisibilityOff } from "@material-ui/icons";
@@ -41,6 +47,16 @@ const useStyles = makeStyles((theme) => ({
   error: {
     color: "rgb(235, 54, 54)",
   },
+  expand: {
+    transform: "rotate(0deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
+      duration: theme.transitions.duration.shortest,
+    }),
+  },
+  expandOpen: {
+    transform: "rotate(180deg)",
+  },
 }));
 
 const ProviderSiginIn = () => {
@@ -52,6 +68,11 @@ const ProviderSiginIn = () => {
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
   let history = useHistory();
   const classes = useStyles();
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
   return (
     <Formik
@@ -206,6 +227,30 @@ const ProviderSiginIn = () => {
                       </Link>
                     </Grid>
                   </Grid>
+                  <div style={{ marginTop: "10px" }}></div>
+                  <Card elevation={0}>
+                    <CardActions disableSpacing>
+                      <Typography variant="body1">Contact Us</Typography>
+                      <IconButton
+                        className={clsx(classes.expand, {
+                          [classes.expandOpen]: expanded,
+                        })}
+                        onClick={handleExpandClick}
+                        aria-expanded={expanded}
+                        aria-label="show more"
+                      >
+                        <ExpandMoreIcon />
+                      </IconButton>
+                    </CardActions>
+                    <Collapse in={expanded} timeout="auto" unmountOnExit>
+                      <CardContent>
+                        <Typography paragraph>
+                          Best Team In The World
+                        </Typography>
+                        <Typography paragraph>Real Madrid</Typography>
+                      </CardContent>
+                    </Collapse>
+                  </Card>
                 </div>
               </form>
             </div>

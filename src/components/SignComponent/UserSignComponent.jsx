@@ -39,13 +39,11 @@ function a11yProps(index) {
 }
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "50%",
-    marginLeft: "24%",
-  },
   tabs: {
-    marginLeft: "24%",
-    // marginBottom: "-20px",
+    marginLeft: "37%",
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: "0%",
+    },
   },
 }));
 const SignInComponent = () => {
@@ -55,8 +53,8 @@ const SignInComponent = () => {
     setValue(newValue);
   };
   return (
-    <div className={classes.root}>
-      <AppBar position="static" color="default">
+    <div>
+      <AppBar position="static" color="default" elevation={0}>
         <Tabs
           value={value}
           onChange={handleChange}
