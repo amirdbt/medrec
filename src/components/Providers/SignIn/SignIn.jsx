@@ -90,7 +90,9 @@ const ProviderSiginIn = () => {
               console.log(res.data);
 
               setLoading(false);
-              history.push("/otp-verify");
+              history.push("/otp-verify", {
+                providerName: res.data.providerName,
+              });
             })
             .catch((err) => {
               console.log(err.response.data.error);

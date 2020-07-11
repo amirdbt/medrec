@@ -9,7 +9,7 @@ import {
   CssBaseline,
   Container,
 } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { Alert } from "@material-ui/lab";
 import { SupervisorAccount } from "@material-ui/icons";
 import { Formik } from "formik";
@@ -45,10 +45,13 @@ const OTPVerification = () => {
   const [loading, setLoading] = useState(false);
   let history = useHistory();
   const classes = useStyles();
-
+  const location = useLocation();
+  // console.log(location.state);
+  const userName = location.state.userName;
+  console.log(userName);
   return (
     <Formik
-      initialValues={{ userName: "", OTP: "" }}
+      initialValues={{ userName, OTP: "" }}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           console.log("OTP  in", values);
@@ -117,23 +120,6 @@ const OTPVerification = () => {
 
               <form className={classes.form} onSubmit={handleSubmit}>
                 <div className={classes.textfields}>
-                  <TextField
-                    name="userName"
-                    label="Username*"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                    type="text"
-                    error={err}
-                    value={values.userName}
-                    className={errors.userName && touched.userName && "error"}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                  {errors.userName && touched.userName && (
-                    <div className={classes.error}> {errors.userName} </div>
-                  )}
-
                   <TextField
                     name="OTP"
                     label="OTP*"

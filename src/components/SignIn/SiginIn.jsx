@@ -87,7 +87,9 @@ const SiginIn = () => {
             .then((res) => {
               console.log(res.data);
               setLoading(false);
-              history.push("/otp-verification");
+              history.push("/otp-verification", {
+                userName: res.data.userName,
+              });
             })
             .catch((err) => {
               console.log(err.response.data.error);

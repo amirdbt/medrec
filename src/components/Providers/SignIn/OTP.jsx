@@ -9,7 +9,7 @@ import {
   CssBaseline,
   Container,
 } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { Alert } from "@material-ui/lab";
 import { LocalHospital } from "@material-ui/icons";
 import { Formik } from "formik";
@@ -45,10 +45,13 @@ const OTPProviderVerification = () => {
   const [loading, setLoading] = useState(false);
   let history = useHistory();
   const classes = useStyles();
-
+  const location = useLocation();
+  // console.log(location.state);
+  const providerName = location.state.providerName;
+  console.log(providerName);
   return (
     <Formik
-      initialValues={{ providerName: "", OTP: "" }}
+      initialValues={{ providerName, OTP: "" }}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           console.log("OTP  in", values);
@@ -118,25 +121,6 @@ const OTPProviderVerification = () => {
 
               <form className={classes.form} onSubmit={handleSubmit}>
                 <div className={classes.textfields}>
-                  <TextField
-                    name="providerName"
-                    label="providerName*"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                    type="text"
-                    error={err}
-                    value={values.providerName}
-                    className={
-                      errors.providerName && touched.providerName && "error"
-                    }
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                  {errors.providerName && touched.providerName && (
-                    <div className={classes.error}> {errors.providerName} </div>
-                  )}
-
                   <TextField
                     name="OTP"
                     label="OTP*"
