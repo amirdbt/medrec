@@ -18,12 +18,15 @@ import axios from "axios";
 import ViewRecordDetails from "../../Profile/Info";
 import SearchBox from "./SearchBox";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
     width: "20%",
     marginRight: "20px",
     marginTop: "20px",
+    [theme.breakpoints.down("sm")]: {
+      width: "80%",
+    },
   },
   media: {
     height: 0,
@@ -33,7 +36,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexWrap: "wrap",
   },
-});
+}));
 
 const SharedRecords = ({ MRID, username }) => {
   const [patientRecords, setPatientRecords] = useState([]);

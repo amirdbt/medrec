@@ -19,12 +19,15 @@ import { Visibility } from "@material-ui/icons";
 import axios from "axios";
 import SearchBox from "../Providers/Patient/SearchBox";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     marginRight: "20px",
     marginTop: "20px",
     maxWidth: 345,
     width: "17%",
+    [theme.breakpoints.down("sm")]: {
+      width: "55%",
+    },
   },
   details: {
     display: "flex",
@@ -38,7 +41,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexWrap: "wrap",
   },
-});
+}));
 
 const Records = ({ hospital }) => {
   const classes = useStyles();

@@ -19,12 +19,15 @@ import ViewRecordDetails from "../Profile/Info";
 import SharedHospitals from "./SharedHospitals";
 import SearchBox from "../Providers/Patient/SearchBox";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
     width: "17%",
     marginRight: "20px",
     marginTop: "20px",
+    [theme.breakpoints.down("sm")]: {
+      width: "55%",
+    },
   },
   media: {
     height: 0,
@@ -34,7 +37,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexWrap: "wrap",
   },
-});
+}));
 
 const ShareRecords = () => {
   let token = localStorage.getItem("token");
