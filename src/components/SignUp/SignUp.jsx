@@ -322,7 +322,7 @@ const SignUp = () => {
                 )}
                 <Grid container>
                   <Grid item xs>
-                    <Link href="/provider-component" variant="body2">
+                    <Link href="/providers" variant="body2">
                       Provider? Sign up
                     </Link>
                   </Grid>

@@ -32,8 +32,8 @@ const Main = withRouter(({ location }) => {
         location.pathname !== "/forgotpassword" &&
         location.pathname !== "/providers-signup" &&
         location.pathname !== "/providers-signin" &&
-        location.pathname !== "/user-component" &&
-        location.pathname !== "/provider-component" &&
+        location.pathname !== "/users" &&
+        location.pathname !== "/providers" &&
         location.pathname !== "/otp-verify" &&
         location.pathname !== "/otp-verification" && (
           <>
@@ -50,8 +50,8 @@ const Main = withRouter(({ location }) => {
         <Route path="/otp-verification" component={OTPVerification} />
         <Route path="/otp-verify" component={OTPProviderVerification} />
         <Route path="/providers-signup" component={ProviderSignUp} />
-        <Route path="/user-component" component={UserSignComponent} />
-        <Route path="/provider-component" component={ProviderSignComponent} />
+        <Route path="/users" component={UserSignComponent} />
+        <Route path="/providers" component={ProviderSignComponent} />
         <AuthGuard path="/create-patient" component={CreatePatient} />
         <AuthGuard path="/add-patient" component={AddPatient} />
         <AuthGuard path="/edit-settings" component={EditSettings} />

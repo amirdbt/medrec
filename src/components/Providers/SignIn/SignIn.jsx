@@ -224,7 +224,7 @@ const ProviderSiginIn = () => {
                       </Link>
                     </Grid>
                     <Grid item>
-                      <Link href="/user-component" variant="body2">
+                      <Link href="/users" variant="body2">
                         User? Sign in
                       </Link>
                     </Grid>

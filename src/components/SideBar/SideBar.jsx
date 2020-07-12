@@ -312,7 +312,7 @@ const SideBar = (props) => {
                   <MenuItem onClick={handleClose}>Profile</MenuItem>
                 </Link>
               )}
-              <Link to="/user-component" className={classes.link1}>
+              <Link to="/users" className={classes.link1}>
                 <MenuItem onClick={logout}>Log out</MenuItem>
               </Link>
             </Menu>
