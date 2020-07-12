@@ -13,12 +13,15 @@ import {
 } from "@material-ui/core";
 import { Visibility } from "@material-ui/icons";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
     width: "10%",
     marginRight: "20px",
     marginTop: "20px",
+    [theme.breakpoints.down("sm")]: {
+      width: "40%",
+    },
   },
   media: {
     height: 120,
