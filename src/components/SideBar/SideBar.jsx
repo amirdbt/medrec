@@ -55,6 +55,11 @@ const useStyles = makeStyles((theme) => ({
   },
   listItems: {
     padding: "15px",
+    "&:hover": {
+      backgroundColor: "#fff ",
+      color: "#000",
+    },
+    borderBottom: "1px solid #8d8d8d",
   },
   iconColor: {
     color: "#bcbcbc",
@@ -90,6 +95,9 @@ const useStyles = makeStyles((theme) => ({
   link1: {
     textDecoration: "none",
     color: "#000000",
+  },
+  listText: {
+    fontSize: "20px",
   },
 }));
 
@@ -135,7 +143,9 @@ const SideBar = (props) => {
             <ListItemIcon className={classes.iconColor}>
               <Dashboard />
             </ListItemIcon>
-            <Typography variant="h5">Dashboard</Typography>
+            <Typography variant="h5" className={classes.listText}>
+              Dashboard
+            </Typography>
           </ListItem>
         </Link>
         <Link className={classes.link} to="/all-patients">
@@ -143,7 +153,9 @@ const SideBar = (props) => {
             <ListItemIcon className={classes.iconColor}>
               <Accessibility />
             </ListItemIcon>
-            <Typography variant="h5">All Patients</Typography>
+            <Typography variant="h5" className={classes.listText}>
+              All Patients
+            </Typography>
           </ListItem>
         </Link>
         <Link className={classes.link} to="/create-patient">
@@ -151,7 +163,9 @@ const SideBar = (props) => {
             <ListItemIcon className={classes.iconColor}>
               <AddBox />
             </ListItemIcon>
-            <Typography variant="h5">Create Patient</Typography>
+            <Typography variant="h5" className={classes.listText}>
+              Create Patient
+            </Typography>
           </ListItem>
         </Link>
         <Link className={classes.link} to="/add-patient">
@@ -159,7 +173,9 @@ const SideBar = (props) => {
             <ListItemIcon className={classes.iconColor}>
               <AddCircleOutline />
             </ListItemIcon>
-            <Typography variant="h5">Add Patient</Typography>
+            <Typography variant="h5" className={classes.listText}>
+              Add Patient
+            </Typography>
           </ListItem>
         </Link>
 
@@ -181,7 +197,9 @@ const SideBar = (props) => {
             <ListItemIcon className={classes.iconColor}>
               <Dashboard />
             </ListItemIcon>
-            <Typography variant="h5">Dashboard</Typography>
+            <Typography variant="h5" className={classes.listText}>
+              Dashboard
+            </Typography>
           </ListItem>
         </Link>
         <Link className={classes.link} to="#">
@@ -189,7 +207,9 @@ const SideBar = (props) => {
             <ListItemIcon className={classes.iconColor}>
               <Accessibility />
             </ListItemIcon>
-            <Typography variant="h5">All Patients</Typography>
+            <Typography variant="h5" className={classes.listText}>
+              All Patients
+            </Typography>
           </ListItem>
         </Link>
         <Link className={classes.link} to="#">
@@ -197,7 +217,9 @@ const SideBar = (props) => {
             <ListItemIcon className={classes.iconColor}>
               <AddBox />
             </ListItemIcon>
-            <Typography variant="h5">Create Patient</Typography>
+            <Typography variant="h5" className={classes.listText}>
+              Create Patient
+            </Typography>
           </ListItem>
         </Link>
         <Link className={classes.link} to="#">
@@ -205,7 +227,9 @@ const SideBar = (props) => {
             <ListItemIcon className={classes.iconColor}>
               <AddCircleOutline />
             </ListItemIcon>
-            <Typography variant="h5">Add Patient</Typography>
+            <Typography variant="h5" className={classes.listText}>
+              Add Patient
+            </Typography>
           </ListItem>
         </Link>
 
@@ -242,7 +266,9 @@ const SideBar = (props) => {
                 <ListItemIcon className={classes.iconColor}>
                   <AccountCircle />
                 </ListItemIcon>
-                <Typography variant="h5">Profile</Typography>
+                <Typography variant="h5" className={classes.listText}>
+                  Profile
+                </Typography>
               </ListItem>
             </Link>
             <Link className={classes.link} to="/share-records">
@@ -250,7 +276,9 @@ const SideBar = (props) => {
                 <ListItemIcon className={classes.iconColor}>
                   <Share />
                 </ListItemIcon>
-                <Typography variant="h5">Shared Records</Typography>
+                <Typography variant="h5" className={classes.listText}>
+                  Shared Records
+                </Typography>
               </ListItem>
             </Link>
             <Link className={classes.link} to="/hospitals">
@@ -258,7 +286,9 @@ const SideBar = (props) => {
                 <ListItemIcon className={classes.iconColor}>
                   <LocalHospital />
                 </ListItemIcon>
-                <Typography variant="h5">Hospitals</Typography>
+                <Typography variant="h5" className={classes.listText}>
+                  Hospitals
+                </Typography>
               </ListItem>
             </Link>
           </>
