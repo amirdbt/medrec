@@ -74,8 +74,12 @@ const OTPVerification = () => {
               history.push("/profile");
             })
             .catch((err) => {
-              console.log(err.response.data);
-              setMessage(err.response.data);
+              // console.log(err.response.data);
+              if (err.response) {
+                setMessage(err.response.data);
+              } else {
+                setMessage("Connection problem");
+              }
               setLoading(false);
               setErr(true);
             });

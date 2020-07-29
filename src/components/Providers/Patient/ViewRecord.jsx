@@ -27,6 +27,7 @@ import moment from "moment";
 import UpdateRecord from "./UpdateRecord";
 import { useHistory } from "react-router-dom";
 import { Alert, AlertTitle } from "@material-ui/lab";
+import DeleteRecord from "./DeleteRecord";
 
 const useStyles = makeStyles((theme) => ({
   links: {
@@ -245,8 +246,11 @@ const ViewRecord = ({ match, location }) => {
                         <UpdateRecord record={record} />
                       </Grid>
                       <Grid item>
-                        {" "}
-                        <Button
+                        <DeleteRecord
+                          record_id={record._id}
+                          location={location}
+                        />
+                        {/* <Button
                           variant="contained"
                           color="secondary"
                           onClick={() => {
@@ -259,7 +263,7 @@ const ViewRecord = ({ match, location }) => {
                           }}
                         >
                           <Delete /> Delete Record
-                        </Button>
+                        </Button> */}
                       </Grid>
                     </Grid>
                   </CardContent>

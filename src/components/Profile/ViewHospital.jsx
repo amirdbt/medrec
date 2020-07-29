@@ -19,9 +19,8 @@ import {
   Button,
 } from "@material-ui/core";
 import Records from "./Records";
-import { Delete } from "@material-ui/icons";
-import { Link, useHistory } from "react-router-dom";
-import axios from "axios";
+import { Link } from "react-router-dom";
+import RemoveHospital from "./RemoveHospital";
 
 const useStyles = makeStyles((theme) => ({
   links: {
@@ -71,25 +70,25 @@ const ViewHospital = ({ match, location }) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  let history = useHistory();
-  let token = localStorage.getItem("token");
-  const removeHospital = (providername) => {
-    axios
-      .patch(
-        `https://polar-dusk-61658.herokuapp.com/users/remove_provider/${providername}`,
-        "",
-        {
-          headers: { Authorization: `${token}` },
-        }
-      )
-      .then((res) => {
-        console.log(res);
-        history.push("/hospitals");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // let history = useHistory();
+  // let token = localStorage.getItem("token");
+  // const removeHospital = (providername) => {
+  //   axios
+  //     .patch(
+  //       `https://polar-dusk-61658.herokuapp.com/users/remove_provider/${providername}`,
+  //       "",
+  //       {
+  //         headers: { Authorization: `${token}` },
+  //       }
+  //     )
+  //     .then((res) => {
+  //       console.log(res);
+  //       history.push("/hospitals");
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
   return (
     <div className="content" ref={divRef}>
       <Breadcrumbs aria-label="breadcrumb">
@@ -185,7 +184,8 @@ const ViewHospital = ({ match, location }) => {
                   that what has been deleted can never be brought back.
                 </Typography>
                 <div style={{ marginBottom: "20px" }}></div>
-                <Button
+                <RemoveHospital providername={hospital.providerName} />
+                {/* <Button
                   variant="contained"
                   color="secondary"
                   onClick={() => {
@@ -198,7 +198,7 @@ const ViewHospital = ({ match, location }) => {
                   }}
                 >
                   <Delete /> Remove Hospital
-                </Button>
+                </Button> */}
               </CardContent>
             </Card>
           </Grid>

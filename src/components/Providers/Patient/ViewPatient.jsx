@@ -17,13 +17,12 @@ import {
   Paper,
   Card,
   CardContent,
-  Button,
 } from "@material-ui/core";
-import { Delete } from "@material-ui/icons";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Records from "./Records";
 import SharedRecords from "./SharedRecords";
+import RemovePatient from "./RemovePatient";
 
 const useStyles = makeStyles((theme) => ({
   links: {
@@ -90,26 +89,6 @@ const ViewPatient = ({ match }) => {
     setPatient(response.data.patient);
     setLoading(false);
     console.log(response.data.patient);
-  };
-
-  let history = useHistory();
-
-  const removePatient = (username) => {
-    axios
-      .patch(
-        `https://polar-dusk-61658.herokuapp.com/providers/remove_patient/${username}`,
-        "",
-        {
-          headers: { Authorization: `${token}` },
-        }
-      )
-      .then((res) => {
-        console.log(res);
-        history.push("/all-patients");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
 
   return (
@@ -261,20 +240,7 @@ const ViewPatient = ({ match }) => {
                       be brought back.
                     </Typography>
                     <div style={{ marginBottom: "20px" }}></div>
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      onClick={() => {
-                        if (
-                          window.confirm(
-                            "Are you sure you want to remove this patient?"
-                          )
-                        )
-                          removePatient(patient.userName);
-                      }}
-                    >
-                      <Delete /> Remove Account
-                    </Button>
+                    <RemovePatient username={patient.userName} />
                   </CardContent>
                 </Card>
               </Grid>
