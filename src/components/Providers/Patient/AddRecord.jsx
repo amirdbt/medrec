@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AddRecord = ({ user_id }) => {
+const AddRecord = ({ user_id, fetchRecords }) => {
   const [open, setOpen] = useState(false);
   const [al, setAl] = useState(false);
   const [err, setErr] = useState(false);
@@ -75,9 +75,7 @@ const AddRecord = ({ user_id }) => {
               setAl(true);
               setLoading(false);
               resetForm({});
-              setTimeout(() => {
-                window.location.reload(false);
-              }, 700);
+              fetchRecords();
             })
             .catch((err) => {
               console.log(err.response.data.error);
@@ -86,9 +84,9 @@ const AddRecord = ({ user_id }) => {
               setAl(true);
               setSeverity("error");
               setLoading(false);
-              setTimeout(() => {
-                window.location.reload(false);
-              }, 700);
+              // setTimeout(() => {
+              //   window.location.reload(false);
+              // }, 700);
             });
           setSubmitting(false);
         }, 200);

@@ -88,7 +88,7 @@ const Records = ({ user_id, MRID, username }) => {
         <>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={4}>
-              <AddRecord user_id={user_id} />
+              <AddRecord fetchRecords={fetchRecords} user_id={user_id} />
             </Grid>
             <Grid item xs={12} sm={4}>
               <SearchBox place="Search record" searchChange={searchChange} />

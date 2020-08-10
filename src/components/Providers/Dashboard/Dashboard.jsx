@@ -184,7 +184,10 @@ const Dashboard = () => {
                           <Typography>Other Actions</Typography>
                           <hr />
                           <div style={{ marginBottom: "20px" }}></div>
-                          <EditProfile hospital={hospital} />
+                          <EditProfile
+                            fetchHospital={fetchHospital}
+                            hospital={hospital}
+                          />
                         </CardContent>
                       </Card>
                     </Grid>

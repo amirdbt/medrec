@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const EditProfile = ({ hospital }) => {
+const EditProfile = ({ hospital, fetchHospital }) => {
   console.log(hospital);
   const [open, setOpen] = useState(false);
   const [al, setAl] = useState(false);
@@ -84,9 +84,7 @@ const EditProfile = ({ hospital }) => {
               setAl(true);
               setLoading(false);
               resetForm({});
-              setTimeout(() => {
-                window.location.reload(false);
-              }, 1000);
+              fetchHospital();
             })
             .catch((err) => {
               console.log(err.response.data.error);
@@ -100,8 +98,7 @@ const EditProfile = ({ hospital }) => {
         }, 200);
       }}
       validationSchema={Yup.object().shape({
-        address: Yup.string()
-        .min(2, "The address can not be less than 2"),
+        address: Yup.string().min(2, "The address can not be less than 2"),
 
         email: Yup.string().email("Invalid email"),
         state: Yup.string(),

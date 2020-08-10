@@ -17,16 +17,13 @@ import {
   Paper,
   Card,
   CardContent,
-  Button,
 } from "@material-ui/core";
-import { Delete } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Files from "./Files";
 import moment from "moment";
 import UpdateRecord from "./UpdateRecord";
-import { useHistory } from "react-router-dom";
-import { Alert, AlertTitle } from "@material-ui/lab";
+import { Alert } from "@material-ui/lab";
 import DeleteRecord from "./DeleteRecord";
 
 const useStyles = makeStyles((theme) => ({
@@ -99,27 +96,6 @@ const ViewRecord = ({ match, location }) => {
       });
   };
 
-  let history = useHistory();
-  const deleteRecord = (record_id) => {
-    axios
-      .delete(`https://polar-dusk-61658.herokuapp.com/records/${record_id}`, {
-        headers: { Authorization: `${token}` },
-      })
-      .then((res) => {
-        console.log(res.data);
-        setMessage("Record deleted successfully.");
-        setError(true);
-        setTimeout(() => {
-          history.push(`/all-patients/${location.state.username}`);
-        }, 1000);
-      })
-      .catch((error) => {
-        console.log(error);
-        setMessage("Record could not be deleted, Try again");
-        setError(true);
-        setSeverity("error");
-      });
-  };
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -243,27 +219,16 @@ const ViewRecord = ({ match, location }) => {
                     <Grid container spacing={6}>
                       <Grid item>
                         {" "}
-                        <UpdateRecord record={record} />
+                        <UpdateRecord
+                          fetchSingleRecord={fetchSingleRecord}
+                          record={record}
+                        />
                       </Grid>
                       <Grid item>
                         <DeleteRecord
                           record_id={record._id}
                           location={location}
                         />
-                        {/* <Button
-                          variant="contained"
-                          color="secondary"
-                          onClick={() => {
-                            if (
-                              window.confirm(
-                                "Are you sure you want to delete this record?"
-                              )
-                            );
-                            deleteRecord(record._id);
-                          }}
-                        >
-                          <Delete /> Delete Record
-                        </Button> */}
                       </Grid>
                     </Grid>
                   </CardContent>

@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UpdateRecord = ({ record }) => {
+const UpdateRecord = ({ record, fetchSingleRecord }) => {
   console.log(record);
   const [open, setOpen] = useState(false);
   const [al, setAl] = useState(false);
@@ -76,9 +76,10 @@ const UpdateRecord = ({ record }) => {
               setAl(true);
               setLoading(false);
               resetForm({});
-              setTimeout(() => {
-                window.location.reload(false);
-              }, 1000);
+              fetchSingleRecord();
+              // setTimeout(() => {
+              //   window.location.reload(false);
+              // }, 1000);
             })
             .catch((err) => {
               console.log(err.response.data.error);
