@@ -177,7 +177,7 @@ const Profile = ({ match }) => {
                   <div style={{ marginBottom: "20px" }}></div>
                   <Grid container spacing={3}>
                     <Grid item>
-                      <EditProfile user={user} />
+                      <EditProfile fetchUser={fetchUser} user={user} />
                     </Grid>
                     <Grid item>
                       <DeactivateAccount />
