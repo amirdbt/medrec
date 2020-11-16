@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory,useLocation } from "react-router-dom";
 import {
   Divider,
   Drawer,
@@ -55,11 +55,14 @@ const useStyles = makeStyles((theme) => ({
   },
   listItems: {
     padding: "15px",
+    color: "#b6c0e7",
+    borderRight: "5px solid transparent",
+
     "&:hover": {
-      backgroundColor: "#fff ",
-      color: "#000",
+      // backgroundColor: "#fff ",
+      color: "#fff",
     },
-    borderBottom: "1px solid #8d8d8d",
+    // borderBottom: "1px solid #8d8d8d",
   },
   iconColor: {
     color: "#bcbcbc",
@@ -126,6 +129,8 @@ const SideBar = (props) => {
     setAnchorEl(event.currentTarget);
   };
 
+  const location = useLocation()
+  const {pathname} = location
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -139,7 +144,7 @@ const SideBar = (props) => {
     display = (
       <>
         <Link className={classes.link} to="/">
-          <ListItem button className={classes.listItems}>
+          <ListItem button className={classes.listItems} selected={"/" === pathname}>
             <ListItemIcon className={classes.iconColor}>
               <Dashboard />
             </ListItemIcon>
@@ -149,7 +154,7 @@ const SideBar = (props) => {
           </ListItem>
         </Link>
         <Link className={classes.link} to="/all-patients">
-          <ListItem button className={classes.listItems}>
+          <ListItem button className={classes.listItems} selected={"/all-patients" === pathname}>
             <ListItemIcon className={classes.iconColor}>
               <Accessibility />
             </ListItemIcon>
@@ -159,7 +164,7 @@ const SideBar = (props) => {
           </ListItem>
         </Link>
         <Link className={classes.link} to="/create-patient">
-          <ListItem button className={classes.listItems}>
+          <ListItem button className={classes.listItems} selected={"/create-patient" === pathname}>
             <ListItemIcon className={classes.iconColor}>
               <AddBox />
             </ListItemIcon>
@@ -169,7 +174,7 @@ const SideBar = (props) => {
           </ListItem>
         </Link>
         <Link className={classes.link} to="/add-patient">
-          <ListItem button className={classes.listItems}>
+          <ListItem button className={classes.listItems} selected={"/add-patient" === pathname}>
             <ListItemIcon className={classes.iconColor}>
               <AddCircleOutline />
             </ListItemIcon>
@@ -193,7 +198,7 @@ const SideBar = (props) => {
     display = (
       <>
         <Link className={classes.link} to="/">
-          <ListItem button className={classes.listItems}>
+          <ListItem button className={classes.listItems} selected={"/" === pathname}>
             <ListItemIcon className={classes.iconColor}>
               <Dashboard />
             </ListItemIcon>
@@ -262,7 +267,7 @@ const SideBar = (props) => {
         {role === "user" && (
           <>
             <Link className={classes.link} to="/profile">
-              <ListItem button className={classes.listItems}>
+              <ListItem button className={classes.listItems} selected={"/profile" === pathname}>
                 <ListItemIcon className={classes.iconColor}>
                   <AccountCircle />
                 </ListItemIcon>
@@ -272,7 +277,7 @@ const SideBar = (props) => {
               </ListItem>
             </Link>
             <Link className={classes.link} to="/share-records">
-              <ListItem button className={classes.listItems}>
+              <ListItem button className={classes.listItems} selected={"/share-records" === pathname}>
                 <ListItemIcon className={classes.iconColor}>
                   <Share />
                 </ListItemIcon>
@@ -281,8 +286,8 @@ const SideBar = (props) => {
                 </Typography>
               </ListItem>
             </Link>
-            <Link className={classes.link} to="/hospitals">
-              <ListItem button className={classes.listItems}>
+            <Link className={classes.link} to="/hospitals" >
+              <ListItem button className={classes.listItems} selected={"/hospitals" === pathname}>
                 <ListItemIcon className={classes.iconColor}>
                   <LocalHospital />
                 </ListItemIcon>
@@ -292,7 +297,7 @@ const SideBar = (props) => {
               </ListItem>
             </Link>
           </>
-        )}
+         )} 
         {role === "provider" && display}
       </List>
     </>

@@ -23,6 +23,8 @@ import ShareRecordsFile from "./components/Profile/ShareRecordsFile";
 import OTPVerification from "./components/SignIn/OTP";
 import OTPProviderVerification from "./components/Providers/SignIn/OTP";
 import { Switch, Route, withRouter } from "react-router-dom";
+import { ThemeProvider } from "@material-ui/core/styles";
+import theme from "./components/Utilities/Theme";
 
 const Main = withRouter(({ location }) => {
   return (
@@ -69,9 +71,9 @@ const Main = withRouter(({ location }) => {
 
 function App() {
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <Main />
-    </div>
+    </ThemeProvider>
   );
 }
 

@@ -74,7 +74,7 @@ const SignUp = () => {
           console.log("Signing up", values);
           setLoading(true);
           axios
-            .post(`https://polar-dusk-61658.herokuapp.com/users/signup`, values)
+            .post(`https://polar-dusk-61658.herokuapp.com/users/signUp`, values)
             .then((res) => {
               console.log(res);
               localStorage.setItem("token", res.data.token);
@@ -91,6 +91,7 @@ const SignUp = () => {
             })
             .catch((err) => {
               console.log(err);
+              console.log(err.response);
               console.log(err.response.data.error);
               setMessage(err.response.data.error);
               setErr(true);
